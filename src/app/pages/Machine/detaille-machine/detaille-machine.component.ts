@@ -126,6 +126,11 @@ export class DetailleMachineComponent implements OnInit {
      loadedMachine.etat = this.stat;
     this.machineService.updateMachine(loadedMachine).subscribe(res => {
      this.notifyService.showSuccess("Update with success ","Update");
+     if(loadedMachine.etat == 'Affecte'){
+       console.log(loadedMachine);
+   this.router.navigate(['/document',{ Type:'Decharge',idEmp:loadedMachine.employee.id, 
+  typeMach:loadedMachine.typeMach,marqueMach:loadedMachine.marqueMach,numAlrim:loadedMachine.numAlrim } ]);
+     }
     });
   }
 

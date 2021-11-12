@@ -10,6 +10,7 @@
     "start:server": "nodemon server.js",
     "automate": "sequelize-automate -c './backend/sequelize-automate.config.json'",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
+  
   },
   "private": true,
   "dependencies": {

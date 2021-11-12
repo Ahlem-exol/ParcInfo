@@ -8,6 +8,7 @@ import { Employee } from 'src/app/models/employee.model';
 import { Fournisseur } from 'src/app/models/fournisseur.model';
 import { Machine } from 'src/app/models/machine.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
+import { DocumentService } from 'src/app/services/document/document.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { FournisseurService } from 'src/app/services/fournisseur/fournisseur.service';
 import { MachineService } from 'src/app/services/machine/machine.service';
@@ -84,12 +85,12 @@ export class ListeMachineComponent implements OnInit,OnDestroy {
     { title: 'pare_fue',  icon: 'ni-tv-2 text-primary'},
     { title: 'Ondeleur',  icon: 'ni-tv-2 text-primary'}
   ];
-
+  date= new Date();
   typeNull:type[]=[
     { title: 'Pas des composent au des sos materiel',  icon: 'ni-tv-2 text-primary'},
   ];
   constructor(private modalService: NgbModal,private machineService :MachineService ,private employeeService:EmployeeService,private router: Router,
-    private directionservice :DirectionService,private fournisseurService:FournisseurService, private notifyService :NotificationService) { }
+    private directionservice :DirectionService, private documentService:DocumentService,private fournisseurService:FournisseurService, private notifyService :NotificationService) { }
   ngOnDestroy(): void {
    this.sub.unsubscribe();
    this.sub2.unsubscribe();
@@ -171,10 +172,19 @@ export class ListeMachineComponent implements OnInit,OnDestroy {
        idEmp = 1;
        }
        console.log(idEmp)
+
+       // ajouter machine
     this.machineService.addMachine(categorieMach, typeMach, marqueMach,numSerie,numAlrim,
     date_entre,date_affectation,date_reforme,cause,observation,
      Emplacement,etat,idDir,idForniss,idEmp).subscribe(res => {
       this.notifyService.showSuccess("Add with success ","Add");
+      if(etat =="Affecte"){
+        //  this.documentService.addDocument("Decharge", "", descreption,idEmp,idForniss,
+        //   idInterv:number,idDir:number,idPro:number,dateSortie).subscribe(res=>{
+
+        //  })
+        this.router.navigate(['/document',{ Type:'Decharge',idEmp:idEmp, typeMach:typeMach,marqueMach:marqueMach,numAlrim:numAlrim } ]);
+      }
      this.ngOnInit();
   })
 

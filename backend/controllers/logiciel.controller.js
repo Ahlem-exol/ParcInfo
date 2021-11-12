@@ -1,6 +1,4 @@
 const Logiciel = require('../models/logiciel');
-
-const Logpardir =require('../models/Logpardir');
 const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
 exports.getAllLogiciel = (req,res, next) => {

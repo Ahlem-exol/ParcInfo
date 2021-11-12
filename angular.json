@@ -34,8 +34,13 @@
               "src/styles.scss",              
                "src/assets/vendors/font-awesome/css/font-awesome.min.css",
                "node_modules/ngx-toastr/toastr.css"
+
             ],
-            "scripts": []
+            "scripts": [
+
+              "node_modules/pdfmake/build/pdfmake.min.js",
+							"node_modules/pdfmake/build/vfs_fonts.js"
+            ]
           },
           "configurations": {
             "production": {

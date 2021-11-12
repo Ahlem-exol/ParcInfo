@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./header-pdf.component.scss']
 })
 export class HeaderPdfComponent implements OnInit {
+
   @Input() fileName = "";
   @Input() currentPage: number;
   @Input() totalPages: number;
@@ -16,10 +17,10 @@ export class HeaderPdfComponent implements OnInit {
   @Output() setZoom: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();
   @Output() print: EventEmitter<any> = new EventEmitter();
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
   onDownload(event: any): void {
     this.download.emit();
