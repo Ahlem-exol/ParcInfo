@@ -39,13 +39,14 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
     { title: 'Reparation port/cablage reseau',  icon: 'ni-tv-2 text-primary'},
   ];
 
-  etat :type[]=[
+  etat:type[]=[
     { title: 'Demande',  icon: 'badge badge-info'}, //other
     { title: 'Annule',  icon: 'badge badge-danger'},
     { title: 'In progress',  icon: 'badge badge-warning'},
     { title: 'Completed',  icon: 'badge badge-success'}
   ];
   date= new Date();
+  visibility='invisible';
   constructor(private modalService: NgbModal,private interventionService:InterventionService,
     private machineService :MachineService ,private employeeService:EmployeeService,private router: Router,
     private directionservice :DirectionService, private notifyService :NotificationService,private logicielservice:LogicielService) { 
@@ -67,15 +68,16 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
   sub5:Subscription;
   loadedLogiciel:Logiciel[];
 
+  stat:string="";
   
   ngOnInit(): void {
     this.sub =  this.interventionService.getInterventions().subscribe(minterdata => {
-      console.log("liste des eintervention",minterdata.interventions);
+      console.log("liste des intervention",minterdata.interventions);
        this.loaddedIntervention = minterdata.interventions;
+       
      })
          
      this.sub2 =  this.directionservice.getDirections().subscribe(dirdata => {
-
        this.loadedDirections = dirdata.directions;
      })
 
@@ -85,19 +87,14 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
 
      this.sub4 =  this.machineService.getMachines().subscribe(machdata => {
        this.loadedMachine = machdata.machines;
+     
      })
-
      this.sub5 =  this.logicielservice.getLogiciels().subscribe(logdata => {
-       this.loadedLogiciel = logdata.logiciels;
+       this.loadedLogiciel = logdata.logiciels;  
      })
-
- 
-
-
   }
-
-
   addIntervention(form: NgForm){
+
     const typeInterv= form.value.typeInterv;
     const descreption= form.value.descreption;
     const remarque = form.value.remarque;
@@ -132,11 +129,6 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
   })
 
   }
-
-
-
-
-
   detaille(intervention:string){
     this.router.navigate(['/intervension-detaill' , { id: intervention }]);
   }
@@ -149,8 +141,15 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
    this.sub5.unsubscribe();
     }
 
- 
+  updateEtat(idInter:number,etat:string){
+   console.log("changemnet letat de intervnetion  "+idInter+ " to etat "+etat);
+   this.interventionService.updateEtat(idInter,etat).subscribe(res => {
+    this.notifyService.showSuccess("Update with success ","Update");
+    this.ngOnInit();
+   });
+    }
   openMediumModal( mediumModalContent: any ) {
+  //this.visibility ='visible';
     this.modalService.open( mediumModalContent );
   }
 
@@ -165,13 +164,10 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
   onForm4NameChange({ target }: {target:any}) {
     this.modal3 = target.value; 
   }
-
   //pour get only the employee machines
   model3:number=0 ;
   onForm3NameChange({ target }: {target:any}) {
     this.model3 = Number(target.value); 
-    console.log(target.value);
-    console.log(typeof(this.model3))
   }
     
   nom:any;
@@ -194,4 +190,7 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
     this.reverse = !this.reverse;
   }
   
+  openMediumModalEtat(mediumModalContent: any ) {
+    this.modalService.open( mediumModalContent );
+   }
 }

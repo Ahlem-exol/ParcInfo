@@ -5,6 +5,7 @@ const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
 
 exports.getAllMachine = (req, res, next) => {
+
   Machine.findAll({attributes:['idMach', 'categorieMach', 'typeMach','marqueMach', 'numSerie', 'numAlrim', 'etat', 'date_entre',
    'date_affectation', 'date_reforme', 'cause', 'observation',  'Emplacement'],
     include:[
@@ -19,10 +20,10 @@ exports.getAllMachine = (req, res, next) => {
       message:'could not fetch machines !!'
     });
   }
- 
   res.status(200).json({
     message:'liste of machines !!',
     machines  : machines.map(machine=>{
+     if(machine.employee) {  ;
       return {
          id: machine.idMach,
          categorieMach: machine.categorieMach,
@@ -38,11 +39,12 @@ exports.getAllMachine = (req, res, next) => {
          observation:machine.observation,
          Emplacement:machine.Emplacement,
          employee:{
-            id: machine.employee.idEmp,
+             id: machine.employee.idEmp,
              nom: machine.employee.nomEmp,
              prenom: machine.employee.prenomEmp,
              post: machine.employee.post,
          },
+
          fournisseur:{
            idForniss: machine.fournisseur.idForniss,
            nomFourni: machine.fournisseur.nomFourni,
@@ -52,6 +54,34 @@ exports.getAllMachine = (req, res, next) => {
             id:  machine.direction.idDir,
             nom:  machine.direction.nomDir,
             numPost:  machine.direction.numPost,
+         }
+        }
+      }else{
+        return {
+          id: machine.idMach,
+          categorieMach: machine.categorieMach,
+          typeMach: machine.typeMach,
+          marqueMach:machine.marqueMach,
+          numSerie: machine.numSerie,
+          numAlrim: machine.numAlrim,
+          etat :machine.etat,
+          date_entre :machine.date_entre,
+          date_affectation:machine.date_affectation,
+          date_reforme:machine.date_reforme,
+          cause :machine.cause,
+          observation:machine.observation,
+          Emplacement:machine.Emplacement,
+        
+          fournisseur:{
+            idForniss: machine.fournisseur.idForniss,
+            nomFourni: machine.fournisseur.nomFourni,
+            Adresse :machine.fournisseur.Adresse,
+          },
+          direction:{
+             id:  machine.direction.idDir,
+             nom:  machine.direction.nomDir,
+             numPost:  machine.direction.numPost,
+          }
          }
       }
     })
@@ -64,6 +94,8 @@ exports.getAllMachine = (req, res, next) => {
   });
   });
 }
+
+
 exports.getMachine = (req, res, next) => {
   const machineId = req.params.id;
   
@@ -85,6 +117,7 @@ exports.getMachine = (req, res, next) => {
      message: 'machine does not exist !'
    });
  }else{
+  if(machine.employee) { 
    res.status(200).json({
      message: 'ok from controller  !',
      machine: { 
@@ -119,6 +152,36 @@ exports.getMachine = (req, res, next) => {
       }
      }
    });
+  }else{
+    res.status(200).json({
+      message: 'ok from controller  !',
+      machine: { 
+       id: machine.idMach,
+       categorieMach: machine.categorieMach,
+       typeMach: machine.typeMach,
+       marqueMach:machine.marqueMach,
+       numSerie: machine.numSerie,
+       etat :machine.etat,
+       numAlrim: machine.numAlrim,
+       date_entre :machine.date_entre,
+       date_affectation:machine.date_affectation,
+       date_reforme:machine.date_reforme,
+       cause :machine.cause,
+       observation:machine.observation,
+       Emplacement:machine.Emplacement,
+       fournisseur:{
+         idForniss: machine.fournisseur.idForniss,
+         nomFourni: machine.fournisseur.nomFourni,
+         Adresse :machine.fournisseur.Adresse,
+       },
+       direction:{
+          id:  machine.direction.idDir,
+          nom:  machine.direction.nomDir,
+          numPost:  machine.direction.numPost,
+       }
+      }
+    });
+  }
  }
   }).catch(error=>{
     console.log(error);
@@ -131,7 +194,7 @@ exports.getMachine = (req, res, next) => {
 
  exports.updateMachine= (req, res, next) => {
   const machineId = req.params.id;
-   console.log(req.body.fournisseur.idForniss)
+
   Machine.findOne(
     {
       where:{idMach:machineId},
@@ -198,7 +261,7 @@ exports.deleteMachine = (req, res, next) => {
       return machine.destroy();
     })
     .then(result => {
-      console.log(result);
+
       res.status(200).json({message: "Machine deleted !"});
     })
     .catch(err => console.log(err));

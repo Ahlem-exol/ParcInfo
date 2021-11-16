@@ -17,6 +17,7 @@
                     <div class="card-body col-lg-4">
                         <div class="d-sm-flex justify-content-between align-items-start">
                           <div>                             
+           
                                <h3 class="card-title card-title-dash">
                                 <i class="menu-icon mdi mdi-arrow-right-bold"></i>  <b>Intervention:  </b>{{loaddedIntervention.typeInterv}}</h3>
                           </div>
@@ -116,7 +117,7 @@
                 <!--  the second row -->
                 <div class="row">      
                   <!-- the partie one of partie 2 -->
-                  <div class="col-lg-8 d-flex flex-column">
+                  <div class="col-lg-7 d-flex flex-column">
                     <div class="row flex-grow">
                       <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
                         <div class="card card-rounded">
@@ -281,8 +282,99 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                
+                   </div>
+                   
+                  <!-- the partie two of partie 2 -->
+                  <div class="col-lg-5 d-flex flex-column">
+                    <div class="row flex-grow">
+                      <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                          <div class="card-body">
+                            <h4 class="card-title">Suivi D'intervention</h4>
+                            <div class="mt-5">
+                              <div class="timeline">
+
+                                <div class="timeline-wrapper timeline-inverted  timeline-wrapper-info ">
+                                  <div class="timeline-badge"></div>
+                                  <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
+                                    <div class="timeline-heading">
+                                      <h6 class="timeline-title">Demande D'intervention</h6>
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>{{ loaddedIntervention.descreption}}</p>
+                                    </div>
+                                    <div class="timeline-footer d-flex align-items-center flex-wrap">                                   
+                                        <span class="ml-md-auto fw-bold">{{ loaddedIntervention.dateDemandeInter}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="timeline-wrapper timeline-inverted timeline-wrapper-danger" *ngIf="loaddedIntervention.etat === 'Annule' ">
+                                  <div class="timeline-badge"></div>
+                                  <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
+                                    <div class="timeline-heading">
+                                      <h6 class="timeline-title">Echec d'intervention</h6>
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>la cause d'annulation ou le refus d'intervention Alpha 6 has landed, and it’s one of our biggest ships to date.</p>
+                                    </div>
+                                    <div class="timeline-footer d-flex align-items-center flex-wrap">
+                                        <span class="ml-md-auto fw-bold">10th Aug 2017</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="timeline-wrapper  timeline-inverted timeline-wrapper-warning" *ngIf="loaddedIntervention.etat === 'In progress'" >
+                                  <div class="timeline-badge"></div>
+                                  <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
+                                    <div class="timeline-heading">
+                                      <h6 class="timeline-title">Lancer l'intervention</h6>
+                                      
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>Obseration</p>
+                                    </div>
+                                    <div class="timeline-footer d-flex align-items-center flex-wrap">
+                                        <span class="ml-md-auto fw-bold">5th Sep 2016</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                <div class="timeline-wrapper timeline-inverted timeline-wrapper-success" *ngIf="loaddedIntervention.etat === 'Completed'">
+                                  <div class="timeline-badge"></div>
+                                  <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
+                                    <div class="timeline-heading">
+                                      <div class="row">
+                                        <div class="col-lg-8">  <h6 class="timeline-title">Fin d'intervention</h6> </div>
+                                        <div class="col-lg-4"> 
+                                          <button type="button" class="btn btn-info btn-icon-text btn-sm "  data-bs-toggle="tooltip" data-placement="right" title="Impresion de fiche">                                          
+                                            <i class="ti-printer btn-icon-append"></i>                                                                              
+                                          </button>
+                                        </div>
+                                      </div>
+              
+                                    </div>
+                                    <div class="timeline-body">
+                                      <p>Any Observation 4 is here to address those pesky.</p>
+                                    </div>
+                                    <div class="timeline-footer d-flex align-items-center flex-wrap">                                                                        
+                                        <span class="ml-md-auto fw-bold">27th July 2016</span>
+                                    </div>
+                                  </div>
+                                </div>
+                               
+                               
+                              
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+
+
+
                 </div>  
           
           </div>
@@ -291,6 +383,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- model -->

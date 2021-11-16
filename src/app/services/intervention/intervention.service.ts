@@ -17,7 +17,6 @@ interface InterventionAdd {
   idMach:number,
   idEmp:number,
   idLog: number,
-
 }
 
 @Injectable({
@@ -32,9 +31,6 @@ export class InterventionService {
     return this.http.get<{ message: string, interventions: Intervention[] }>(BACKEND_URL);
   }
 
-
-
-
   getIntervention(id: number) {
     return  this.http.get<{ message: string, intervention: Intervention }>(BACKEND_URL + '/' + id);
  }
@@ -42,12 +38,17 @@ export class InterventionService {
  updateIntervention(interventionUpdate:Intervention){
   return this.http.put<{ message: string}>(BACKEND_URL + '/update/' + interventionUpdate.id, interventionUpdate);
  }
+
+ updateEtat(id:number,etat:string){
+ const body = {etat : etat};
+  return this.http.put<{ message: string}>(BACKEND_URL + '/updateEtat/' + id, body);
+ }
+
  DeleteIntervention(idInter:number){
   return this.http.delete<{message:string}>(BACKEND_URL+'/'+idInter);
  }
 
-
-  addIntervention(typeInterv:string, descreption:string, remarque:string,dure:number,dateDemandeInter:Date,
+ addIntervention(typeInterv:string, descreption:string, remarque:string,dure:number,dateDemandeInter:Date,
     dateFinInter:Date,dateReparation:Date,etatdereparation:string,etat:string,idDir:number,idMach:number,idEmp:number,idLog:number){
       const interventionAdd: InterventionAdd = {     
         typeInterv: typeInterv,
@@ -67,6 +68,6 @@ export class InterventionService {
      
         return this.http.post<{ message: string }>(`${BACKEND_URL}/add`, interventionAdd);
 
-    }
+  }
 
 }

@@ -14161,7 +14161,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 
 .modal-open .modal {
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
 }
 
@@ -14209,6 +14209,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 
 .modal-dialog-scrollable .modal-content {
   max-height: 100%;
+ 
   overflow: hidden;
 }
 
@@ -14223,10 +14224,11 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 
 .modal-content {
+  
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 700px;
   pointer-events: auto;
   background-color: #ffffff;
   background-clip: padding-box;
@@ -14334,6 +14336,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 
 .modal-fullscreen .modal-content {
   height: 100%;
+  width: 100%;
   border: 0;
   border-radius: 0;
 }
@@ -25402,7 +25405,7 @@ dl li {
   content: " ";
   width: 3px;
   background-color: #F1F1F1;
-  left: 50%;
+
   margin-left: -1.5px;
 }
 
@@ -25412,19 +25415,25 @@ dl li {
   position: relative;
   width: 100%;
   padding-right: 90px;
+
 }
 
 .timeline .timeline-wrapper:before {
   content: " ";
   display: table;
+
 }
 
 .timeline .timeline-wrapper:after {
   content: " ";
   display: table;
   clear: both;
+  
 }
 
+.timeline-panel{
+  margin-left: 0%; width: 300px;
+}
 .timeline .timeline-wrapper .timeline-panel {
   border-radius: 2px;
   padding: 20px;
@@ -25433,7 +25442,7 @@ dl li {
   border-radius: 6px;
   box-shadow: 1px 2px 35px 0 rgba(1, 1, 1, 0.1);
   width: 35%;
-  margin-left: 15%;
+
 }
 
 .timeline .timeline-wrapper .timeline-panel:before {
@@ -25444,6 +25453,7 @@ dl li {
   content: "";
   left: 0;
   right: 0;
+ 
 }
 
 .timeline .timeline-wrapper .timeline-panel:after {
@@ -25456,16 +25466,19 @@ dl li {
   border-right: 0 solid #ffffff;
   border-bottom: 14px solid transparent;
   content: " ";
+
 }
 
 .timeline .timeline-wrapper .timeline-panel .timeline-title {
   margin-top: 0;
   color: #1E283D;
   text-transform: uppercase;
+
 }
 
 .timeline .timeline-wrapper .timeline-panel .timeline-body p + p {
   margin-top: 5px;
+  
 }
 
 .timeline .timeline-wrapper .timeline-panel .timeline-body ul {
@@ -25485,7 +25498,7 @@ dl li {
   height: 14px;
   position: absolute;
   top: 16px;
-  left: calc(50% - 7px);
+  left: calc(0% - 7px);
   z-index: 10;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;

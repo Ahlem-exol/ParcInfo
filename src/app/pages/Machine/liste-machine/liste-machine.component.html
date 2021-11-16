@@ -32,11 +32,13 @@
                       <tr  style="cursor: pointer;"  *ngFor="let machine of loaddedMachine  
                       | orderBy: key: reverse |paginate : {itemsPerPage:5,currentPage:p};"
                        (click)="detaille(machine.id)"   >
+                       <ng-container  *ngIf="machine!=null">    
                         <td>{{machine.numSerie}}</td>
                         <td>{{machine.typeMach}}</td>
                         <td>{{machine.marqueMach}}</td>                     
                         <td>  <div class="badge badge-opacity-warning me-3">{{machine.etat}}</div> </td>
                         <td> <button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Detaille</button></td>
+                       </ng-container>
                       </tr>          
                     </tbody>              
                   </table>
@@ -52,6 +54,7 @@
   </div>
 
   <ng-template #mediumModalContent let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
+   
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel-2">Ajouter Machine</h5>

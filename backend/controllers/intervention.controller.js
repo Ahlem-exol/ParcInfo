@@ -268,3 +268,36 @@ exports.addIntervention= (req, res, next) => {
 });
   
 };
+
+
+exports.UpdateEtat= (req, res, next) => {
+  const interventionId = req.params.id;
+  console.log(req.body.etat)
+   Intervention.findOne(
+    {
+      where:{idInterv:interventionId},
+      attributes:['idInterv', 'etat']
+    }
+    ).then(intervention => {
+    if (!intervention) {
+      return res.status(401).json({
+        message: 'intervention does not exist !'
+      });
+    }else{
+      intervention.update({
+          etat:req.body.etat,
+
+
+       }) .then(result => {
+        res.status(201).json({
+          message: 'intervention update  !',
+          result: result,
+        });
+      }).catch(err => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+    }
+  })
+};

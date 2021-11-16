@@ -36,7 +36,7 @@ export class MachineService {
   }
 
   getmachine(id: number) {
-    return  this.http.get<{ message: string, machine: Machine }>(BACKEND_URL + '/' + id);
+  return  this.http.get<{ message: string, machine: Machine }>(BACKEND_URL + '/' + id);
  }
 
  updateMachine(machineUp:Machine){

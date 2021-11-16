@@ -20,7 +20,6 @@ declare interface type {
   icon: string;
 }
 
-
 @Component({
   selector: 'app-detaille-intervention',
   templateUrl: './detaille-intervention.component.html',
@@ -44,6 +43,7 @@ export class DetailleInterventionComponent implements OnInit {
     { title: 'In progress',  icon: 'badge badge-warning'},
     { title: 'Completed',  icon: 'badge badge-success'}
   ];
+
   date= new Date();
   sub: Subscription;
   loaddedIntervention : Intervention;
@@ -95,11 +95,10 @@ export class DetailleInterventionComponent implements OnInit {
     this.router.navigate(['/employee-detaill' , { id: idEmp }]);
   }
 
-
   InterventionUpdate(interventionUpdate: any){
- console.log(interventionUpdate)
+     console.log(interventionUpdate)
     this.interventionService.updateIntervention(interventionUpdate).subscribe(res => {
-     this.notifyService.showSuccess("Update with success ","Update");
+     this.notifyService.showSuccess("Update with success !! ","Update");
     });
   }
 
@@ -133,4 +132,5 @@ export class DetailleInterventionComponent implements OnInit {
    console.log("model3",target.value);
    console.log(typeof(this.model3))
  }
+
 }
