@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
+import { Intervention } from 'src/app/models/intervention.model';
+import { Machine } from 'src/app/models/machine.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -21,6 +23,14 @@ export class DetailleEmployeeComponent implements OnInit {
   sub2:Subscription;
   loadedDirections :Direction[];
 
+
+  sub3:Subscription;
+  loadedIntervention :Intervention[];
+
+  sub4:Subscription;
+  loadedMachines :Machine[];
+
+  
   updateEmployee :Employee;
   deleteEmployee: Employee;
 
@@ -32,11 +42,20 @@ export class DetailleEmployeeComponent implements OnInit {
        const idEmp = JSON.parse(this.route.snapshot.paramMap.get('id') || '{}');
        this.sub =  this.employeeService.getEmployee(idEmp).subscribe(empdata => {
         this.loadedEmployee = empdata.employee;})
-
         this.sub2 = this.directionservice.getDirections().subscribe(dirdata=> {
           this.loadedDirections = dirdata.directions;
         })
+        this.sub3 = this.employeeService.getEmployeeIntevention(idEmp).subscribe(dirdata=> {
+          this.loadedIntervention = dirdata.interventions;
+        })
+
+        this.sub4 = this.employeeService.getEmployeeMachines(idEmp).subscribe(machdata=>{
+          this.loadedMachines =machdata.machines;
+        })
   }
+
+  
+
   employeeUpdate(updateEmp:Employee){
     console.log(updateEmp.direction.id);
     //updateEmp.reset();

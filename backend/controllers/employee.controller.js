@@ -1,6 +1,9 @@
 const Employee = require('../models/employee');
 const Direction = require('../models/direction');
-//get liste employee
+const Intervention = require('../models/intervention');
+const Machine = require('../models/machine');
+
+////////////////////////////////////
 exports.getAllEmployee = (req,res, next) => {
   Employee.findAll({
     attributes:['idEmp','nomEmp','prenomEmp','dateNaiss','post','numTele','mailEmp','numPost','matricule','adresse'],
@@ -11,8 +14,7 @@ exports.getAllEmployee = (req,res, next) => {
 
 })
     .then((employees) => {
-     // console.log(users[0].usr_email);
-     // console.log(employees);
+
       res.status(200).json({
         message: 'Employees !',
         employees: employees.map(employee => {
@@ -106,17 +108,21 @@ exports.getEmployee = (req, res, next) => {
 
 // /////////////////////////////////////add employee
 exports.addEmployee = (req, res, next) => {
+
+  const idUser = req.userData.id;
+  console.log("the id get it by the tocken",idUser)
   const employee = new Employee({
     matricule:req.body.matricule,
     nomEmp:req.body.nom,
     prenomEmp:req.body.prenom,
     post : req.body.post,
-    idDir :req.body.idDir ,
+    idDir :req.body.idDir,
     dateNaiss:req.body.datenaissance,
     numTele:req.body.numtel,
     mailEmp:req.body.mailPers,
     numPost:req.body.numPost,
-    adresse:req.body.adresse
+    adresse:req.body.adresse,
+    idUser:idUser,
   });
 
   employee.save().then(result => {
@@ -135,9 +141,8 @@ exports.addEmployee = (req, res, next) => {
 };
 
 
-// //upate employee
+// //update employee
 exports.updateEmployee = (req, res, next) => {
-  console.log(req.body.direction.id);
   const employeeId = req.params.id;
 
   Employee.findOne({   where:{idEmp:employeeId},
@@ -177,7 +182,8 @@ exports.updateEmployee = (req, res, next) => {
     }
   })
 };
-// ///////////////////delete
+
+// ///////////////////Delete
 exports.deleteEmployee = (req, res, next) => {
   // User.destroy({where:{user_id: req.params.id}});
   const employeeId = req.params.id;
@@ -194,3 +200,116 @@ exports.deleteEmployee = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+
+
+////////////////////////////////////
+exports.getAllInterventionEmployee = (req,res, next) => {
+  
+
+
+};
+
+
+exports.getAllInterventionEmployee = (req, res, next) => {
+  const employeeId = req.params.id;
+
+  Intervention.findAll({attributes:['idInterv', 'typeInterv', 'dateDemandeInter', 'dure', 'dateFinInter', 'descreption', 
+  'remarque', 'dateReparation','etat','etatdereparation','causeEchec'],
+    include:[
+      {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post'],   where:{idEmp:employeeId}},
+    ]
+    }).then((interventions)=>{
+  if(!interventions){
+    return res.status(401).json({
+      message:'could not fetch interventions !!'
+    });
+  }
+  res.status(200).json({
+    message:'liste of interventions !!',
+    interventions  : interventions.map(intervention=>{
+      return {
+         id: intervention.idInterv,
+         typeInterv: intervention.typeInterv,
+         descreption: intervention.descreption,
+         remarque :intervention.remarque,
+         dure: intervention.dure,
+         dateDemandeInter :intervention.dateDemandeInter,
+         dateFinInter:intervention.dateFinInter,
+         dateReparation:intervention.dateReparation,
+         etat:intervention.etat,
+         etatdereparation:intervention.etatdereparation,
+         causeEchec:intervention.causeEchec,
+ 
+         employee:{
+             id: intervention.employee.idEmp,
+             nom: intervention.employee.nomEmp,
+             prenom: intervention.employee.prenomEmp,
+             post: intervention.employee.post,
+         }
+      
+
+      }
+    })
+  })
+  }).catch(error=>{
+    console.log(error);
+    res.status(500).json({
+    error:error,
+    message:'An error occured while fetching the machines ! Please try later or contact he administartor',
+  });
+  });
+}
+
+
+exports.getAllMachineEmployee = (req, res, next) => {
+  const employeeId = req.params.id;
+  Machine.findAll({attributes:['idMach', 'categorieMach', 'typeMach','marqueMach', 'numSerie', 'numAlrim', 'etat', 'date_entre',
+   'date_affectation', 'date_reforme', 'cause', 'observation',  'Emplacement'],
+    include:[
+      {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post'] ,  where:{idEmp:employeeId}},
+  
+    ]
+    }).then((machines)=>{
+  if(!machines){
+    return res.status(401).json({
+      message:'could not fetch machines !!'
+    });
+  }
+  res.status(200).json({
+    message:'liste of machines !!',
+    machines  : machines.map(machine=>{
+     if(machine.employee) {  ;
+      return {
+         id: machine.idMach,
+         categorieMach: machine.categorieMach,
+         typeMach: machine.typeMach,
+         marqueMach:machine.marqueMach,
+         numSerie: machine.numSerie,
+         numAlrim: machine.numAlrim,
+         etat :machine.etat,
+         date_entre :machine.date_entre,
+         date_affectation:machine.date_affectation,
+         date_reforme:machine.date_reforme,
+         cause :machine.cause,
+         observation:machine.observation,
+         Emplacement:machine.Emplacement,
+         employee:{
+             id: machine.employee.idEmp,
+             nom: machine.employee.nomEmp,
+             prenom: machine.employee.prenomEmp,
+             post: machine.employee.post,
+         },
+
+     
+        }
+      }
+    })
+  })
+  }).catch(error=>{
+    console.log(error);
+    res.status(500).json({
+    error:error,
+    message:'An error occured while fetching the machines ! Please try later or contact he administartor',
+  });
+  });
+}

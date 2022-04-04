@@ -4,7 +4,7 @@ export class Direction {
       public nom: string,
       public numPost: number,
       public effective:number,
-      // qui utilise machine
+      // variable a calcule
       public nbrEmp: number,
       public nbrMach :number,
       public nbrInterv:number,

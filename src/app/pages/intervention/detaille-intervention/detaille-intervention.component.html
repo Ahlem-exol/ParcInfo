@@ -1,291 +1,183 @@
-<!-- if etat de la macine en refoem doit etre no modification only read -->
-
 <div class="content-wrapper">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="home-tab">
-       
-        <div class="tab-content tab-content-basic">
-          <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-           
-            <!--  the first row -->
-            <div class="row">      
-              <!-- partie 1 -->
-              <div class="col-lg-3 d-flex flex-column">
-                <div class="row flex-grow">
-                  <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">                    
-                    <div class="card-body col-lg-4">
-                        <div class="d-sm-flex justify-content-between align-items-start">
-                          <div>                             
-           
-                               <h3 class="card-title card-title-dash">
-                                <i class="menu-icon mdi mdi-arrow-right-bold"></i>  <b>Intervention:  </b>{{loaddedIntervention.typeInterv}}</h3>
-                          </div>
-                        </div>
-                    </div>   
-                  </div>
-                </div>
-              </div>   
-              <!-- partie 2 -->
-               <div class="col-lg-3 d-flex flex-column" style="cursor: pointer;" (click)="detailleEmployee(loaddedIntervention.employee.id)" > 
-                <div class="row flex-grow"> 
-                  <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">   
-                    <div class="card card-rounded col-lg-4">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="d-flex justify-content-between align-items-center mb-3">
-
-                            <div class="d-flex">
-                              <!-- une image eour icon of employee -->
-                              <h1>E</h1>
-                              <div class="wrapper ms-3">
-                                <p class="ms-1 mb-1 fw-bold">Employée</p>
-                                <small class="text-muted mb-0">{{loaddedIntervention.employee.nom}} {{loaddedIntervention.employee.prenom}}</small>
-                              </div>
+  <div class="row">        
+    <div class="email-wrapper wrapper">
+      <div class="row align-items-stretch">
+           <!-- partie 1 -->
+                <div class="col-lg-12 d-flex flex-column">
+                  <div class="row flex-grow">
+                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">                    
+                      <div class="card-body col-lg-4">
+                          <div class="d-sm-flex justify-content-between align-items-start">
+                            <div>                             
+             
+                                 <h3 class="card-title card-title-dash">
+                                  <i class="menu-icon mdi mdi-arrow-right-bold"></i>  <b>Intervention:  </b>{{loaddedIntervention.typeInterv}}</h3>
                             </div>
                           </div>
-                         
-                        </div>
-                       
-                      </div>
-                   </div>
-                  </div> 
-                 </div>
-                </div>
-               </div>
-              <!-- partie 3 -->
-                <div class="col-lg-3 d-flex flex-column" style="cursor: pointer;"> 
-                  <div class="row flex-grow"> 
-                    <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">   
-                      <div class="card card-rounded col-lg-4">
-                      <div class="card-body">
-                        <div class="row">
-                         
-                          <div class="col-lg-12">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-
-                              <div class="d-flex">
-                                <!-- une image eour icon of employee -->
-                                <h1>D</h1>
-                                <div class="wrapper ms-3">
-                                  <p class="ms-1 mb-1 fw-bold">Direction</p>
-                                  <small class="text-muted mb-0">{{loaddedIntervention.direction.nom}}</small>
-                                </div>
-                              </div>
-                            </div>
-                           
-                          </div>
-                        </div>
-                     </div>
-                    </div> 
-                   </div>
-                  </div>
-                 </div>
-              <!-- partie 4 -->
-               <div class="col-lg-3 d-flex flex-column" style="cursor: pointer;"> 
-                <div class="row flex-grow"> 
-                  <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">   
-                    <div class="card card-rounded col-lg-4">
-                    <div class="card-body">
-                      <div class="row">
-                       
-                        <div class="col-lg-12">
-                          <div class="d-flex justify-content-between align-items-center mb-3">
-
-                            <div class="d-flex">
-                              <!-- une image eour icon of employee -->
-                              <h1>F</h1>
-                              <div class="wrapper ms-3">
-                                <p class="ms-1 mb-1 fw-bold">Machine</p>
-                                <small class="text-muted mb-0">{{loaddedIntervention.machine.typeMach}}</small>
-                              </div>
-                            </div>
-                          </div>
-                         
-                        </div>
-                      </div>
-                   </div>
-                  </div> 
-                 </div>
-                </div>
-               </div>
-
-            </div>
-
-               
-                <!--  the second row -->
-                <div class="row">      
-                  <!-- the partie one of partie 2 -->
-                  <div class="col-lg-7 d-flex flex-column">
-                    <div class="row flex-grow">
-                      <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
-                        <div class="card card-rounded">
-                          <div class="card-body">                               
-                            <div class="d-sm-flex justify-content-between align-items-start">
-                          
-                                <div class="row">
-                                  <div class="col-md-8">
-                                   <h4 class="card-title card-title-dash">Information sur l'Intercention</h4>
-                                   </div>
-
-                                 <div class="col-md-4" >
-                                   <button  class="btn btn-danger btn-fw" (click)="openMediumModal(mediumModalContent) ">Supprimer</button>
-                                   
-                                 </div>                                                     
-                                 <form  (ngSubmit)="InterventionUpdate(loaddedIntervention)">
-
-
-                                  <div class="row">
-                                    <div class="col-md-8"  > </div>
-                                    <div class="col-md-4" >
-                                      <button type="submit" class="btn btn btn-success btn-fw">Update</button>
-                                       </div>  
-                                  </div>
-                                
-                                 <p class="card-description">
-                                  Réfernece info
-                                </p>
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="form-group row">
-                                      <label class=" col-form-label">Categorie Intervention </label>
-                                      <div class="" >
-                                        <select class="form-control" name ="typeInterv" (change)="onForm2NameChange($event)" [(ngModel)]="loaddedIntervention.typeInterv">  
-                                          <option  >
-                                            {{loaddedIntervention.typeInterv}}
-                                          </option>
-                                          <ng-container  *ngFor="let type of typedIntervention">
-                                            <option  *ngIf="type.title != loaddedIntervention.typeInterv " value={{type.title}}>
-                                               {{type.title}}
-                                             </option>
-                                          </ng-container> 
-                                        
-                                         </select>                               
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6"   >
-                                    <div class="form-group row">
-                                      <label class=" col-form-label">Etat</label>
-                                      <div class="">
-                                        <select class="form-control" name ="etat" [(ngModel)]="loaddedIntervention.etat" >  
-                                          <option  >
-                                            {{loaddedIntervention.etat}}
-                                          </option> 
-                                          <ng-container  *ngFor="let etat of etat">
-                                            <option  *ngIf="etat.title != loaddedIntervention.etat "  value={{etat.title}}>
-                                               {{etat.title}}
-                                             </option>
-                                          </ng-container> 
-                                         </select>   
-                                      </div></div></div>
-                                   
-                                    </div>
-                                
-                                    <div class="row"> 
-                                      <div class="form-group  col-md-6 ">
-                                        <label class=" col-form-label">Employee</label>
-                                        <div class="">
-                                         
-                                           <select class="form-control" name ="employee.idEmp" (change)="onForm3NameChange($event)" [(ngModel)]="loaddedIntervention.employee.id" > 
-                                             <option *ngFor="let employee of loadedEmployee" [value]="employee.id" > {{employee.nom}} {{employee.prenom}} </option>
-                                            </select>
-                                        </div>
-                                      </div>
-                                    
-                                  
-                                     <!-- afficher la miste des machine fine why id +id employee slectionees if mzcihne .idemployee equel to edemploye -->
-                                     <div class="form-group  col-md-6 " >
-                                       <label class=" col-form-label">Machine</label>
-                                       <div class="">
-                                         <select class="form-control" name ="machine.idMach"  [(ngModel)]="loaddedIntervention.machine.id" > 
-                                           <ng-container  *ngFor="let machine of loadedMachine">
-                                           <option  *ngIf="model3 === machine.employee.id " [value]="machine.id" > {{machine.typeMach}}  </option>
-                                         </ng-container>
-                                          </select>
-                                          </div>     
-                                       </div>
-                                      </div>
-                                   
-                                      <div class="row"> 
-                                        <div class="form-group  col-md-6 ">
-                                          <label class=" col-form-label">descreption</label>
-
-                                            <div class="">
-                                              <textarea name="descreption" class="form-control rounded-0" placeholder="Votre descreption de lintervetion" required
-                                              [(ngModel)]="loaddedIntervention.descreption"  rows="3" ></textarea>
-                                            </div>
-                                          
-                                        </div>
-                                      
-                                    
-                                       <!-- afficher la miste des machine fine why id +id employee slectionees if mzcihne .idemployee equel to edemploye -->
-                                       <div class="form-group  col-md-6 " >
-                                         <label class=" col-form-label">remarque</label>
-                                         <div class="">
-                                          <textarea name="remarque" class="form-control rounded-0" placeholder="Votre remarque de lintervetion" required
-                                          [(ngModel)]="loaddedIntervention.remarque"  rows="3" ></textarea>
-                                            </div>     
-                                         </div>
-                                        </div>
-
-                                        <div class="form-group col-md-6 "  *ngIf="modal2 === 'Installation Software' || modal2 === 'Reparation/configuration software' " >
-                                          <label class=" col-form-label">Software</label>                                 
-                                          <div class="">
-                                            <select class="form-control" name ="logiciel.idLog"    [(ngModel)]="loaddedIntervention.idLog" > 
-                                              <option *ngFor="let logiciel of loadedLogiciel" [value]="logiciel.idLog" > {{logiciel.nomLog}}   </option>
-                                             </select>
-                                         </div>
-                                        </div>
-                                        <div class="row">
-
-                                          <div class="form-group col-md-6 " >
-                                            <label class=" col-form-label">Date de demande</label>                                 
-                                            <div class="">
-                                              <input  type="date" name="dateDemandeInter" class="form-control"  [(ngModel)]="loaddedIntervention.dateDemandeInter" /> 
-                                            </div>
-                                          </div>
-                                          <div class="form-group col-md-6 ">
-                                            <label class=" col-form-label">Durée de reparation</label>                                 
-                                            <div class="">
-                                              <input  type="number" name="dure" class="form-control"  [(ngModel)]="loaddedIntervention.dure" /> 
-                                            </div>
-                                          </div>
-                                          <div class="form-group col-md-6 " >
-                                            <label class=" col-form-label">Date d'intervention</label>                                 
-                                            <div class="">
-                                              <input  type="date" name="dateReparation" class="form-control"  [(ngModel)]="loaddedIntervention.dateReparation" /> 
-                                            </div>
-                                          </div>
-                                          <div class="form-group col-md-6 " >
-                                            <label class=" col-form-label">Date de Fin d'intervention</label>                                 
-                                            <div class="">
-                                              <input  type="date" name="dateFinInter" class="form-control"  [(ngModel)]="loaddedIntervention.dateFinInter"  /> 
-                                            </div>
-                                          </div>
-
-
-
-
-                                        </div>  
-
-                              </form>
-
-                              </div>
-
-
-
-                           
-                            </div> 
-                          </div>
-                        </div>
-                      </div>
+                      </div>   
                     </div>
-                   </div>
-                   
-                  <!-- the partie two of partie 2 -->
-                  <div class="col-lg-5 d-flex flex-column">
+                  </div>
+                </div>   
+           
+               
+              <div class="col-lg-12 d-flex flex-column">
+                <form  (ngSubmit)="InterventionUpdate(loaddedIntervention)">
+                <div class="row">
+                 <div class="col-md-12 mb-4 mt-4">
+                  <div class="home-tab">
+                  <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                  
+                    <div class="nav nav-tabs btn-group  ">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="detailleEmployee(loaddedIntervention.employee.id)">Employee {{loaddedIntervention.employee.nom}} {{loaddedIntervention.employee.prenom}}</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Direction {{loaddedIntervention.direction.nom}}</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Machine {{loaddedIntervention.machine.typeMach}}</button>
+                    </div>
+
+                    <div>
+
+                      <div class="btn-wrapper">
+                        <button type="submit"  class="btn btn-otline-dark"  ><i class="mdi mdi-border-color"></i> Update</button>
+                        <a class="btn btn-danger text-white me-0" (click)="openMediumModal(mediumModalContent)"><i class="icon-download"></i> Delete</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                  </div>
+                </div>
+                  <!-- information of employee -->
+                <div class="row">
+                 <div class="col-lg-7 d-flex flex-column">
+                  <div class="row flex-grow">
+                    <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+                  <div class="card">         
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class=" col-form-label"><b> Categorie Intervention:</b></label>
+                          <div class="" >
+                            <select class="form-control" name ="typeInterv" (change)="onForm2NameChange($event)" [(ngModel)]="loaddedIntervention.typeInterv">  
+                              <option  >
+                                {{loaddedIntervention.typeInterv}}
+                              </option>
+                              <ng-container  *ngFor="let type of typedIntervention">
+                                <option  *ngIf="type.title != loaddedIntervention.typeInterv " value={{type.title}}>
+                                   {{type.title}}
+                                 </option>
+                              </ng-container> 
+                            
+                             </select>                               
+                          </div>
+                        </div>
+                      </div>                                  
+                     </div>
+                    
+                    <div class="row"> 
+                          <div class="form-group  col-md-6 ">
+                            <label class=" col-form-label">Employee</label>
+                            <div class="">                                        
+                               <select class="form-control" name ="employee.idEmp" (change)="onForm3NameChange($event)" [(ngModel)]="loaddedIntervention.employee.id" > 
+                                 <option *ngFor="let employee of loadedEmployee" [value]="employee.id" > {{employee.nom}} {{employee.prenom}} </option>
+                                </select>
+                            </div>
+                          </div>                                                                    
+                         <!-- afficher la miste des machine fine why id +id employee slectionees if mzcihne .idemployee equel to edemploye -->
+                         <div class="form-group  col-md-6 " >
+                           <label class=" col-form-label">Machine</label>
+                           <div class="">
+                             <select class="form-control" name ="machine.idMach"  [(ngModel)]="loaddedIntervention.machine.id" > 
+                               <ng-container  *ngFor="let machine of loadedMachine">
+                               <option  *ngIf="model3 === machine.employee.id " [value]="machine.id" > {{machine.typeMach}}  </option>
+                             </ng-container>
+                              </select>
+                              </div>     
+                           </div>
+                      </div>
+                       
+                    <div class="row"> 
+                            <div class="form-group  col-md-6 ">
+                              <label class=" col-form-label">Descreption :</label>
+
+                                <div class="">
+                                  <textarea name="descreption" class="form-control rounded-0" placeholder="Votre descreption de lintervetion" required
+                                  [(ngModel)]="loaddedIntervention.descreption"  rows="3" ></textarea>
+                                </div>
+                              
+                            </div>
+                          
+                        
+                           <!-- afficher la miste des machine fine why id +id employee slectionees if mzcihne .idemployee equel to edemploye -->
+                           <div class="form-group  col-md-6 " >
+                             <label class=" col-form-label">Remarque:</label>
+                             <div class="">
+                              <textarea name="remarque" class="form-control rounded-0" placeholder="Votre remarque de lintervetion" required
+                              [(ngModel)]="loaddedIntervention.remarque"  rows="3" ></textarea>
+                                </div>     
+                             </div>
+                      </div>
+                    </div>  
+                  </div>
+                    </div>
+                    <!-- liste des logiciels  -->
+                    <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+                      <div class="card card-rounded">
+                        <div class="card-body">
+                          <div class= "row">
+                            <div class="col-md-8"> <h4 class="card-title">Liste des Logiciels</h4></div> 
+                            <div class="col-md-4">
+                              <button class="btn  btn-success " type="button"   (click)="openMediumModal(mediumModalContent1) ">
+                                Change logiciel
+                              </button>
+                            </div>
+                           
+                          </div>
+                         
+
+                          <small class="card-description">
+                           liste of application/Systéme/logiciels à répare installe ou/et configure.
+                          </small>
+                          <div class="row">
+                            <div class="col-md-12">
+                              
+                              <div id="dragula-event-left" class="py-2" >
+
+                                <ng-container  *ngFor="let element of loadedLogicielPeintervention ">
+                                  <ng-container *ngIf=" element.idInterv === loaddedIntervention.id"  >
+                                    <ng-container *ngFor=" let elt of loadedLogiciel"  >
+                                      <ng-container *ngIf=" element.idLog === elt.idLog"  >
+                                  
+                                        
+                                        <div class="card rounded border mb-2" >
+                                    
+                                        <div class="card-body p-3">
+                                    <div class="media">
+                                      <i class="ti ti-pin-alt icon-sm text-primary align-self-center me-3"></i>
+                                      <div class="media-body">
+                                        <h6 class="mb-1">{{elt.nomLog}}</h6>
+                                       
+                                      </div>                              
+                                    </div> 
+                                  </div>
+                                </div> 
+                                </ng-container>
+                                  </ng-container>
+                                  </ng-container>
+                                </ng-container>                            
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>                    
+                  
+                 </div>
+                
+                    <!-- Time_Lien -->
+             
+                <div class="col-lg-5 d-flex flex-column">                    
                     <div class="row flex-grow">
                       <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
                         <div class="card card-rounded">
@@ -301,7 +193,7 @@
                                       <h6 class="timeline-title">Demande D'intervention</h6>
                                     </div>
                                     <div class="timeline-body">
-                                      <p>{{ loaddedIntervention.descreption}}</p>
+                                      <small>{{ loaddedIntervention.descreption}}</small>
                                     </div>
                                     <div class="timeline-footer d-flex align-items-center flex-wrap">                                   
                                         <span class="ml-md-auto fw-bold">{{ loaddedIntervention.dateDemandeInter}}</span>
@@ -316,15 +208,15 @@
                                       <h6 class="timeline-title">Echec d'intervention</h6>
                                     </div>
                                     <div class="timeline-body">
-                                      <p>la cause d'annulation ou le refus d'intervention Alpha 6 has landed, and it’s one of our biggest ships to date.</p>
+                                      <p>{{loaddedIntervention.causeEchec}}</p>
                                     </div>
                                     <div class="timeline-footer d-flex align-items-center flex-wrap">
-                                        <span class="ml-md-auto fw-bold">10th Aug 2017</span>
+                                        <span class="ml-md-auto fw-bold"> {{loaddedIntervention.dateFinInter}}</span>
                                     </div>
                                   </div>
                                 </div>
 
-                                <div class="timeline-wrapper  timeline-inverted timeline-wrapper-warning" *ngIf="loaddedIntervention.etat === 'In progress'" >
+                                <div class="timeline-wrapper  timeline-inverted timeline-wrapper-warning" *ngIf="loaddedIntervention.etat === 'In progress' || loaddedIntervention.etat === 'Completed'" >
                                   <div class="timeline-badge"></div>
                                   <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
                                     <div class="timeline-heading">
@@ -332,10 +224,10 @@
                                       
                                     </div>
                                     <div class="timeline-body">
-                                      <p>Obseration</p>
+                                      <p>{{loaddedIntervention.descreption}}</p>
                                     </div>
                                     <div class="timeline-footer d-flex align-items-center flex-wrap">
-                                        <span class="ml-md-auto fw-bold">5th Sep 2016</span>
+                                        <span class="ml-md-auto fw-bold">{{loaddedIntervention.dateReparation}}</span>
                                     </div>
                                   </div>
                                 </div>
@@ -355,36 +247,131 @@
               
                                     </div>
                                     <div class="timeline-body">
-                                      <p>Any Observation 4 is here to address those pesky.</p>
+                                      <p>{{loaddedIntervention.etatdereparation}}</p>
                                     </div>
                                     <div class="timeline-footer d-flex align-items-center flex-wrap">                                                                        
-                                        <span class="ml-md-auto fw-bold">27th July 2016</span>
+                                        <span class="ml-md-auto fw-bold">{{loaddedIntervention.dateFinInter}}</span>
                                     </div>
                                   </div>
                                 </div>
                                
-                               
                               
+                                <div class="timeline-wrapper timeline-inverted timeline-wrapper-secondary" >
+                                  <div class="timeline-badge"></div>
+                                  <div class="timeline-panel" style="margin-left: 0%; width: 300px;">
+                                    <div class="timeline-heading">
+                                      <div class="row">
+                                        <div class="col-lg-8">  <h6 class="timeline-title">New Etat </h6> </div>
+                                        <div class="col-lg-4">                                        
+                                          
+                                        </div>
+                                      </div>
+              
+                                    </div>
+                                    <div class="timeline-body">
+                                      <div class="form-group">
+                                        <label class=" col-form-label">Type Etat:</label>
+                                        <div class="" >
+                                          <select class="form-control" name ="etat"  (change)="onForm4NameChange($event)"  [(ngModel)]="loaddedIntervention.etat">  
+                                            <ng-container  *ngFor="let etat of etat">
+                                              <option  value={{etat.title}}>
+                                                 {{etat.title}}
+                                               </option>
+                                            </ng-container> 
+                                           </select>                               
+                                         </div>
+                                      </div>
+                                      <div class="form-group" *ngIf="modal3==='In progress' || modal3==='Completed' || modal3==='Annule'">
+                                        <label class=" col-form-label">Date d'intervention:</label>                                 
+                                        <div class="">
+                                          <input  type="date" name="dateReparation" class="form-control"  required [(ngModel)]="loaddedIntervention.dateReparation" /> 
+                                        </div>
+                                      </div>
+                                      <div class="form-group" *ngIf="modal3==='Completed'">
+                                        <label class=" col-form-label">Date de Fin d'intervention:</label>                                 
+                                        <div class="">
+                                          <input  type="date" name="dateFinInter" class="form-control"  required [(ngModel)]="loaddedIntervention.dateFinInter"/> 
+                                        </div>
+                                      </div>
+                                      <div class="form-group"  *ngIf="modal3==='Annule'  ">
+                                        <label class=" col-form-label">La Cause D'echec/ Annulation</label>                                 
+                                        <div class="">
+                                          <input  type="text" name="causeEchec" class="form-control"  required [(ngModel)]="loaddedIntervention.causeEchec"  /> 
+                                        </div>
+                                      </div>
+                          
+                                      <div class="form-group"   *ngIf="modal3==='Completed' ">
+                                        <label class=" col-form-label" >Etat (Observation) de Réparation :</label>        
+                                        <div class="">
+                                          <input  type="text" name="etatdereparation" class="form-control"  required [(ngModel)]="loaddedIntervention.etatdereparation" /> 
+                                        </div>
+                                      </div>
+
+
+
+                                      <button type="submit" class="btn btn-info btn-icon-text btn-sm "  >  
+                                                    Add                                          
+                                      </button> 
+
+                                     
+                                    </div>
+                                 
+                                  </div>
+                                </div>
+                             
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
+                   
                     </div>
-                   </div>
-
-
-
-                </div>  
-          
-          </div>
-        </div>
-      </div>
+               </div>
+                </div>
+               </form>
+</div>
     </div>
   </div>
 </div>
+ 
 
 
+
+
+<!-- model -->
+<ng-template #mediumModalContent1 let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel-2">Changement liste des logiciels</h5>
+      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="updateListeLogiciel(loaddedIntervention.id)">
+      <div class="modal-body">
+       changement la liste des logiciels a repare/installe/configure 
+
+       <ng-multiselect-dropdown
+       [placeholder]="'Selectionez Le(les) Logiciel(s)'"
+       [settings]="dropdownSettings"
+       [data]="dropdownList"
+       [(ngModel)]="selectedItems"      
+       (onSelect)="onItemSelect($event)"
+       (onSelectAll)="onSelectAll($event)"  
+       (onDeSelect)="unSelect($event)"  
+       (onDeSelectAll)="unSelectAll($event)" > 
+     </ng-multiselect-dropdown> 
+
+
+      </div>
+
+        <button type="submit" class="btn btn-danger" (click)="modal.close()">Yes</button>
+        <button type="button" class="btn btn-light" (click)="modal.close()">NO</button>
+   
+    </form>
+  </div>
+</ng-template>
 
 <!-- model -->
 <ng-template #mediumModalContent let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
@@ -406,3 +393,5 @@
     </form>
   </div>
 </ng-template>
+
+

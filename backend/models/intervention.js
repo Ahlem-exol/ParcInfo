@@ -150,6 +150,16 @@ const Intervention = sequelize.define(
       comment: null,
       field: "etat"
     },
+    //causeEchec
+    causeEchec:{
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "causeEchec"
+    },
   },{
 
     freezeTableName: true,

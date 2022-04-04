@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -6,6 +7,7 @@ import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Intervention } from 'src/app/models/intervention.model';
 import { Logiciel } from 'src/app/models/logiciel.model';
+import { Logparinter } from 'src/app/models/logparinter.model';
 import { Machine } from 'src/app/models/machine.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
@@ -30,7 +32,7 @@ export class DetailleInterventionComponent implements OnInit {
   typedIntervention :type[]=[
     { title: 'Reparation Software',  icon: 'ni-tv-2 text-primary'}, //other
     { title: 'Installation Software',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Reparation/configuration software',  icon: 'ni-tv-2 text-primary'},
+    { title: 'configuration software',  icon: 'ni-tv-2 text-primary'},
     { title: 'Recuperation des données',  icon: 'ni-tv-2 text-primary'},
     { title: 'Assitence',  icon: 'ni-tv-2 text-primary'},
     { title: 'Reparation Hardware ',  icon: 'ni-tv-2 text-primary' },
@@ -38,7 +40,6 @@ export class DetailleInterventionComponent implements OnInit {
   ];
 
   etat :type[]=[
-    { title: 'Demande',  icon: 'badge badge-info'}, //other
     { title: 'Annule',  icon: 'badge badge-danger'},
     { title: 'In progress',  icon: 'badge badge-warning'},
     { title: 'Completed',  icon: 'badge badge-success'}
@@ -59,11 +60,21 @@ export class DetailleInterventionComponent implements OnInit {
 
   sub5:Subscription;
   loadedLogiciel:Logiciel[];
+
+  sub6:Subscription;
+  loadedLogicielPeintervention:Logparinter[];
   model3 :number
   modal2:string
+  logUp :[];
+  lenth: number;
+
   constructor(private modalService: NgbModal,private interventionService:InterventionService ,private machineService:MachineService ,private employeeService:EmployeeService
     ,private route: ActivatedRoute,private router: Router, private directionservice :DirectionService
     ,private notifyService : NotificationService, private fournisseurService:FournisseurService,private logicielservice:LogicielService) { }
+
+    dropdownList:any[];
+    selectedItems :any[];
+    dropdownSettings :any = {};
 
   ngOnInit(): void {
     const idInter = JSON.parse(this.route.snapshot.paramMap.get('id') || '{}');
@@ -72,9 +83,13 @@ export class DetailleInterventionComponent implements OnInit {
        this.model3=this.loaddedIntervention.employee.id ; 
        this.modal2=this.loaddedIntervention.typeInterv;
      })
-    
-     this.sub2 =  this.directionservice.getDirections().subscribe(dirdata => {
 
+     this.sub6 =  this.interventionService.getInterventionsPerLogociel().subscribe(interdata => {
+      this.loadedLogicielPeintervention = interdata.logparinters;
+    })
+
+
+     this.sub2 =  this.directionservice.getDirections().subscribe(dirdata => {
        this.loadedDirections = dirdata.directions;
      })
 
@@ -87,8 +102,46 @@ export class DetailleInterventionComponent implements OnInit {
      })
 
      this.sub5 =  this.logicielservice.getLogiciels().subscribe(logdata => {
+      console.log(this.loaddedIntervention.id)
+      console.log(this.loadedLogicielPeintervention)
+    
        this.loadedLogiciel = logdata.logiciels;
+       this.dropdownList = this.loadedLogiciel;
+       this.selectedItems = [];
+       this.dropdownSettings= {
+         singleSelection: false,
+         idField: 'idLog',
+         textField: 'nomLog',
+         selectAllText: 'Select All',
+         unSelectAllText: "UnSelect All",
+         itemsShowLimit: 3,
+         allowSearchFilter: true
+       };
+      
      })
+  }
+  logiciels :any[];
+  onItemSelect(item: any) {
+    this.logiciels=[];
+    this.logiciels= item;
+    console.log(item)
+  }
+  onSelectAll(items: any) {
+    this.logiciels=[];
+    this.logiciels= items;
+    console.log(items)
+  }
+  unSelect(item:any){
+     this.logiciels.forEach((element,index)=>{
+       if(this.logiciels[index].idLog == item.idLog ) {
+        console.log("Item ["+index+"]: " ,this.logiciels[index].idLog,", unselcted Item :   ",item.idLog, "the equalite ", (this.logiciels[index].idLog == item.idLog ));
+         delete this.logiciels[index];
+    }
+   });
+  }
+  unSelectAll(items :any){
+    this.logiciels=[];
+    console.log("inselcted item",items);
   }
 
   detailleEmployee(idEmp:number){
@@ -96,24 +149,47 @@ export class DetailleInterventionComponent implements OnInit {
   }
 
   InterventionUpdate(interventionUpdate: any){
-     console.log(interventionUpdate)
+     console.log("the updzate data  ",interventionUpdate)
     this.interventionService.updateIntervention(interventionUpdate).subscribe(res => {
      this.notifyService.showSuccess("Update with success !! ","Update");
     });
   }
 
+
+  EtatUpdate(form: NgForm){
+    const etat= form.value.etat;
+    const dateReparation= form.value.dateReparation;
+    const dateFinInter = form.value.dateFinInter;
+    const causeEchec= form.value.causeEchec;
+    const etatdereparation = form.value.etatdereparation;
+
+
+  }
   deleteIntervention(idIntervention: number){
     this.interventionService.DeleteIntervention(idIntervention).subscribe(res=>{
-      this.notifyService.showSuccess("delete success ","delet");
-      this.router.navigate(['/intervention']);
+      this.notifyService.showSuccess("Delete with success ","delet");
+      this.router.navigate(['/intervension']);
     }) 
+  }
+
+  updateListeLogiciel( id:number ){
+
+    console.log("logiciel list", this.logiciels.length)
+    if(this.logiciels.length == undefined){
+      this.lenth= 0;
+    }else{
+      this.lenth=this.logiciels.length;
+    }
+   
+   this.interventionService.UpdateListeOfLogciel(this.logiciels,id,this.lenth).subscribe(res => {
+     this.notifyService.showSuccess("Update with success ","Update");
+     this.ngOnInit();
+  })
   }
   openMediumModal( mediumModalContent: any ) {
     this.modalService.open( mediumModalContent );
   }
-
  //pour get type de reparatoioin
-
  onForm2NameChange({ target }: {target:any}) {
    this.modal2 = target.value; 
  }

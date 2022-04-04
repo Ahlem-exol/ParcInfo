@@ -1,17 +1,22 @@
-<div class="container-scroller">
-  <app-header></app-header>
-  
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-     <app-nav></app-nav>
-   <!-- partial -->
-    <div class="main-panel">
-  <!-- <app-dashboard></app-dashboard> -->
+<ng-container *ngIf="showNavbar==false">
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
+</ng-container>
+
+<ng-container *ngIf="showNavbar == true">
+
+
+<div class="container-scroller">
+  <app-header ></app-header>
+  <div class="container-fluid page-body-wrapper">
+     <app-nav  *ngIf="showSidebar"> </app-nav>
+
+    <div class="main-panel" > 
+  <router-outlet></router-outlet>
+  
+   <app-footer *ngIf="showFooter"></app-footer>
   </div>
    </div>
-</div>
-
+</div> 
+</ng-container>
 
 

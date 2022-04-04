@@ -183,7 +183,7 @@
               <label class=" col-form-label">Fournisseur</label>
               <div class="">
                
-                <select class="form-control" name ="direction.idForniss"  ngModel > 
+                <select class="form-control" name ="idForniss"  ngModel > 
                   <option *ngFor="let fournisseur of loadedFournisseur" [value]="fournisseur.idForniss" > {{fournisseur.nomFourni}} </option>
                  </select>
              </div>
@@ -201,8 +201,8 @@
               <label class=" col-form-label">Employee</label>
               <div class="">
                
-                <select class="form-control"  name ="direction.idEmp"   ngModel > 
-                  <option *ngFor="let employee of loadedEmployee" [value]="employee.id"> {{employee.nom}} {{employee.prenom}} </option>
+                <select class="form-control"  name ="idEmp"   ngModel > 
+                  <option *ngFor="let employee of loadedEmployee"  [value]="employee.id"> {{employee.nom}} {{employee.prenom}} </option>
                  </select>
              </div>
            
@@ -221,10 +221,6 @@
               </div>
   
             </div>
-
-
-
-           
     
       </div>
       <div class="modal-footer">

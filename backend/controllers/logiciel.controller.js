@@ -1,6 +1,7 @@
 const Logiciel = require('../models/logiciel');
 const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
+const Logpardir =require("../models/logpardir");
 exports.getAllLogiciel = (req,res, next) => {
     Logiciel.findAll({attributes: ['idLog', 'nomLog','logo', 'versionLog', 'Licence', 'type', 'comptabilite'
     , 'observation', 'lienTelechr'],
@@ -53,29 +54,8 @@ exports.getAllLogicielParDirection = (req,res, next) => {
           idLpd: logpardir.idLpd,
           idLog:logpardir.idLog,
           idDir:logpardir.idDir,
+       
          
-          // Logiciel:{
-          //    idLog: logpardir.logiciel.idLog,
-          //   nomLog: logpardir.logiciel.nomLog,
-          //   logo:logpardirs.logiciel.logo,
-          //   versionLog: logpardirs.logiciel.versionLog,
-          //   Licence:logpardirs.logiciel.Licence,
-          //   type: logpardirs.logiciel.type,
-          //   comptabilite :logpardirs.logiciel.comptabilite,
-          //   observation:logpardirs.logiciel.observation,
-          //   lienTelechr:logpardirs.logiciel.lienTelechr,
-          // },
-          // direction:{     
-          //   id: logpardirs.direction.idDir,
-          //   nom: logpardirs.direction.nomDir,
-          //   numPost: logpardirs.direction.numPost,
-          //   effective:logpardirs.direction.effectif,
-          //   nbrEmp: logpardirs.direction.nbrEmp,
-          //   nbrMach :logpardirs.direction.nbrMachine,
-          //   nbrInterv:logpardirs.direction.nbrIntervention,
-          //   userPost:logpardirs.direction.UserPost,
-          //   emplacement:logpardirs.direction.Emplacement
-          //     }
 
         }
       }),
@@ -85,5 +65,4 @@ exports.getAllLogicielParDirection = (req,res, next) => {
     console.log(err)
   });
 };
-
 

@@ -1,8 +1,10 @@
+// the problem with the JSON Données
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { PDFDocumentProxy, PDFPageProxy } from 'ng2-pdf-viewer';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-
 import * as  pdfMake from "pdfmake/build/pdfmake";
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,12 +20,9 @@ import { Employee } from 'src/app/models/employee.model';
 
 export class OutputPdfComponent implements OnInit {
   
-type:string ="decharge";
- // pdfSrc="https://www.orimi.com/pdf-test.pdf"; // this sample, dynamic one we will generate with the pdfmake
- pdfSrc:string; // this sample, dynamic one we will generate with the pdfmake
- pageVariable = 1;
-
- 
+ type:string ="decharge";
+ pdfSrc:string =""; // this sample, dynamic one we will generate with the pdfmake
+ pageVariable = 1; 
  // Initialize variables required for the header and this component
  fileName:string = "";
  // set zoom variables
@@ -54,7 +53,7 @@ type:string ="decharge";
      this.numAlrim=JSON.parse(this.route.snapshot.paramMap.get('numAlrim') || '{}');
      this.sub =  this.employeeService.getEmployee(this.idEmp).subscribe(empdata => {
       this.loadedEmployee = empdata.employee;}),
-   
+      this.fileName = "test-document.pdf";
      this.getData();
   }
 
@@ -167,7 +166,7 @@ type:string ="decharge";
       },
  
    
-      ], // it will be discussed later
+      ], 
    
     }
  

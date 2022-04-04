@@ -1,6 +1,6 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -16,9 +16,15 @@ import { LogicielService } from 'src/app/services/logiciel/logiciel.service';
 import { MachineService } from 'src/app/services/machine/machine.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
+
 declare interface type {
   title: string;
   icon: string;
+}
+
+declare interface type2 {
+  item_id: number;
+  item_text: string;
 }
 
 @Component({
@@ -28,11 +34,15 @@ declare interface type {
 
 })
 export class ListeInterventionComponent implements OnInit,OnDestroy {
-
+  dropdownList:any[];
+  selectedItems :any[];
+  dropdownSettings :any = {};
+  
+  logiciels :any[];
   typedIntervention :type[]=[
     { title: 'Reparation Software',  icon: 'ni-tv-2 text-primary'}, //other
     { title: 'Installation Software',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Reparation/configuration software',  icon: 'ni-tv-2 text-primary'},
+    { title: 'configuration software',  icon: 'ni-tv-2 text-primary'},
     { title: 'Recuperation des données',  icon: 'ni-tv-2 text-primary'},
     { title: 'Assitence',  icon: 'ni-tv-2 text-primary'},
     { title: 'Reparation Hardware ',  icon: 'ni-tv-2 text-primary' },
@@ -45,9 +55,11 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
     { title: 'In progress',  icon: 'badge badge-warning'},
     { title: 'Completed',  icon: 'badge badge-success'}
   ];
+
   date= new Date();
   visibility='invisible';
-  constructor(private modalService: NgbModal,private interventionService:InterventionService,
+  lenth: number;
+  constructor(private fb : FormBuilder,private modalService: NgbModal,private interventionService:InterventionService,
     private machineService :MachineService ,private employeeService:EmployeeService,private router: Router,
     private directionservice :DirectionService, private notifyService :NotificationService,private logicielservice:LogicielService) { 
 
@@ -69,9 +81,10 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
   loadedLogiciel:Logiciel[];
 
   stat:string="";
+  obj:any;
   
-  ngOnInit(): void {
-    this.sub =  this.interventionService.getInterventions().subscribe(minterdata => {
+  ngOnInit(): void { 
+     this.sub =  this.interventionService.getInterventions().subscribe(minterdata => {
       console.log("liste des intervention",minterdata.interventions);
        this.loaddedIntervention = minterdata.interventions;
        
@@ -90,9 +103,51 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
      
      })
      this.sub5 =  this.logicielservice.getLogiciels().subscribe(logdata => {
-       this.loadedLogiciel = logdata.logiciels;  
+   
+      this.loadedLogiciel = logdata.logiciels;  
+      this.dropdownList = this.loadedLogiciel;
+      this.selectedItems = [];
+      this.dropdownSettings= {
+        singleSelection: false,
+        idField: 'idLog',
+        textField: 'nomLog',
+        selectAllText: 'Select All',
+        unSelectAllText: "UnSelect All",
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
      })
   }
+
+ 
+  onItemSelect(item: any) {
+    this.logiciels=[];
+    this.logiciels= item;
+    console.log(item)
+  }
+  onSelectAll(items: any) {
+    this.logiciels=[];
+    this.logiciels= items;
+    console.log(items)
+  }
+  unSelect(item:any){
+     this.logiciels.forEach((element,index)=>{
+       if(this.logiciels[index].idLog == item.idLog ) {
+        console.log("Item ["+index+"]: " ,this.logiciels[index].idLog,", unselcted Item :   ",item.idLog, "the equalite ", (this.logiciels[index].idLog == item.idLog ));
+         delete this.logiciels[index];
+}
+
+  
+   });
+
+
+  }
+  unSelectAll(items :any){
+    this.logiciels=[];
+    console.log("inselcted item",items);
+  }
+
+
   addIntervention(form: NgForm){
 
     const typeInterv= form.value.typeInterv;
@@ -102,8 +157,10 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
     const dateDemandeInter = form.value.dateDemandeInter;
     const dateFinInter= form.value.dateFinInter;
     const dateReparation= form.value.dateReparation;
-    const etatdereparation= "sfdqsfsdf";
+    const etatdereparation= form.value.etat;
     const etat= form.value.etat;
+    const causeEchec =form.value.causeEchec;
+    console.log("from submite les logiciel est ", this.logiciels);
     var idDir= Number(form.value.idDir);
     if (!idDir){
       idDir = 1;
@@ -120,10 +177,16 @@ export class ListeInterventionComponent implements OnInit,OnDestroy {
     if (!idLog){
       idLog = 1;
        }
-console.log("the add intervention",typeInterv, descreption, remarque,dure,dateDemandeInter,
-dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
+       
+       console.log("logiciel list", this.logiciels.length)
+       if(this.logiciels.length == undefined){
+         this.lenth= 0;
+       }else{
+         this.lenth=this.logiciels.length;
+       }
+       
     this.interventionService.addIntervention(typeInterv, descreption, remarque,dure,dateDemandeInter,
-      dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog).subscribe(res => {
+      dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog,this.logiciels,causeEchec,this.lenth).subscribe(res => {
       this.notifyService.showSuccess("Add with success ","Add");
      this.ngOnInit();
   })
@@ -132,7 +195,6 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
   detaille(intervention:string){
     this.router.navigate(['/intervension-detaill' , { id: intervention }]);
   }
-
   ngOnDestroy(): void {
    this.sub.unsubscribe();
    this.sub2.unsubscribe();
@@ -140,7 +202,6 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
    this.sub4.unsubscribe();
    this.sub5.unsubscribe();
     }
-
   updateEtat(idInter:number,etat:string){
    console.log("changemnet letat de intervnetion  "+idInter+ " to etat "+etat);
    this.interventionService.updateEtat(idInter,etat).subscribe(res => {
@@ -152,7 +213,6 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
   //this.visibility ='visible';
     this.modalService.open( mediumModalContent );
   }
-
   //pour get type de reparatoioin
   modal2 :string="";
   onForm2NameChange({ target }: {target:any}) {
@@ -168,8 +228,7 @@ dateFinInter,dateReparation,etatdereparation,etat,idDir,idMach,idEmp,idLog)
   model3:number=0 ;
   onForm3NameChange({ target }: {target:any}) {
     this.model3 = Number(target.value); 
-  }
-    
+  }   
   nom:any;
   p:number = 1;
   //pour table serach 

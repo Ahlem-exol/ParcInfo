@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Direction } from 'src/app/models/direction.model';
@@ -32,15 +32,17 @@ export class DashbordComponent implements OnInit,OnDestroy {
 
 
   constructor(private modalService: NgbModal,private directionService:DirectionService,
-    private router: Router, private FournisseurService:FournisseurService,private logicielService:LogicielService) { }
+    private router: Router,private route: ActivatedRoute, private FournisseurService:FournisseurService,private logicielService:LogicielService) { }
   ngOnDestroy(): void {
    this.sub.unsubscribe();
    this.sub2.unsubscribe();
    this.sub3.unsubscribe();
    this.sub4.unsubscribe();
+   
   }
 
   ngOnInit(): void {
+
     this.sub =  this.directionService.getDirections().subscribe(dirdata => {
        this.loadedDirections = dirdata.directions;
      });

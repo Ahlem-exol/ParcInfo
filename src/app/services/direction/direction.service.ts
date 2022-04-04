@@ -16,16 +16,13 @@ export class DirectionService {
   constructor(private http:HttpClient,private modalService :NgbModal) { }
 
   getDirections() {
-    // this.http.get<{ message: string, employees: Employee[] }>(BACKEND_URL).pipe(take(1)).subscribe((empData) => {
-    //   console.log(empData.employees)
-    //   this.employees = empData.employees;
-     
-    //   this._employees.next([...this.employees]);
-    // });
-    // return [...this.employees];
-    console.log('we in the service');
+
     return this.http.get<{ message: string, directions: Direction[] }>(BACKEND_URL);
   }
 
+  getDirection(nomDir:string) {
+  //  console.log(nomDir)
+    return this.http.get<{ message: string, direction: Direction }>(BACKEND_URL+ '/' + nomDir);
+  }
 
 }

@@ -25403,7 +25403,7 @@ dl li {
   bottom: 0;
   position: absolute;
   content: " ";
-  width: 3px;
+  width: 1px;
   background-color: #F1F1F1;
 
   margin-left: -1.5px;
@@ -25413,7 +25413,7 @@ dl li {
   display: block;
   margin-bottom: 20px;
   position: relative;
-  width: 100%;
+  width: 30%;
   padding-right: 90px;
 
 }

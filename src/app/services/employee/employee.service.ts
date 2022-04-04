@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
+import { Intervention } from 'src/app/models/intervention.model';
+import { Machine } from 'src/app/models/machine.model';
 
 interface EmployeeAdd {
    nom: string,
@@ -37,9 +39,16 @@ export class EmployeeService {
 
   getEmployee(id: number) {
    return  this.http.get<{ message: string, employee: Employee }>(BACKEND_URL + '/' + id);
+  }
 
+  getEmployeeIntevention(id: number) {
+    return this.http.get<{ message: string, interventions: Intervention[] }>(BACKEND_URL + '/inter/' + id);
+   }
 
-}
+   getEmployeeMachines(id: number) {
+    return this.http.get<{ message: string, machines: Machine[] }>(BACKEND_URL + '/mach/' + id);
+   }
+
 
   addEmployee(nom:string, prenom:string, post:string,
     datenaissance:Date,numtel:string,mailPers:string,

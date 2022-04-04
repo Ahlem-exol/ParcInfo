@@ -18,7 +18,9 @@ const fournisseurRoutes = require('./routes/fournisseur');
 const interventionRoutes = require('./routes/intervention');
 const logicielRoutes = require('./routes/logiciel');
 const documentRoutes =require('./routes/document');
+const authRoutes =require('./routes/auth');
 //   /* LIeN */
+app.use('/api/auth', authRoutes);
 app.use('/api/employee', employeeRoutes);
 app.use('/api/fournisseur',fournisseurRoutes);
 app.use('/api/dir',directionRoutes);

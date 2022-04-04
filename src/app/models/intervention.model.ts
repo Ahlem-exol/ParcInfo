@@ -18,6 +18,7 @@ export class Intervention {
       public dateReparation:Date,
 
       public etatdereparation:string,
+      public causeEchec:string,
       public etat:string,
 
       public idDir:number,
@@ -30,6 +31,7 @@ export class Intervention {
       public employee:Employee,
       
       public idLog: number,
+      public ListeLogiciel:Logiciel[],
       public logiciel:Logiciel,
     ) { }
   }

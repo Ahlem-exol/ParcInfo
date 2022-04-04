@@ -93,6 +93,19 @@ const Employee = sequelize.define(
         model: "direction_model"
       }
     },
+    idUser: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "idUser",
+      references: {
+        key: "id",
+        model: "user_model"
+      }
+    },
     matricule: {
       type: DataTypes.INTEGER(11),
       allowNull: false,

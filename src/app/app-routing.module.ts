@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './pages/auth/auth-guard';
+import { AuthService } from './pages/auth/auth.service';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { OutputPdfComponent } from './pages/document/output-pdf/output-pdf.component';
 import { DetailleEmployeeComponent } from './pages/employee/detaille-employee/detaille-employee.component';
@@ -10,22 +13,45 @@ import { DetailleMachineComponent } from './pages/Machine/detaille-machine/detai
 import { ListeMachineComponent } from './pages/Machine/liste-machine/liste-machine.component';
 
 const routes: Routes = [
-
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-
-  { path: 'dashboard', component: DashbordComponent },
-  {path:'employee', component:ListeEmployeeComponent},
-  {path:'employee-detaill', component:DetailleEmployeeComponent},
-  {path:'machine', component:ListeMachineComponent},
-  {path:'machine-detaill', component:DetailleMachineComponent},
-  {path:'intervension', component:ListeInterventionComponent},
-  {path:'intervension-detaill', component:DetailleInterventionComponent},
-  {path:'document', component: OutputPdfComponent},
-  // {path:'document-detaill', component:DetailleDocumentComponent}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: DashbordComponent, canActivate: [AuthGuard] },
+  {
+    path: 'employee',
+    component: ListeEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'employee-detaill',
+    component: DetailleEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'machine',
+    component: ListeMachineComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'machine-detaill',
+    component: DetailleMachineComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'intervension',
+    component: ListeInterventionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'intervension-detaill',
+    component: DetailleInterventionComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'document', component: OutputPdfComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthService,AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

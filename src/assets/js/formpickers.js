@@ -35,3 +35,5 @@
     $('.input-daterange').datepicker({});
   }
 })(jQuery);
+
+

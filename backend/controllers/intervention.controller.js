@@ -4,10 +4,10 @@ const Employee =require('../models/employee');
 const Direction = require('../models/direction');
 const Logiciel = require('../models/logiciel');
 const Machine = require('../models/machine');
-
+const Logparinter = require('../models/logparinter');
 exports.getAllIntervention = (req, res, next) => {
   Intervention.findAll({attributes:['idInterv', 'typeInterv', 'dateDemandeInter', 'dure', 'dateFinInter', 'descreption', 
-  'remarque', 'dateReparation','etat','etatdereparation'],
+  'remarque', 'dateReparation','etat','etatdereparation','causeEchec'],
     include:[
       {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post']},
       {model:Logiciel,attributes:['idLog', 'nomLog', 'versionLog', 'Licence', 'type','observation']},
@@ -35,6 +35,7 @@ exports.getAllIntervention = (req, res, next) => {
          dateReparation:intervention.dateReparation,
          etat:intervention.etat,
          etatdereparation:intervention.etatdereparation,
+         causeEchec:intervention.causeEchec,
          direction:{
             id: intervention.direction.idDir,
             nom: intervention.direction.nomDir,
@@ -86,7 +87,7 @@ exports.getIntervention = (req, res, next) => {
     {
       where:{idInterv:interventionId},
       attributes:['idInterv', 'typeInterv', 'dateDemandeInter', 'dure', 'dateFinInter', 'descreption', 
-      'remarque', 'dateReparation','etat','etatdereparation'],
+      'remarque', 'dateReparation','etat','etatdereparation','causeEchec'],
        include:[
         {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post']},
         {model:Logiciel,attributes:['idLog', 'nomLog', 'versionLog', 'Licence', 'type','observation']},
@@ -163,7 +164,7 @@ exports.getIntervention = (req, res, next) => {
     {
       where:{idInterv:interventionId},
       attributes:['idInterv', 'typeInterv', 'dateDemandeInter', 'dure', 'dateFinInter', 'descreption', 
-      'remarque', 'dateReparation','etat','etatdereparation'],
+      'remarque', 'dateReparation','etat','etatdereparation','causeEchec'],
        include:[
         {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post']},
         {model:Logiciel,attributes:['idLog', 'nomLog', 'versionLog', 'Licence', 'type','observation']},
@@ -187,11 +188,12 @@ exports.getIntervention = (req, res, next) => {
           dateReparation:req.body.dateReparation,
           etat:req.body.etat,
           etatdereparation:req.body.etatdereparation,
+          causeEchec:req.body.causeEchec,
           idLog:req.body.logiciel.idLog,
           idEmp:req.body.employee.idEmp,
           idMach:req.body.machine.idMach,
           idDir:req.body.direction.idDir
-
+         
        }) .then(result => {
         res.status(201).json({
           message: 'intervention update  !',
@@ -213,7 +215,7 @@ exports.deleteIntervention = (req, res, next) => {
     {
       where:{idInterv:interventionId},
       attributes:['idInterv', 'typeInterv', 'dateDemandeInter', 'dure', 'dateFinInter', 'descreption', 
-      'remarque', 'dateReparation','etat','etatdereparation'],
+      'remarque', 'dateReparation','etat','etatdereparation','causeEchec'],
        include:[
         {model:Employee,attributes:['idEmp','nomEmp','prenomEmp','post']},
         {model:Logiciel,attributes:['idLog', 'nomLog', 'versionLog', 'Licence', 'type','observation']},
@@ -225,7 +227,7 @@ exports.deleteIntervention = (req, res, next) => {
       return intervention.destroy();
     })
     .then(result => {
-      console.log(result);
+
       res.status(200).json({message: "intervention deleted !"});
     })
     .catch(err => console.log(err));
@@ -234,10 +236,10 @@ exports.deleteIntervention = (req, res, next) => {
 
 /////////////add machine
 exports.addIntervention= (req, res, next) => {
-
+  listedeslogiciel = req.body.ListeLogiciel;
 
   const intervention = new Intervention({
-        typeInterv: req.body.typeInterv,
+          typeInterv: req.body.typeInterv,
           descreption: req.body.descreption,
           remarque :req.body.remarque,
           dure: req.body.dure,
@@ -246,18 +248,30 @@ exports.addIntervention= (req, res, next) => {
           dateReparation:req.body.dateReparation,
           etat:req.body.etat,
           etatdereparation:req.body.etatdereparation,
+          causeEchec:req.body.causeEchec,
           idLog:req.body.idLog,
           idEmp:req.body.idEmp,
           idMach:req.body.idMach,
           idDir:req.body.idDir
-
-      
-
   });
 
   intervention.save().then(resul => {
+   
+
+    listedeslogiciel.forEach(element => {
+
+    const logparinter = new Logparinter({
+      idInterv:resul.idInterv,
+      idLog:  element.idLog,
+    })
+    logparinter.save().then(resul => {
+      res.status(201).json({
+        message: ' Add logiel paeikntzr ! .',
+      });
+    });
+  });
     res.status(201).json({
-      message: ' Add intervention ! .',
+      message: ' Add Intervention ! .',
     });
   })
 .catch(err => {
@@ -272,7 +286,6 @@ exports.addIntervention= (req, res, next) => {
 
 exports.UpdateEtat= (req, res, next) => {
   const interventionId = req.params.id;
-  console.log(req.body.etat)
    Intervention.findOne(
     {
       where:{idInterv:interventionId},
@@ -301,3 +314,85 @@ exports.UpdateEtat= (req, res, next) => {
     }
   })
 };
+
+
+exports.getAllLogicielParIntervnetion = (req,res, next) => {
+  Logparinter.findAll(
+    {attributes: ['id','idInterv','idLog'],
+  }).then((logparinters) => {
+    res.status(200).json({    
+      message: 'logiciel dans l\'intervention !',
+      logparinters: logparinters.map(logparinter => {
+        return {
+          id: logparinter.id,
+          idInterv:logparinter.idInterv,
+          idLog:logparinter.idLog,
+         
+
+        }
+      }),
+    });
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+};
+
+
+
+
+exports.UpdateListeOfLogiciel= (req, res, next) => {
+  const interventionId = req.body.idinter;
+  //delet all the logicielPar intervention avec idIntervention equal intervention id 
+ 
+  Logparinter.findAll({    
+     where:{idInterv:interventionId},
+    attributes: ['id','idInterv','idLog'],
+  }).then((logparinters) => {
+    res.status(200).json({    
+      message: 'logiciel dans l\'intervention !',
+      logparinters: logparinters.map(logparinter => {
+        return logparinter.destroy();
+      }),
+    });
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+ 
+  //then instert the new logiciel 
+  listedeslogiciel = req.body.listeLogiciel;
+  console.log(Object.keys(listedeslogiciel));
+ if (req.body.lenth != 0){
+
+
+    listedeslogiciel.forEach(element => {
+    const logparinter = new Logparinter({
+      idInterv:interventionId,
+      idLog:  element.idLog,
+    })
+    logparinter.save().then(resul => {
+      res.status(201).json({
+        message: ' Add logiel paeikntzr ! .',
+      });
+    });
+  });
+ }else{
+  
+
+    const logparinter = new Logparinter({
+      idInterv:interventionId,
+      idLog:  listedeslogiciel.idLog,
+    })
+    logparinter.save().then(resul => {
+      res.status(201).json({
+        message: ' Add logiel paeikntzr ! .',
+      });
+    });
+  
+ }
+
+};
+
+
+

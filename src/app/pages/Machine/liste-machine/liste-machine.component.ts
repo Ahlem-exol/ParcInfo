@@ -171,7 +171,7 @@ export class ListeMachineComponent implements OnInit,OnDestroy {
     if (!idEmp){
        idEmp = 1;
        }
-       console.log(idEmp)
+       console.log(idForniss)
 
        // ajouter machine
     this.machineService.addMachine(categorieMach, typeMach, marqueMach,numSerie,numAlrim,
@@ -179,10 +179,6 @@ export class ListeMachineComponent implements OnInit,OnDestroy {
      Emplacement,etat,idDir,idForniss,idEmp).subscribe(res => {
       this.notifyService.showSuccess("Add with success ","Add");
       if(etat =="Affecte"){
-        //  this.documentService.addDocument("Decharge", "", descreption,idEmp,idForniss,
-        //   idInterv:number,idDir:number,idPro:number,dateSortie).subscribe(res=>{
-
-        //  })
         this.router.navigate(['/document',{ Type:'Decharge',idEmp:idEmp, typeMach:typeMach,marqueMach:marqueMach,numAlrim:numAlrim } ]);
       }
      this.ngOnInit();
