@@ -23,7 +23,7 @@ exports.getAllMachine = (req, res, next) => {
   res.status(200).json({
     message:'liste of machines !!',
     machines  : machines.map(machine=>{
-     if(machine.employee) {  ;
+     if(machine.employee) {  
       return {
          id: machine.idMach,
          categorieMach: machine.categorieMach,
@@ -269,7 +269,8 @@ exports.deleteMachine = (req, res, next) => {
 
 /////////////add machine
 exports.addMachine = (req, res, next) => {
-
+  const idUser = req.userData.id;
+  console.log(req.body)
   
   const machine = new Machine({
 
@@ -287,7 +288,9 @@ exports.addMachine = (req, res, next) => {
     Emplacement:req.body.Emplacement,
     idEmp:req.body.idEmp,
     idForniss:req.body.idForniss,
-    idDir:req.body.idDir
+    idDir:req.body.idDir,
+   
+    idUser:idUser,
 
   });
 

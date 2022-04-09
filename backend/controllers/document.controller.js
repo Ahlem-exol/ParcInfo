@@ -9,7 +9,6 @@ exports.addDocument = (req, res, next) => {
          titreDoc: req.body.titreDoc,
          lienDoc: req.body.lienDoc,
          descreption :req.body.descreption,
-  
          idEmp: req.body.idEmp,
          idForniss: req.body.idForniss,
          idInterv :req.body.idInterv,

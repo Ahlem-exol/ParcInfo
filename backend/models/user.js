@@ -4,6 +4,8 @@ const {
 
   const sequelize = require('../utils/database');
 const Employee = require('./employee');
+const Intervention = require('./intervention');
+const Machine = require('./machine');
 
   const User = sequelize.define(
     'user',
@@ -55,6 +57,14 @@ const Employee = require('./employee');
   
 User.hasMany(Employee);
 Employee.belongsTo(User, { targetKey: 'id', foreignKey: 'idUser' });
+
+  
+User.hasMany(Machine);
+Machine.belongsTo(User, { targetKey: 'id', foreignKey: 'idUser' });
+
+
+User.hasMany(Intervention);
+Intervention.belongsTo(User, { targetKey: 'id', foreignKey: 'iduser' });
 
 
 

@@ -165,7 +165,20 @@ const Machine = sequelize.define(
       autoIncrement: false,
       comment: null,
       field: "Emplacement"
-    }
+    },
+    idUser: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "idUser",
+      references: {
+        key: "id",
+        model: "user_model"
+      }
+    },
 }, {
   freezeTableName: true,
   timestamps: false
