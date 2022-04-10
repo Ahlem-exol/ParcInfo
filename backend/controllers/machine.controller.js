@@ -270,10 +270,10 @@ exports.deleteMachine = (req, res, next) => {
 /////////////add machine
 exports.addMachine = (req, res, next) => {
   const idUser = req.userData.id;
-  console.log(req.body)
+  // console.log(req.body)
   
   const machine = new Machine({
-
+ 
     categorieMach: req.body.categorieMach,
     typeMach: req.body.typeMach,
     marqueMach:req.body.marqueMach,

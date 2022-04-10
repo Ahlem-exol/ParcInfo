@@ -47,7 +47,7 @@ const Machine = sequelize.define(
 
     
     numSerie: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(50),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
@@ -56,7 +56,7 @@ const Machine = sequelize.define(
       field: "numSerie"
     },
     numAlrim: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(50),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
@@ -101,7 +101,7 @@ const Machine = sequelize.define(
       field: "date_reforme"
     },
     cause: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(255),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
@@ -186,7 +186,5 @@ const Machine = sequelize.define(
 );
 
 Machine.hasMany(Intervention);
- Intervention.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
-
-
+Intervention.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
 module.exports = Machine;

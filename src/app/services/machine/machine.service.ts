@@ -50,26 +50,28 @@ export class MachineService {
  addMachine(categorieMach:string, typeMach:string, marqueMach:string,numSerie:number,numAlrim:number,
   date_entre:Date,date_affectation:Date,date_reforme:Date,cause:string,observation:string,
   Emplacement:string,etat:string,idDir:number,idForniss:number,idEmp:number){
-
-  const machineAdd: MachineAdd = {     
-   categorieMach: categorieMach,
-   typeMach:typeMach,
-   marqueMach :marqueMach,
-   numSerie: numSerie,
-   numAlrim: numAlrim,
-   date_entre :date_entre,
-   date_affectation:date_affectation,
-   date_reforme:date_reforme,
-   cause :cause,
-   observation:observation,
-   Emplacement:Emplacement,
-   etat:etat,
-   idDir:idDir,
-   idForniss:idForniss,
-   idEmp:idEmp,
-  };
-
-   return this.http.post<{ message: string }>(`${BACKEND_URL}/add`, machineAdd);
-}
+    const machineAdd: MachineAdd = {
+      categorieMach: categorieMach,
+      typeMach: typeMach,
+      marqueMach: marqueMach,
+      numSerie: numSerie,
+      numAlrim: numAlrim,
+      date_entre: date_entre,
+      date_affectation: date_affectation,
+      date_reforme: date_reforme,
+      cause: cause,
+      observation: observation,
+      Emplacement: Emplacement,
+      etat: etat,
+      idDir: idDir,
+      idForniss: idForniss,
+      idEmp: idEmp,
+    };
+    console.log(machineAdd);
+    return this.http.post<{ message: string }>(
+      `${BACKEND_URL}/add`,
+      machineAdd
+    );
+  }
  
 }

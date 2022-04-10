@@ -181,11 +181,14 @@ export class ListeMachineComponent implements OnInit, OnDestroy {
     var idForniss = Number(form.value.idForniss);
     //est un fournisseur inconnu
     if (!idForniss) {
-      idForniss = 1;
+      idForniss = 4;
     }
 
+   
+  
     var idEmp = Number(form.value.idEmp.split(',')[0]);
     var idDir = Number(form.value.idEmp.split(',')[1]);
+    // console.log();
     // ajouter machine
     this.machineService
       .addMachine(

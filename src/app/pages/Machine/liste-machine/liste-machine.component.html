@@ -4,13 +4,16 @@
             <div class="card">
               <div class="card-body">
                  <div class="row">
-                  <div class="col-lg-11">
+                  <div class="col-lg-10">
                     <div class="row">
-                     <div class="col-lg-8">   <h4 class="card-title">Liste des machinees</h4></div>
+                    <div class="col-lg-8">
+                      <h4 class="card-title"><b>Liste des Machines</b></h4>
+                    </div>
+                    <!-- la fonction rechernce -->
                      <div class="col-lg-3" ><input class="form-control" type ="text" name ="prenom" placeholder="search"></div>
                      </div>
                  </div>
-                 <div class="col-lg-1">
+                <div class="col-lg-2">
                        <button type="button" class="btn btn-success btn-rounded btn-icon" (click)="openMediumModal(mediumModalContent)">
                         <i class="ti-plus"></i>
                       </button>     
@@ -21,7 +24,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>N°Serie</th>
+                        <th>N°Serie/Code Alrim</th>
                         <th>Type</th>
                         <th>Mark</th>
                         <th>Etat</th>
@@ -33,7 +36,13 @@
                       | orderBy: key: reverse |paginate : {itemsPerPage:5,currentPage:p};"
                        (click)="detaille(machine.id)"   >
                        <ng-container  *ngIf="machine!=null">    
+                      <ng-container *ngIf="machine.numAlrim === '' ">
                         <td>{{machine.numSerie}}</td>
+                      </ng-container>
+                      <ng-container *ngIf="machine.numAlrim !== '' ">
+                        <td>{{machine.numSerie}}</td>
+                      </ng-container>
+                      <td *ngIf="machine.numAlrim === '' ">{{machine.numSerie}}</td>
                         <td>{{machine.typeMach}}</td>
                         <td>{{machine.marqueMach}}</td>                     
                         <td>  <div class="badge badge-opacity-warning me-3">{{machine.etat}}</div> </td>
@@ -57,7 +66,8 @@
    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel-2">Ajouter Machine</h5>
+        <h4 class="modal-title" id="exampleModalLabel-2"> <i class=" mdi mdi-plus-circle"></i> <span><b>Ajouter Machine
+            </b></span></h4>
         <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -68,8 +78,8 @@
       <div class="modal-body">
     
           <div class="form-group row">
-            <label class=" col-form-label">Categorie Machine </label>
-            <div class="" >
+            <label class=" col-sm-3 col-sm-3 "><b>Categorie Machine : </b> </label>
+            <div class="col-sm-9">
               <select class="form-control" name ="categorieMach"  (change)="onForm2NameChange($event)" ngModel >  
                 <ng-container  *ngFor="let categorie of categorieMateriel">
                   <option  value={{categorie.title}}>
@@ -81,8 +91,8 @@
           </div>
          
             <div class="form-group row" *ngIf="modal2 ==='User Machine' ">
-              <label class=" col-form-label">typeMach</label>
-              <div class="">
+              <label class=" col-sm-3"><b>TypeMach:</b> </label>
+              <div class="col-sm-9 ">
                 <select class="form-control" name ="typeMach" ngModel>  
               
                   <ng-container  *ngFor="let type of type1">
@@ -95,8 +105,8 @@
              </div>
 
              <div class="form-group row" *ngIf="modal2 ==='Reseau Materile' ">
-              <label class=" col-form-label">typeMach</label>
-              <div class="">
+              <label class=" col-sm-3 col-sm-3"><b>TypeMach:</b></label>
+              <div class=" col-sm-9">
                 <select class="form-control" name ="typeMach" ngModel>  
               
                   <ng-container  *ngFor="let type of type2">
@@ -109,8 +119,8 @@
              </div>
 
              <div class="form-group row" *ngIf="modal2 ==='Armoir reseau' ">
-              <label class=" col-form-label">typeMach</label>
-              <div class="">
+              <label class=" col-sm-3 col-sm-3"><b>TypeMach:</b></label>
+              <div class="col-sm-9">
                 <select class="form-control" name ="typeMach" ngModel>  
               
                   <ng-container  *ngFor="let type of composente">
@@ -123,8 +133,8 @@
              </div>
 
              <div class="form-group row" *ngIf="modal2 ==='Armoir camera' ">
-              <label class=" col-form-label">typeMach</label>
-              <div class="">
+              <label class=" col-sm-3 col-sm-3"><b>TypeMach:</b></label>
+              <div class="col-sm-9">
                 <select class="form-control" name ="typeMach" ngModel>  
               
                   <ng-container  *ngFor="let type of composente">
@@ -136,32 +146,34 @@
                </div>
              </div>
              <div class="form-group row">
-              <label class=" col-form-label">marqueMach</label>
-               <div class="">
-                <input type="text" name="marqueMach" class="form-control" placeholder="marqueMach" required ngModel>
+              <label class="  col-sm-3"><b>La Marque de la machine :</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                   ">
+                <input type="text" name="marqueMach" class="form-control" placeholder="Entre la marque de la machine" required
+                  ngModel>
               </div> 
            
             </div>
            
             <div class ="row">
             <div class="form-group  col-md-6">
-                <label class=" col-form-label">numAlrim</label>
+                <label class=" col-sm-3 col-sm-3"><b>Code Alrim :</b></label>
                 <div class="">
-                   <input  type="number" name="numAlrim" class="form-control" required ngModel placeholder="numAlrim"/>
+                  <input type="text" name="numAlrim" class="form-control" required ngModel placeholder="Codation de ALRIM" />
                 </div>
               </div>
 
               <div class="form-group  col-md-6">
-                <label class=" col-form-label">numSerie </label>
-                <div class="">
-                  <input  type="number" name="numSerie" class="form-control" required ngModel placeholder="numSerie"/>
+                <label class=" col-sm-3 "><b>N° de Serie : </b> </label>
+                <div class="col-sm-9">
+                  <input type="text" name="numSerie" class="form-control" required ngModel placeholder=" N°Serie" />
                 </div>
               </div>
             </div>
-            
             <div class="form-group row">
-              <label class=" col-form-label">Etat</label>
-              <div class="" >
+              <label class="col-sm-3"><b>Etat de la machine : </b></label>
+              <div class="col-sm-9">
                 <select class="form-control" name ="etat"  (change)="onFormNameChange($event)" ngModel >  
                   <ng-container  *ngFor="let etat of etat">
                     <option  value={{etat.title}}>
@@ -171,66 +183,68 @@
                  </select>                               
               </div>
             </div>
-           
             <div class="form-group row " *ngIf="stat === 'En Stock' ">
-              <label class=" col-form-label">Date d'entree</label>                                 
-              <div class="">
+              <label class=" col-sm-3"><b>Date d'entree :</b></label>
+              <div class="col-sm-9">
                 <input  type="date" name="date_entre" class="form-control" required ngModel  placeholder="date_entre"/>
               </div>
-           
             </div>
             <div class="form-group row " *ngIf="stat === 'En Stock' ">
-              <label class=" col-form-label">Fournisseur</label>
-              <div class="">
-               
+              <label class=" col-sm-3"><b>Fournisseur : </b></label>
+              <div class="col-sm-9">
                 <select class="form-control" name ="idForniss"  ngModel > 
                   <option *ngFor="let fournisseur of loadedFournisseur" [value]="fournisseur.idForniss" > {{fournisseur.nomFourni}} </option>
                  </select>
-             </div>
-           
+            </div>
             </div>
             <div class="form-group row " *ngIf="stat === 'En Stock' ">
-              <label class=" col-form-label">observation</label>
-              <div class="">
+              <label class=" col-sm-3"><b>Observation: </b>></label>
+              <div class="col-sm-9">
                 <textarea name="observation" class="form-control rounded-0" placeholder="Votre observation sur le materiele" required ngModel  rows="3" ></textarea>
               </div>
-  
             </div>
-
             <div class="form-group row " *ngIf="stat === 'Affecte' ">
-              <label class=" col-form-label">Employee</label>
-              <div class="">
-               
+              <label class=" col-sm-3"><b>Employee : </b></label>
+              <div class="col-sm-9">
                 <select class="form-control"  name ="idEmp"  ngModel > 
-                  <option *ngFor="let employee of loadedEmployee"  
-             
+                  <option *ngFor="let employee of loadedEmployee"
                   value="{{employee.id}},{{employee.direction.id}}"
-                  > {{employee.nom}} {{employee.prenom}} </option>
-               
+                  > {{employee.nom}} {{employee.prenom}} </option>              
                 </select>
-          
-             </div>
-           
-             
+            </div>
             </div>
             <div class="form-group row"  *ngIf="stat === 'Affecte' ">
-              <label class=" col-form-label">Date D'affectation</label>
-              <div class="">
+              <label class=" col-sm-3"><b>Date D'affectation : </b></label>
+              <div class="col-sm-9">
                 <input  type="date" name="date_affectation" class="form-control" ngModel="{{date|date:'yyyy-MM-dd'}}" />
               </div>
             </div>
-
             <div class="form-group row " *ngIf="stat === 'Affecte' ">
-              <label class=" col-form-label">observation</label>
-              <div class="">
+              <label class=" col-sm-3"><b>Observation</b>></label>
+              <div class="col-sm-9">
                 <textarea name="observation" class="form-control rounded-0" placeholder="Votre observation sur le materiele" required ngModel  rows="3" ></textarea>
               </div>
-  
             </div>
-    
+
+
+            <div class="form-group row" *ngIf="stat === 'En reforme' ">
+              <label class=" col-sm-3"><b>Date De Reforme : </b></label>
+              <div class="col-sm-9">
+                <input type="date" name="date_reforme" class="form-control" ngModel="{{date|date:'yyyy-MM-dd'}}" />
+              </div>
+            </div>
+            <div class="form-group row " *ngIf="stat === 'En reforme' ">
+              <label class=" col-sm-3"><b>La cause de Refrome:</b></label>
+              <div class="col-sm-9">
+                <textarea name="cause" class="form-control rounded-0" placeholder="Votre observation sur le materiele" required
+                  ngModel rows="3"></textarea>
+              </div>
+            </div>
+
+
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success" (click)="modal.close()">Submit</button>
+        <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
         <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
       </div>
     </form>
