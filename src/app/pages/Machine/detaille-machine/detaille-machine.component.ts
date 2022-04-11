@@ -99,7 +99,7 @@ export class DetailleMachineComponent implements OnInit {
     this.sub = this.machineService.getmachine(idMach).subscribe(machinedata =>{
         this.loadedMachine = machinedata.machine;
         this.modal2=machinedata.machine.categorieMach;
-    
+    console.log(this.loadedMachine);
     })
 
     this.sub2 = this.directionservice.getDirections().subscribe(directiondata =>{
