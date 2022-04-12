@@ -194,7 +194,7 @@ exports.getMachine = (req, res, next) => {
 
  exports.updateMachine= (req, res, next) => {
   const machineId = req.params.id;
-
+  const idUser = req.userData.id;
   Machine.findOne(
     {
       where:{idMach:machineId},
@@ -227,11 +227,12 @@ exports.getMachine = (req, res, next) => {
           Emplacement:req.body.Emplacement,
           idEmp:req.body.employee.idEmp,
           idForniss:req.body.fournisseur.idForniss,
-          idDir:req.body.direction.idDir
+          idDir:req.body.direction.idDir,
+          idUser:idUser,
 
        }) .then(result => {
         res.status(201).json({
-          message: 'Machine update  !',
+          message: 'Machine update !!',
           result: result,
         });
       }).catch(err => {

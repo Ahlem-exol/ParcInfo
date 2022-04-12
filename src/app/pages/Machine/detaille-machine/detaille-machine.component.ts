@@ -20,141 +20,174 @@ declare interface type {
 @Component({
   selector: 'app-detaille-machine',
   templateUrl: './detaille-machine.component.html',
-  styleUrls: ['./detaille-machine.component.scss']
+  styleUrls: ['./detaille-machine.component.scss'],
 })
 export class DetailleMachineComponent implements OnInit {
-
   sub: Subscription;
   loadedMachine: Machine;
 
-  sub2:Subscription;
-  loadedDirections :Direction[];
-  
-  sub3:Subscription;
-  loadedEmployee :Employee[];
+  sub2: Subscription;
+  loadedDirections: Direction[];
 
-  sub4:Subscription;
-  loadedFournisseur :Fournisseur[];
+  sub3: Subscription;
+  loadedEmployee: Employee[];
 
-  modal2 : String="" ;
-  stat:String="";
+  sub4: Subscription;
+  loadedFournisseur: Fournisseur[];
 
-  etat : type[]=[
-    { title: 'En Stock',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Affecte',  icon: 'ni-tv-2 text-primary'},
-    { title: 'En Reparation',  icon: 'ni-tv-2 text-primary'},
-    { title: 'En reforme',  icon: 'ni-tv-2 text-primary'}];
-  categorieMateriel :type[]=[
-    { title: 'User Machine',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Reseau Materile',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Pointeusse',  icon: 'ni-tv-2 text-primary'},
-    { title: 'CNC Machine',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Armoir reseau',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Armoir camera',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Other',  icon: 'ni-tv-2 text-primary'}];
+  modal2: String = '';
+  stat: String = '';
+
+  etat: type[] = [
+    { title: 'En Stock', icon: 'ni-tv-2 text-primary' },
+    { title: 'Affecte', icon: 'ni-tv-2 text-primary' },
+    { title: 'En Reparation', icon: 'ni-tv-2 text-primary' },
+    { title: 'En reforme', icon: 'ni-tv-2 text-primary' },
+  ];
+  categorieMateriel: type[] = [
+    { title: 'User Machine', icon: 'ni-tv-2 text-primary' },
+    { title: 'Reseau Materile', icon: 'ni-tv-2 text-primary' },
+    { title: 'Pointeusse', icon: 'ni-tv-2 text-primary' },
+    { title: 'CNC Machine', icon: 'ni-tv-2 text-primary' },
+    { title: 'Armoir reseau', icon: 'ni-tv-2 text-primary' },
+    { title: 'Armoir camera', icon: 'ni-tv-2 text-primary' },
+    { title: 'Other', icon: 'ni-tv-2 text-primary' },
+  ];
   // user machines
-  type1 :type[]=[
-    { title: 'Unite',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Moniteur',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Laptop',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Imprement',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Scanner',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Multifonction',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Clavier',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Souris',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Ondeleur',  icon: 'ni-tv-2 text-primary'}
+  type1: type[] = [
+    { title: 'Unite', icon: 'ni-tv-2 text-primary' },
+    { title: 'Moniteur', icon: 'ni-tv-2 text-primary' },
+    { title: 'Laptop', icon: 'ni-tv-2 text-primary' },
+    { title: 'Imprement', icon: 'ni-tv-2 text-primary' },
+    { title: 'Scanner', icon: 'ni-tv-2 text-primary' },
+    { title: 'Multifonction', icon: 'ni-tv-2 text-primary' },
+    { title: 'Clavier', icon: 'ni-tv-2 text-primary' },
+    { title: 'Souris', icon: 'ni-tv-2 text-primary' },
+    { title: 'Ondeleur', icon: 'ni-tv-2 text-primary' },
   ];
   // reseaux materile
-  type2:type[]=[
-    { title: 'serveur',  icon: 'ni-tv-2 text-primary'},
-    { title: 'switch',  icon: 'ni-tv-2 text-primary'},
-    { title: 'convertissuer',  icon: 'ni-tv-2 text-primary'},
-    { title: 'ondeleur',  icon: 'ni-tv-2 text-primary'},
-    { title: 'routeur',  icon: 'ni-tv-2 text-primary'},
-    { title: 'modem',  icon: 'ni-tv-2 text-primary'},
-    { title: 'fibre et cable',  icon: 'ni-tv-2 text-primary'},
-    { title: 'pare_fue',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Ondeleur',  icon: 'ni-tv-2 text-primary'}
+  type2: type[] = [
+    { title: 'serveur', icon: 'ni-tv-2 text-primary' },
+    { title: 'switch', icon: 'ni-tv-2 text-primary' },
+    { title: 'convertissuer', icon: 'ni-tv-2 text-primary' },
+    { title: 'ondeleur', icon: 'ni-tv-2 text-primary' },
+    { title: 'routeur', icon: 'ni-tv-2 text-primary' },
+    { title: 'modem', icon: 'ni-tv-2 text-primary' },
+    { title: 'fibre et cable', icon: 'ni-tv-2 text-primary' },
+    { title: 'pare_fue', icon: 'ni-tv-2 text-primary' },
+    { title: 'Ondeleur', icon: 'ni-tv-2 text-primary' },
   ];
   // reseaux materile
-  composente:type[]=[
-    { title: 'switch',  icon: 'ni-tv-2 text-primary'},
-    { title: 'convertissuer',  icon: 'ni-tv-2 text-primary'},
-    { title: 'ondeleur',  icon: 'ni-tv-2 text-primary'},
-    { title: 'fibre et cable',  icon: 'ni-tv-2 text-primary'},
-    { title: 'pare_fue',  icon: 'ni-tv-2 text-primary'},
-    { title: 'Ondeleur',  icon: 'ni-tv-2 text-primary'}
+  composente: type[] = [
+    { title: 'switch', icon: 'ni-tv-2 text-primary' },
+    { title: 'convertissuer', icon: 'ni-tv-2 text-primary' },
+    { title: 'ondeleur', icon: 'ni-tv-2 text-primary' },
+    { title: 'fibre et cable', icon: 'ni-tv-2 text-primary' },
+    { title: 'pare_fue', icon: 'ni-tv-2 text-primary' },
+    { title: 'Ondeleur', icon: 'ni-tv-2 text-primary' },
   ];
 
-  typeNull:type[]=[
-    { title: 'Pas des composent au des sos materiel',  icon: 'ni-tv-2 text-primary'},
+  typeNull: type[] = [
+    {
+      title: 'Pas des composent au des sos materiel',
+      icon: 'ni-tv-2 text-primary',
+    },
   ];
 
-  constructor(private modalService: NgbModal,private machineService:MachineService ,private employeeService:EmployeeService
-    ,private route: ActivatedRoute,private router: Router, private directionservice :DirectionService
-    ,private notifyService : NotificationService, private fournisseurService:FournisseurService) { }
+  constructor(
+    private modalService: NgbModal,
+    private machineService: MachineService,
+    private employeeService: EmployeeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private directionservice: DirectionService,
+    private notifyService: NotificationService,
+    private fournisseurService: FournisseurService
+  ) {}
 
   ngOnInit(): void {
     const idMach = JSON.parse(this.route.snapshot.paramMap.get('id') || '{}');
-    this.sub = this.machineService.getmachine(idMach).subscribe(machinedata =>{
+    this.sub = this.machineService
+      .getmachine(idMach)
+      .subscribe((machinedata) => {
         this.loadedMachine = machinedata.machine;
-        this.modal2=machinedata.machine.categorieMach;
-    console.log(this.loadedMachine);
-    })
+        this.modal2 = machinedata.machine.categorieMach;
+        console.log(this.loadedMachine);
+      });
 
-    this.sub2 = this.directionservice.getDirections().subscribe(directiondata =>{
-      this.loadedDirections = directiondata.directions;
-    })
+    this.sub2 = this.directionservice
+      .getDirections()
+      .subscribe((directiondata) => {
+        this.loadedDirections = directiondata.directions;
+      });
 
-    this.sub3 = this.employeeService.getEmployees().subscribe(employeedata =>{
-    this.loadedEmployee = employeedata.employees;
-   })
+    this.sub3 = this.employeeService
+      .getEmployees()
+      .subscribe((employeedata) => {
+        this.loadedEmployee = employeedata.employees;
+      });
 
-  this.sub4 = this.fournisseurService.getFournisseur().subscribe(fournisseurdata =>{
-  this.loadedFournisseur = fournisseurdata.fournisseurs;
-   })
-
+    this.sub4 = this.fournisseurService
+      .getFournisseur()
+      .subscribe((fournisseurdata) => {
+        this.loadedFournisseur = fournisseurdata.fournisseurs;
+      });
   }
 
-  onForm2NameChange({ target }: {target:any}) {
-    this.modal2 = target.value; 
+  onForm2NameChange({ target }: { target: any }) {
+    this.modal2 = target.value;
     console.log(target.value);
   }
-  
-  MachineUpdate(loadedMachine: any){
-    console.log(loadedMachine.fournisseur.idForniss);
-     loadedMachine.etat = this.stat;
-    this.machineService.updateMachine(loadedMachine).subscribe(res => {
-     this.notifyService.showSuccess("Update with success ","Update");
-     if(loadedMachine.etat == 'Affecte'){
-       console.log(loadedMachine);
-   this.router.navigate(['/document',{ Type:'Decharge',idEmp:loadedMachine.employee.id, 
-  typeMach:loadedMachine.typeMach,marqueMach:loadedMachine.marqueMach,numAlrim:loadedMachine.numAlrim } ]);
-     }
-    });
+
+  MachineUpdate(loadedMachine: any) {
+    if (this.stat != '') {
+      loadedMachine.etat = this.stat;
+    }
+    console.log(loadedMachine);
+
+    // this.machineService.updateMachine(loadedMachine).subscribe((res) => {
+    //   this.notifyService.showSuccess('Update with success ', 'Update');
+
+    //   if (loadedMachine.etat == 'Affecte') {
+    //     console.log(
+    //       loadedMachine.employee.id,
+    //       loadedMachine.marqueMach,
+    //       loadedMachine.typeMach,
+    //       loadedMachine.numAlrim
+    //     );
+    //     this.router.navigate([
+    //       '/document',
+    //       {
+    //         Type: 'Decharge',
+    //         idEmp: loadedMachine.employee.id,
+    //         typeMach: loadedMachine.marqueMach,
+    //         marqueMach: loadedMachine.typeMach,
+    //         numAlrim: loadedMachine.numAlrim,
+    //       },
+    //     ]);
+    //   }
+    // });
   }
 
-  deleteMachine(idMach: number){
+  deleteMachine(idMach: number) {
     // this.machineService.DeleteMachine(idMach).subscribe(res=>{
     //   this.notifyService.showSuccess("delete success ","delet");
     //   this.router.navigate(['/machine']);
-    // }) 
+    // })
     this.router.navigate(['/machine']);
-
   }
 
-  openMediumModal( mediumModalContent: any ) {
-    this.modalService.open( mediumModalContent );
+  openMediumModal(mediumModalContent: any) {
+    this.modalService.open(mediumModalContent);
   }
 
-  openMediumModalStat( mediumModalContent: any, stat:string ) {
-    this.modalService.open( mediumModalContent );
-    this.stat =stat;
+  openMediumModalStat(mediumModalContent: any, stat: string) {
+    this.modalService.open(mediumModalContent);
+    this.stat = stat;
     console.log(stat);
   }
 
-  detailleEmployee(idEmp:number){
-    this.router.navigate(['/employee-detaill' , { id: idEmp }]);
+  detailleEmployee(idEmp: number) {
+    this.router.navigate(['/employee-detaill', { id: idEmp }]);
   }
-
 }

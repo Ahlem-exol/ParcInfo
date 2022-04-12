@@ -148,7 +148,7 @@
                                   <div class="row">
                                     <div class="col-md-6">
                                       <div class="form-group row">
-                                        <label class=" col-form-label">Categorie Machine </label>
+                                        <label class=" col-form-label">Categorie Machine :</label>
                                         <div class="" >
                                           <select class="form-control" name ="categorieMach" (change)="onForm2NameChange($event)" [(ngModel)]="loadedMachine.categorieMach">  
                                             <option  >
@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="col-md-6" *ngIf="modal2 ==='User Machine' "  >
                                       <div class="form-group row">
-                                        <label class=" col-form-label">typeMach</label>
+                                        <label class=" col-form-label">Type Machine :</label>
                                         <div class="">
                                           <select class="form-control" name ="typeMach" [(ngModel)]="loadedMachine.typeMach" >  
                                             <option  >
@@ -181,7 +181,7 @@
                                         </div></div></div>
                                     <div class="col-md-6" *ngIf="modal2 ==='Reseau Materile' " >
                                         <div class="form-group row">
-                                          <label class=" col-form-label">typeMach</label>
+                                          <label class=" col-form-label">Type Machine :</label>
                                                  <div class="">
 
                                            <select class="form-control" name ="typeMach" [(ngModel)]="loadedMachine.typeMach"  >  
@@ -197,7 +197,7 @@
                                           </div></div></div>
                                           <div class="col-md-6"  *ngIf="modal2 ==='Armoir reseau'">
                                             <div class="form-group row">
-                                              <label class=" col-form-label">typeMach</label>
+                                              <label class=" col-form-label">Type Machine :</label>
                                               <div class="">
                                            <select class="form-control" name ="typeMach"  [(ngModel)]="loadedMachine.typeMach">  
                                             <option  >
@@ -213,7 +213,7 @@
                                        </div></div></div>
                                        <div class="col-md-6" *ngIf="modal2 ==='Armoir camera' " [(ngModel)]="loadedMachine.typeMach" >
                                         <div class="form-group row">
-                                          <label class=" col-form-label">typeMach</label>
+                                          <label class=" col-form-label">Type Machine :</label>
                                           <div class="">
                                            <select class="form-control" name ="typeMach" >  
                                             <option  >
@@ -234,7 +234,7 @@
 
                                     <div class="col-md-6" >
                                       <div class="form-group row">
-                                        <label class=" col-form-label">MarqueMach</label>
+                                        <label class=" col-form-label">La marque de la machine :</label>
                                          <div class="">
                                           <input type="text" name="marqueMach" class="form-control" placeholder="marqueMach" required
                                           [(ngModel)]="loadedMachine.marqueMach"  />
@@ -740,12 +740,12 @@
                 <div class="">
                  
                    <select class="form-control" name ="direction.idEmp"  [(ngModel)]="loadedMachine.employee.id" > 
-                     <option *ngFor="let employee of loadedEmployee" [value]="employee.id" > {{employee.nom}} {{employee.prenom}} </option>
+                    <option *ngFor="let employee of loadedEmployee" [value]="employee.id"> {{employee.nom}} {{employee.prenom}} </option>
                     </select>
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
               <div class="form-group row">
                 <label class=" col-form-label">Direction</label>
                 <div class="">
@@ -755,7 +755,7 @@
                     </select>
                 </div>
               </div>
-            </div>
+            </div> -->
 
 
           </div>
@@ -767,7 +767,22 @@
       </form>
     </div>
 
-    <div *ngIf="stat === 'En reforme' " (ngSubmit)="MachineUpdate(loadedMachine)" >
+<div *ngIf="stat === 'En Reparation'">
+  <form (ngSubmit)="MachineUpdate(loadedMachine)">
+    <div class="modal-body">
+      <div class="row">
+        <p>Pour passse la machine a la reparation voir la section intervention</p>
+      </div>
+    </div>
+
+
+    <button type="button" class="btn btn-light" (click)="modal.close()">OK</button>
+
+  </form>
+</div>
+
+
+<div *ngIf="stat === 'En reforme'">
       <form   (ngSubmit)="MachineUpdate(loadedMachine)" >
         <div class="modal-body">
           <div class="row">
