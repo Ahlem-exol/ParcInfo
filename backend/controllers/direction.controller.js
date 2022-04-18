@@ -28,7 +28,7 @@ exports.getAllDirection = (req,res, next) => {
     });
 };
 
-
+// get direction by nom 
 exports.getDirection = (req, res, next) => {
   
   const nomDir = req.params.nomDir;
