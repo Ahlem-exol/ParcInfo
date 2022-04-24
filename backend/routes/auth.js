@@ -5,7 +5,7 @@ const activeDirectory = require("../controllers/activeDirectory.controller")
 
 const router = express.Router();
 
-router.get('/find', activeDirectory.FindIp);
+router.get('/find', activeDirectory.GetData);
 router.post('/signup', AuthController.createUser);
 
 router.post('/login', AuthController.userLogin);
