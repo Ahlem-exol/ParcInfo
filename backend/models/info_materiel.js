@@ -1,9 +1,11 @@
 const {
   DataTypes
 } = require('sequelize');
+const sequelize = require('../utils/database'); 
+const Info_materiel = sequelize.define(
+  'info_materiel',
+  {
 
-module.exports = sequelize => {
-  const attributes = {
     idInfoM: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -13,42 +15,34 @@ module.exports = sequelize => {
       comment: null,
       field: "idInfoM"
     },
-    type: {
+    RAM: {
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "type"
+      field: "RAM"
     },
-    mark: {
+    Processor: {
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "mark"
+      field: "Processor"
     },
-    otherCar: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "otherCar"
-    },
-    descreption: {
+    CarteGraphique: {
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "descreption"
+      field: "CarteGraphique"
     },
+   
     idMach: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -61,18 +55,26 @@ module.exports = sequelize => {
         key: "idMach",
         model: "machine_model"
       }
-    }
-  };
-  const options = {
-    tableName: "info_materiel",
-    comment: "",
-    indexes: [{
-      name: "idMach",
-      unique: false,
-      type: "BTREE",
-      fields: ["idMach"]
-    }]
-  };
-  const InfoMaterielModel = sequelize.define("info_materiel_model", attributes, options);
-  return InfoMaterielModel;
-};
+    }, 
+     idUser: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "idUser",
+      references: {
+        key: "id",
+        model: "user_model"
+      }
+    },
+   }, {
+
+    freezeTableName: true,
+    timestamps: false
+  }
+  );
+
+
+  module.exports = Info_materiel;

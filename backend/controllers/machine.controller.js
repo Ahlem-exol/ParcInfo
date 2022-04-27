@@ -3,6 +3,7 @@ const Machine = require('../models/machine');
 const Employee =require('../models/employee');
 const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
+const info_materiel = require('../models/info_materiel');
 
 exports.getAllMachine = (req, res, next) => {
 
@@ -270,6 +271,79 @@ exports.deleteMachine = (req, res, next) => {
 
 /////////////add machine
 exports.addMachine = (req, res, next) => {
+  const idUser = req.userData.id;
+  // console.log(req.body)
+  
+  const machine = new Machine({
+ 
+    categorieMach: req.body.categorieMach,
+    typeMach: req.body.typeMach,
+    marqueMach:req.body.marqueMach,
+    numSerie: req.body.numSerie,
+    etat :req.body.etat,
+    numAlrim: req.body.numAlrim,
+    date_entre :req.body.date_entre,
+    date_affectation:req.body.date_affectation,
+    date_reforme:req.body.date_reforme,
+    cause :req.body.cause,
+    observation:req.body.observation,
+    Emplacement:req.body.Emplacement,
+    idEmp:req.body.idEmp,
+    idForniss:req.body.idForniss,
+    idDir:req.body.idDir,
+   
+    idUser:idUser,
+
+  });
+
+  machine.save().then(result => {
+    res.status(201).json({
+      message: ' Add machine ! .',
+    });
+  })
+.catch(err => {
+  res.status(500).json({
+    error: err,
+    message: 'Error !',
+  });
+});
+  
+};
+
+
+/////////////add har information of the machine 
+exports.addHard = (req, res, next) => {
+  const idUser = req.userData.id;
+
+
+  const info_materiel = new info_materiel({
+
+    idInfoM:req.body.categorieMach,
+    idMach:req.body.categorieMach,
+    RAM:req.body.categorieMach,
+    Processor:req.body.categorieMach,
+    CarteGraphique:req.body.categorieMach,
+   
+    idUser:idUser,
+
+  });
+
+  info_materiel.save().then(result => {
+    res.status(201).json({
+      message: ' Add info_materiel ! .',
+    });
+  })
+.catch(err => {
+  res.status(500).json({
+    error: err,
+    message: 'Error !',
+  });
+});
+  
+};
+
+
+exports.addNetwork = (req, res, next) => {
   const idUser = req.userData.id;
   // console.log(req.body)
   

@@ -44,8 +44,6 @@ const Machine = sequelize.define(
       comment: null,
       field: "marqueMach"
     },
-
-    
     numSerie: {
       type: DataTypes.STRING(50),
       allowNull: true,
@@ -179,6 +177,7 @@ const Machine = sequelize.define(
         model: "user_model"
       }
     },
+
 }, {
   freezeTableName: true,
   timestamps: false

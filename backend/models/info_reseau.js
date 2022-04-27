@@ -2,8 +2,10 @@ const {
   DataTypes
 } = require('sequelize');
 
-module.exports = sequelize => {
-  const attributes = {
+const sequelize = require('../utils/database');
+const Info_reseau = sequelize.define(
+  'info_reseau',
+  {
     idInfoR: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -88,18 +90,68 @@ module.exports = sequelize => {
         key: "idMach",
         model: "machine_model"
       }
-    }
-  };
-  const options = {
-    tableName: "info_reseau",
-    comment: "",
-    indexes: [{
-      name: "idMach",
-      unique: false,
-      type: "BTREE",
-      fields: ["idMach"]
-    }]
-  };
-  const InfoReseauModel = sequelize.define("info_reseau_model", attributes, options);
-  return InfoReseauModel;
-};
+    },
+    macAdd: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "macAdd"
+    },
+    nomAdpter: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "nomAdpter"
+    },
+    Getway: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "Getway"
+    },
+    DHCPServer: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "DHCPServer"
+    },
+    Subnet: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "Subnet"
+    },
+    DNSserver: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "DNSserver"
+    },
+
+  }, {
+
+    freezeTableName: true,
+    timestamps: false
+  }
+  );
+
+
+  module.exports = Info_reseau;

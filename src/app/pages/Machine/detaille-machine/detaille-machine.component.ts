@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -94,6 +95,17 @@ export class DetailleMachineComponent implements OnInit {
     },
   ];
 
+  // typeWindows
+  typeWindows: type[] = [
+    { title: 'Windows XP', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows 7', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows 8', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows 10', icon: 'ni-tv-2 text-primary' },
+    { title: 'Unix', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows server 2016', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows Server 2012', icon: 'ni-tv-2 text-primary' },
+    { title: 'Windows 11', icon: 'ni-tv-2 text-primary' },
+  ];
   constructor(
     private modalService: NgbModal,
     private machineService: MachineService,
@@ -189,5 +201,16 @@ export class DetailleMachineComponent implements OnInit {
 
   detailleEmployee(idEmp: number) {
     this.router.navigate(['/employee-detaill', { id: idEmp }]);
+  }
+
+  addHard(form: NgForm) {
+    const RAM = form.value.RAM;
+    const Processor = form.value.Processor;
+    const CarteGraphique = form.value.CarteGraphique;
+    const idMach = Number(
+      JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')
+    );
+
+    console.log('la machine a madifer leur inform tion estg', idMach);
   }
 }

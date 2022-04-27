@@ -86,6 +86,7 @@ export class ListeMachineComponent implements OnInit, OnDestroy {
     { title: 'pare_fue', icon: 'ni-tv-2 text-primary' },
     { title: 'Ondeleur', icon: 'ni-tv-2 text-primary' },
   ];
+
   date = new Date();
   idirection: Number;
   typeNull: type[] = [
@@ -94,6 +95,7 @@ export class ListeMachineComponent implements OnInit, OnDestroy {
       icon: 'ni-tv-2 text-primary',
     },
   ];
+
   constructor(
     private modalService: NgbModal,
     private machineService: MachineService,
@@ -184,8 +186,6 @@ export class ListeMachineComponent implements OnInit, OnDestroy {
       idForniss = 4;
     }
 
-   
-  
     var idEmp = Number(form.value.idEmp.split(',')[0]);
     var idDir = Number(form.value.idEmp.split(',')[1]);
     // console.log();

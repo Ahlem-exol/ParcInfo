@@ -375,40 +375,118 @@
                   </div>  
                   <!--  the third row -->
                   <div class="row">      
-                    <div class="col-lg-8 d-flex flex-column">
+                    <div class="col-lg-4 d-flex flex-column">
                       <div class="row flex-grow">
                         <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
                           <div class="card card-rounded">
-                            <div class="card-body">   
+                            <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
-                                  <h4 class="card-title card-title-dash">Liste des machines</h4>
-                                 <p class="card-subtitle card-subtitle-dash">la liste de tous type de materiel affecte de user X est 4.</p>
+                                  <div class=" row">
+                                    <div class="col-lg-10 col-sm-10">
+                                      <h4 class="card-title card-title-dash">Details Materils (HARD)</h4>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-2">
+                                      <button type="button" class="btn btn-success btn-rounded btn-icon"
+                                        (click)="openMediumModal(mediumModalContent4)">
+                                        <i class="ti-plus"></i>
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
-                               
                               </div>
-                              <div class="table-responsive  mt-1">
-                                <table class="table select-table">
-                                  <thead>
-                                    <tr>
-                                      <th></th>
-                                      <th>Type</th>
-                                      <th>Marque</th>
-                                      <th>Date d'affectation</th>
-                                      <th>Status</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex ">
-                                          
+                              <div class="list align-items-center border-bottom py-2">
+                                <div class="wrapper w-100">
+                                  <p class="mb-2 font-weight-medium">
+                                    Systéme d'exploitation
+                                  </p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="list align-items-center border-bottom py-2">
+                                <div class="wrapper w-100">
+                                  <p class="mb-2 font-weight-medium">
+                                    Processeur
+                                  </p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                    
+                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                    
+                              <div class="list align-items-center border-bottom py-2">
+                                <div class="wrapper w-100">
+                                  <p class="mb-2 font-weight-medium">
+                                    RAM
+                                  </p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                    
+                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                    
+                              <div class="list align-items-center border-bottom py-2">
+                                <div class="wrapper w-100">
+                                  <p class="mb-2 font-weight-medium">
+                                    Carte Graphique
+                                  </p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                    
+                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                    
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-lg-4 d-flex flex-column">
+                      <div class="row flex-grow">
+                        <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <div class="d-sm-flex justify-content-between align-items-start">
+                                <div>
+                                                <h4 class="card-title card-title-dash">Détaile Materiel</h4>
+                                                </div>
+                                                
+                                                </div>
+                                                <div class="table-responsive  mt-1">
+                                                  <table class="table select-table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th></th>
+                                                        <th>Type</th>
+                                                        <th>Marque</th>
+                                                        <th>Date d'affectation</th>
+                                                        <th>Status</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+                                                        <td>
+                                                          <div class="form-check form-check-flat mt-0">
+                                                            <label class="form-check-label">
+                                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
+                                                          </div>
+                                                        </td>
+                                                        <td>
+                                                          <div class="d-flex ">
                                           <div>
                                             <h6>Brandon Washington</h6>
                                             <p>Head admin</p>
@@ -579,7 +657,7 @@
                               <div class="row">
                                 <div class="col-lg-12">
                                   <div class="d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title card-title-dash">liste des logiciel</h4>
+                                    <h4 class="card-title card-title-dash">Detaile Network</h4>
                                     <div class="add-items d-flex mb-0">
                                     </div>
                                   </div>
@@ -587,9 +665,6 @@
                                     <ul class="todo-list todo-list-rounded">
                                       <li class="d-block">
                                         <div class="form-check w-100">
-                                          <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
-                                          </label>
                                           <div class="d-flex mt-2">
                                             <div class="ps-4 text-small me-3">24 June 2020</div>
                                             <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
@@ -745,19 +820,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-12">
-              <div class="form-group row">
-                <label class=" col-form-label">Direction</label>
-                <div class="">
-                 
-                   <select class="form-control" name ="direction.idEmp"  [(ngModel)]="loadedMachine.direction.id" > 
-                     <option *ngFor="let direction of loadedDirections" [value]="direction.id" > {{direction.nom}}</option>
-                    </select>
-                </div>
-              </div>
-            </div> -->
-
-
           </div>
         </div>
   
@@ -821,3 +883,54 @@
   </ng-template>
 
   
+<ng-template #mediumModalContent4 let-modal class="modal fade" id="exampleModal-2"
+  aria-labelledby="exampleModalLabel-2">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel-2"> <i class=" mdi mdi-plus-circle"></i> <span><b>Ajouter HARD
+            Information
+          </b></span></h4>
+      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <!--  -->
+    <form #authForm="ngForm" (ngSubmit)="addHard(authForm)">
+      <div class="modal-body">
+
+
+        <div class="form-group row">
+          <label class="  col-sm-3"><b>La RAM :</b></label>
+          <div class="col-sm-9 col-lg-9">
+
+            <input type="text" name="RAM" class="form-control" placeholder="00,0 GO" required ngModel>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="  col-sm-3"><b>Le Processeur :</b></label>
+          <div class="col-sm-9 col-lg-9">
+
+            <input type="text" name="processor" class="form-control" placeholder="Intel EMD" required ngModel>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="  col-sm-3"><b>Carte Graphique :</b></label>
+          <div
+            class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                             ">
+            <input type="text" name="CarteGraphique" class="form-control" placeholder="Carte Graphique driver" required
+              ngModel>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
+        <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
