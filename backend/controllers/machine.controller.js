@@ -3,7 +3,8 @@ const Machine = require('../models/machine');
 const Employee =require('../models/employee');
 const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
-const info_materiel = require('../models/info_materiel');
+const Info_materiel = require('../models/info_materiel');
+const Info_reseau = require('../models/info_reseau');
 
 exports.getAllMachine = (req, res, next) => {
 
@@ -313,22 +314,28 @@ exports.addMachine = (req, res, next) => {
 
 /////////////add har information of the machine 
 exports.addHard = (req, res, next) => {
+
+  console.log("//////////////////////////add hard //////////////////////////////////////")
   const idUser = req.userData.id;
+   console.log(req.body,idUser)
+  const info_materiel = new Info_materiel({
 
 
-  const info_materiel = new info_materiel({
-
-    idInfoM:req.body.categorieMach,
-    idMach:req.body.categorieMach,
-    RAM:req.body.categorieMach,
-    Processor:req.body.categorieMach,
-    CarteGraphique:req.body.categorieMach,
-   
-    idUser:idUser,
+    idMach:req.body.idMach,
+    RAM:req.body.RAM,
+    Processor:req.body.Processor,
+    CarteGraphique:req.body.CarteGraphique,
+    espaceStokage:req.body.espaceStokage,
+    Appphoto:req.body.Appphoto,
+    Bluetouth:req.body.Bluetouth,
+    cartReseau:req.body.cartReseau,
+    cartReseau2:req.body.cartReseau2,
+    cartReseau3:req.body.cartReseau3,
+    iduser:idUser,
 
   });
 
-  info_materiel.save().then(result => {
+  info_materiel.save().then(res => {
     res.status(201).json({
       message: ' Add info_materiel ! .',
     });
@@ -341,37 +348,74 @@ exports.addHard = (req, res, next) => {
 });
   
 };
-
-
+///////////////////
+exports.getHardDetaille = (req, res, next) => {
+  const machineId = req.params.id;
+  
+  Info_materiel.findOne(
+    {
+      where:{idMach:machineId},
+      attributes:['idInfoM', 'RAM', 'Processor','CarteGraphique', 'Appphoto', 'Bluetouth', 'cartReseau', 'cartReseau2',
+      'cartReseau3', 'espaceStokage']
+     }
+    ).then(HardData=>{
+  
+  if (!HardData) {
+   return res.status(401).json({
+     message: 'you should entre information of the hard !'
+   });
+ }else{
+ 
+   res.status(200).json({
+     message: 'ok from controller  !',
+     HardInfo: { 
+       idInfoM: HardData.idInfoM,
+       RAM: HardData.RAM,
+       Processor: HardData.Processor,
+       CarteGraphique: HardData.CarteGraphique,
+       espaceStokage: HardData.espaceStokage,
+       Appphoto: HardData.Appphoto,
+       Bluetouth: HardData.Bluetouth,
+       cartReseau: HardData.cartReseau,
+       cartReseau2: HardData.cartReseau2,
+       cartReseau3: HardData.cartReseau3,
+      
+     }
+   });
+ 
+ }
+  }).catch(error=>{
+    console.log(error);
+    res.status(500).json({
+      error:error,
+      message :'An error occured while fetching the machines! Please try later or contact the administrator',
+    });
+  })
+ };
+///////////////////////
 exports.addNetwork = (req, res, next) => {
   const idUser = req.userData.id;
   // console.log(req.body)
   
-  const machine = new Machine({
+  const info_reseau = new Info_reseau({
  
-    categorieMach: req.body.categorieMach,
-    typeMach: req.body.typeMach,
-    marqueMach:req.body.marqueMach,
-    numSerie: req.body.numSerie,
-    etat :req.body.etat,
-    numAlrim: req.body.numAlrim,
-    date_entre :req.body.date_entre,
-    date_affectation:req.body.date_affectation,
-    date_reforme:req.body.date_reforme,
-    cause :req.body.cause,
-    observation:req.body.observation,
-    Emplacement:req.body.Emplacement,
-    idEmp:req.body.idEmp,
-    idForniss:req.body.idForniss,
-    idDir:req.body.idDir,
-   
-    idUser:idUser,
+     macAdd: req.body.macAdd,
+     nomMach: req.body.nomMach,
+     outlook:req.body.outlook,
+     DNSDomain: req.body.DNSDomain,
+     sessionReseau: req.body.sessionReseau,
+     VPNConfig: req.body.VPNConfig,
+     sessionLocal: req.body.sessionLocal,
+     mdpsSessionLocal: req.body.mdpsSessionLocal,
+     observation: req.body.observation,
+     idMach: req.body.idMach,
+     iduser:idUser,
 
   });
 
-  machine.save().then(result => {
+  info_reseau.save().then(result => {
     res.status(201).json({
-      message: ' Add machine ! .',
+      message: ' Add info_reseau  ! .',
     });
   })
 .catch(err => {
@@ -382,3 +426,47 @@ exports.addNetwork = (req, res, next) => {
 });
   
 };
+
+
+exports.getNetworkDetaille = (req, res, next) => {
+  const machineId = req.params.id;
+  
+  Info_reseau.findOne(
+    {
+      where:{idMach:machineId},
+      attributes:['idInfoR', 'nomMach', 'sessionLocal','mdpsSessionLocal', 'sessionReseau', 'outlook', 'observation', 'macAdd',
+      'DNSDomain', 'VPNConfig']}
+    ).then(NetworkData=>{
+  
+  if (!NetworkData) {
+   return res.status(401).json({
+     message: 'you should entre information of the Network !'
+   });
+ }else{
+ 
+   res.status(200).json({
+     message: 'ok from controller  !',
+     NetworkData: { 
+   
+        id: NetworkData.idInfoR,
+        macAdd: NetworkData.macAdd,
+        outlook: NetworkData.outlook,
+        nomMach: NetworkData.nomMach,
+        DNSDomain: NetworkData.DNSDomain,
+        sessionReseau: NetworkData.sessionReseau,
+        VPNConfig: NetworkData.VPNConfig,
+        sessionLocal: NetworkData.sessionLocal,
+        mdpsSessionLocal: NetworkData.mdpsSessionLocal,
+        observation: NetworkData.observation,
+     }
+   });
+ 
+ }
+  }).catch(error=>{
+    console.log(error);
+    res.status(500).json({
+      error:error,
+      message :'An error occured while fetching the data! Please try later or contact the administrator',
+    });
+  })
+ };

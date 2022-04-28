@@ -374,7 +374,9 @@
                     </div>
                   </div>  
                   <!--  the third row -->
-                  <div class="row">      
+                  <div class="row">
+                    <!-- Detaille Hard  -->
+                    <!-- TODO Modifier la ficharge de la resultat JSON -->
                     <div class="col-lg-4 d-flex flex-column">
                       <div class="row flex-grow">
                         <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
@@ -398,322 +400,268 @@
                               <div class="list align-items-center border-bottom py-2">
                                 <div class="wrapper w-100">
                                   <p class="mb-2 font-weight-medium">
-                                    Systéme d'exploitation
+                                    Processeur :
                                   </p>
                                   <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                      <p class="mb-0 text-small text-muted">{{loadedhardData.Processor}}</p>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+
                               <div class="list align-items-center border-bottom py-2">
                                 <div class="wrapper w-100">
                                   <p class="mb-2 font-weight-medium">
-                                    Processeur
+                                    RAM :
                                   </p>
                                   <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                    
-                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                    
+                                      <p class="mb-0 text-small text-muted">{{loadedhardData.RAM}}</p>
+                                      </div>
+                                      </div>
+                                      </div>
+                                      </div>
+
                               <div class="list align-items-center border-bottom py-2">
                                 <div class="wrapper w-100">
                                   <p class="mb-2 font-weight-medium">
-                                    RAM
+                                    La Carte Graphique :
                                   </p>
                                   <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                    
-                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                      <p class="mb-0 text-small text-muted">{{loadedhardData.CarteGraphique}}</p>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                    
+                            
                               <div class="list align-items-center border-bottom py-2">
                                 <div class="wrapper w-100">
                                   <p class="mb-2 font-weight-medium">
-                                    Carte Graphique
+                                    Espace de Stockage :
                                   </p>
                                   <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                    
-                                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                                      <p class="mb-0 text-small text-muted">{{loadedhardData.espaceStokage}}</p>
+                                      </div>
+                                      </div>
+                                      </div>
+                                      </div>
+                                      <div class="list align-items-center border-bottom py-2">
+                                        <div class="wrapper w-100">
+                                          <p class="mb-2 font-weight-medium">
+                                            Appariel Photo :
+                                          </p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                              <p class="mb-0 text-small text-muted">{{loadedhardData.Appphoto}}</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                              <div class="list align-items-center border-bottom py-2">
+                                <div class="wrapper w-100">
+                                  <p class="mb-2 font-weight-medium">
+                                    Bluetouth :
+                                  </p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                      <p class="mb-0 text-small text-muted">{{loadedhardData.Bluetouth}}</p>
                                     </div>
-                                  </div>
-                                </div>
-                              </div>
-                    
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="col-lg-4 d-flex flex-column">
-                      <div class="row flex-grow">
-                        <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
-                          <div class="card card-rounded">
-                            <div class="card-body">
-                              <div class="d-sm-flex justify-content-between align-items-start">
-                                <div>
-                                                <h4 class="card-title card-title-dash">Détaile Materiel</h4>
-                                                </div>
-                                                
-                                                </div>
-                                                <div class="table-responsive  mt-1">
-                                                  <table class="table select-table">
-                                                    <thead>
-                                                      <tr>
-                                                        <th></th>
-                                                        <th>Type</th>
-                                                        <th>Marque</th>
-                                                        <th>Date d'affectation</th>
-                                                        <th>Status</th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                      <tr>
-                                                        <td>
-                                                          <div class="form-check form-check-flat mt-0">
-                                                            <label class="form-check-label">
-                                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                                          </div>
-                                                        </td>
-                                                        <td>
-                                                          <div class="d-flex ">
-                                          <div>
-                                            <h6>Brandon Washington</h6>
-                                            <p>Head admin</p>
+                                    </div>
+                                    </div>
+                                    </div>
+<div class="list align-items-center border-bottom py-2">
+  <div class="wrapper w-100">
+    <p class="mb-2 font-weight-medium">
+      La Carte Réseau :
+    </p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <p class="mb-0 text-small text-muted">{{loadedhardData.cartReseau}}</p>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="list align-items-center border-bottom py-2">
+      <div class="wrapper w-100">
+        <p class="mb-2 font-weight-medium">
+          La carte Réseau :
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <p class="mb-0 text-small text-muted">{{loadedhardData.cartReseau2}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="list align-items-center border-bottom py-2">
+      <div class="wrapper w-100">
+        <p class="mb-2 font-weight-medium">
+          La carte Réseau :
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <p class="mb-0 text-small text-muted">{{loadedhardData.cartReseau3}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- Detaille Network et SOFT -->
+    <div class="col-lg-4 d-flex flex-column">
+      <div class="row flex-grow">
+        <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-between align-items-start">
+                <div>
+                                        <div class=" row">
+                                          <div class="col-lg-10 col-sm-10">
+                                            <h4 class="card-title card-title-dash">Details Network</h4>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">79%</p>
-                                            <p>85/162</p>
+                                          <div class="col-lg-2 col-sm-2">
+                                            <button type="button" class="btn btn-success btn-rounded btn-icon" (click)="openMediumModal(mediumModalContent5)">
+                                              <i class="ti-plus"></i>
+                                            </button>
                                           </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <div>
-                                            <h6>Laura Brooks</h6>
-                                            <p>Head admin</p>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
                                           </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <div>
-                                            <h6>Wayne Murphy</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 38%" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-warning">In progress</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
-                                          <div>
-                                            <h6>Matthew Bailey</h6>
-                                            <p>Head admin</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-danger">Pending</div></td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="form-check form-check-flat mt-0">
-                                          <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div class="d-flex">
+                                          <div class="list align-items-center border-bottom py-2">
+                                            <div class="wrapper w-100">
+                                              <p class="mb-2 font-weight-medium">
                                           
-                                          <div>
-                                            <h6>Katherine Butler</h6>
-                                            <p>Head admin</p>
-                                          </div>
+                                                DNS Domain :
+                                              </p>
+                                              <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                  <p class="mb-0 text-small text-muted">{{loadedNetworkData.DNSDomain}}</p>
+                                                </div>
+                                                </div>
+                                                </div>
                                         </div>
-                                      </td>
-                                      <td>
-                                        <h6>Company name 1</h6>
-                                        <p>company type</p>
-                                      </td>
-                                      <td>
-                                        <div>
-                                          <div class="d-flex justify-content-between align-items-center mb-1 max-width-progress-wrap">
-                                            <p class="text-success">65%</p>
-                                            <p>85/162</p>
-                                          </div>
-                                          <div class="progress progress-md">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td><div class="badge badge-opacity-success">Completed</div></td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                                        <div class="list align-items-center border-bottom py-2">
+                                          <div class="wrapper w-100">
+                                            <p class="mb-2 font-weight-medium">
+                                              VPN Config: :
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                              <div class="d-flex align-items-center">
+                                                <p class="mb-0 text-small text-muted">{{loadedNetworkData.VPNConfig}}</p>
+                                              </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="list align-items-center border-bottom py-2">
+                                              <div class="wrapper w-100">
+                                                <p class="mb-2 font-weight-medium">
+                                                  Nom de la machine :
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                  <div class="d-flex align-items-center">
+                                                    <p class="mb-0 text-small text-muted">{{loadedNetworkData.nomMach}}</p>
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="list align-items-center border-bottom py-2">
+                                                    <div class="wrapper w-100">
+                                                      <p class="mb-2 font-weight-medium">
+                                                        Session Réseau :
+                                                      </p>
+                                                      <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                          <p class="mb-0 text-small text-muted">{{loadedNetworkData.sessionReseau}}</p>
+                                                        </div>
+                                                  </div>
+                                                  </div>
+                                                </div>
+                                            <div class="list align-items-center border-bottom py-2">
+                                              <div class="wrapper w-100">
+                                                <p class="mb-2 font-weight-medium">
+                                                  Outlook Configuration :
+                                                </p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                  <div class="d-flex align-items-center">
+                                                    <p class="mb-0 text-small text-muted">{{loadedNetworkData.outlook }}</p>
+                                                  </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="list align-items-center border-bottom py-2">
+                                                  <div class="wrapper w-100">
+                                                    <p class="mb-2 font-weight-medium">
+                                                      Address Mac :
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                      <div class="d-flex align-items-center">
+                                                        <p class="mb-0 text-small text-muted">{{loadedNetworkData.macAdd }}</p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  </div>
+                                          <div class="list align-items-center border-bottom py-2">
+                                            <div class="wrapper w-100">
+                                              <p class="mb-2 font-weight-medium">
+                                                sessionLocal et Password :
+                                              </p>
+                                              <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                  <p class="mb-0 text-small text-muted">{{loadedNetworkData.sessionLocal}} /
+                                                    {{loadedNetworkData.mdpsSessionLocal}} </p>
+                                                </div>
+                                              </div>
+                                              </div>
                               </div>
-      
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                                           <!--  -->
-                    <div class="col-lg-4 d-flex flex-column">
-                      <div class="row flex-grow">         
-                        <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                          <div class="card card-rounded">
-                            <div class="card-body">
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title card-title-dash">Detaile Network</h4>
-                                    <div class="add-items d-flex mb-0">
-                                    </div>
-                                  </div>
-                                  <div class="list-wrapper">
-                                    <ul class="todo-list todo-list-rounded">
-                                      <li class="d-block">
-                                        <div class="form-check w-100">
-                                          <div class="d-flex mt-2">
-                                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                                            <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
-                                            <i class="mdi mdi-flag ms-2 flag-color"></i>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="d-block">
-                                        <div class="form-check w-100">
-                                          <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
-                                          </label>
-                                          <div class="d-flex mt-2">
-                                            <div class="ps-4 text-small me-3">23 June 2020</div>
-                                            <div class="badge badge-opacity-success me-3">Done</div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li>
-                                        <div class="form-check w-100">
-                                          <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
-                                          </label>
-                                          <div class="d-flex mt-2">
-                                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                                            <div class="badge badge-opacity-success me-3">Done</div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="border-bottom-0">
-                                        <div class="form-check w-100">
-                                          <label class="form-check-label">
-                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
-                                          </label>
-                                          <div class="d-flex mt-2">
-                                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                                            <div class="badge badge-opacity-danger me-3">Expired</div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                              </div>
+                              </div>
+                              </div>
+                              </div>
+<!-- detaille softywar /windows  -->
+<div class="col-lg-4 d-flex flex-column">
+  <div class="row flex-grow">
+    <div class="col-12 col-lg-12 col-lg-12 grid-margin stretch-card">
+      <div class="card card-rounded">
+        <div class="card-body">
+          <div class="d-sm-flex justify-content-between align-items-start">
+            <div>
+              <div class=" row">
+                <div class="col-lg-10 col-sm-10">
+                  <h4 class="card-title card-title-dash">Liste des SoftWares</h4>
+                </div>
+                <div class="col-lg-2 col-sm-2">
+                  <button type="button" class="btn btn-success btn-rounded btn-icon" (click)="openMediumModal(mediumModalContent6)">
+                    <i class="ti-plus"></i>
+                  </button>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                  <div class="d-flex">
+                    <img class="img-sm rounded-10" src="assets/images/faces/face1.jpg" alt="profile">
+                    <div class="wrapper ms-3">
+                      <p class="ms-1 mb-1 fw-bold">Brandon Washington</p>
+                      <small class="text-muted mb-0">162543</small>
                     </div>
+                  </div>
+                  <div class="text-muted text-small">
+                    1h ago
+                  </div>
+                  </div>
+                  </div>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
                   </div>
             </div>
           </div>
@@ -912,7 +860,7 @@
           <label class="  col-sm-3"><b>Le Processeur :</b></label>
           <div class="col-sm-9 col-lg-9">
 
-            <input type="text" name="processor" class="form-control" placeholder="Intel EMD" required ngModel>
+            <input type="text" name="Processor" class="form-control" placeholder="Intel EMD" required ngModel>
           </div>
         </div>
 
@@ -925,12 +873,278 @@
               ngModel>
           </div>
         </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Apparel Photo :</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ">
+        <input type="text" name="Appphoto" class="form-control" placeholder="Intergeted camera" ngModel>
       </div>
-
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
-        <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+    </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Espace de Stokage :</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
+        <input type="text" name="espaceStokage" class="form-control" placeholder="500 GO SSD" ngModel>
       </div>
+    </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Bluetouth :</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
+        <input type="text" name="Bluetouth" class="form-control" placeholder="Intel(R) Wirless Bluetouth" ngModel>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Driver Cart Reseau :</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
+        <input type="text" name="cartReseau" class="form-control" placeholder="Realtek" ngModel>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Driver Cart Reseau 2 :</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+        <input type="text" name="cartReseau2" class="form-control" placeholder="Realtek" ngModel>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="  col-sm-3"><b>Driver Cart Reseau 3:</b></label>
+      <div
+        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+        <input type="text" name="cartReseau3" class="form-control" placeholder="Realtek" ngModel>
+      </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
+      <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+    </div>
     </form>
-  </div>
+    </div>
+    </ng-template>
+    
+    <ng-template #mediumModalContent5 let-modal class="modal fade" id="exampleModal-2"
+      aria-labelledby="exampleModalLabel-2">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel-2"> <i class=" mdi mdi-plus-circle"></i> <span><b>Ajouter Network
+                Information
+              </b></span></h4>
+          <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #network="ngForm" (ngSubmit)="addNetwork(network)">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Address Mac :</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
+                <input type="text" name="macAdd" class="form-control" placeholder="000000000000000000" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+    
+              <label class="  col-sm-3"><b>Nom Machine :</b></label>
+              <div class="col-sm-9 col-lg-9">
+    
+                <input type="text" name="nomMach" class="form-control" placeholder="Desk-PCXXX-XX" required ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>DNS Domain :</b></label>
+              <div class="col-sm-9 col-lg-9">
+                <select class="form-control" name="DNSDomain" ngModel>
+                  <ng-container *ngFor="let domain of DNSDomain">
+                    <option value={{domain.title}}>
+                      {{domain.title}}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Session Réseau:</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ">
+                <input type="text" name="sessionReseau" class="form-control" placeholder="X.xxxxx" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Configuration Boit messagerie :</b></label>
+              <div class="col-sm-9 col-lg-9">
+                <select class="form-control" name="outlook" ngModel>
+                  <ng-container *ngFor="let boit of ConfigOutlook">
+                    <option value={{boit.title}}>
+                      {{boit.title}}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>VPN Config:</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+                <select class="form-control" name="VPNConfig" ngModel>
+                  <ng-container *ngFor="let vpn of VPNConfig">
+                    <option value={{vpn.title}}>
+                      {{vpn.title}}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Session Local :</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ">
+                <input type="text" name="sessionLocal" class="form-control" placeholder="Administrateur" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Mot de passe Session Local :</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ">
+                <input type="text" name="mdpsSessionLocal" class="form-control" placeholder="Intel(R) Wirless Bluetouth"
+                  ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Observation:</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ">
+                <textarea name="observation" class="form-control" placeholder="Any observation" ngModel></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
+            <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+    
+    
+    <ng-template #mediumModalContent6 let-modal class="modal fade" id="exampleModal-2"
+      aria-labelledby="exampleModalLabel-2">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel-2"> <i class=" mdi mdi-plus-circle"></i> <span><b> Selectionnées
+                SoftWare
+                Information
+              </b></span></h4>
+          <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #network="ngForm" (ngSubmit)="addNetwork(network)">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="  col-sm-3"><b>Icon Logiciel:</b></label>
+              <div
+                class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ">
+                <input type="file" name="macAdd" class="form-control" ngModel>
+              </div>
+            </div>
+            <div class="form-group row">
+    
+              <label class="  col-sm-3"><b>Nom Logiciel :</b></label>
+              <div class="col-sm-9 col-lg-9">
+              
+                <input type="text" name="nomMach" class="form-control" placeholder="Desk-PCXXX-XX" required ngModel>
+              </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Licence/Key :</b></label>
+                <div class="col-sm-9 col-lg-9">
+                  <select class="form-control" name="DNSDomain" ngModel>
+                    <ng-container *ngFor="let domain of DNSDomain">
+                      <option value={{domain.title}}>
+                        {{domain.title}}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Session Réseau:</b></label>
+                <div
+                  class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
+                  <input type="text" name="sessionReseau" class="form-control" placeholder="X.xxxxx" ngModel>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Configuration Boit messagerie :</b></label>
+                <div class="col-sm-9 col-lg-9">
+                  <select class="form-control" name="outlook" ngModel>
+                    <ng-container *ngFor="let boit of ConfigOutlook">
+                      <option value={{boit.title}}>
+                        {{boit.title}}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>VPN Config:</b></label>
+                <div
+                  class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
+                  <select class="form-control" name="VPNConfig" ngModel>
+                    <ng-container *ngFor="let vpn of VPNConfig">
+                      <option value={{vpn.title}}>
+                        {{vpn.title}}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Session Local :</b></label>
+                <div
+                  class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
+                  <input type="text" name="sessionLocal" class="form-control" placeholder="Administrateur" ngModel>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Mot de passe Session Local :</b></label>
+                <div
+                  class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
+                  <input type="text" name="mdpsSessionLocal" class="form-control" placeholder="Intel(R) Wirless Bluetouth" ngModel>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="  col-sm-3"><b>Observation:</b></label>
+                <div
+                  class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ">
+                  <textarea name="observation" class="form-control" placeholder="Any observation" ngModel></textarea>
+                </div>
+              </div>
+              </div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
+  <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+</div>
+</form>
+</div>
 </ng-template>

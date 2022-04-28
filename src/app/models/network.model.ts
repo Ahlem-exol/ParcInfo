@@ -1,18 +1,19 @@
 import { Direction } from './direction.model';
+import { Machine } from './machine.model';
 
-export class Employee {
+export class Network {
   constructor(
     public id: number,
-    public nom: string,
-    public prenom: string,
-    public datenaissance: Date,
-    public post: string,
-    public numtel: string,
-    public mailPers: string,
-    public numpost: number,
-    public matricule: number,
-    public adresse: string,
-    public idDir: number,
-    public direction: Direction
+    public macAdd: string,
+    public outlook: string,
+    public nomMach: string,
+    public DNSDomain: string,
+    public sessionReseau: string,
+    public VPNConfig: string,
+    public sessionLocal: string,
+    public mdpsSessionLocal: string,
+    public observation: string,
+    public idMach: number,
+    public machine: Machine
   ) {}
 }

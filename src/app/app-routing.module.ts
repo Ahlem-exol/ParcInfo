@@ -9,6 +9,7 @@ import { DetailleEmployeeComponent } from './pages/employee/detaille-employee/de
 import { ListeEmployeeComponent } from './pages/employee/liste-employee/liste-employee.component';
 import { DetailleInterventionComponent } from './pages/intervention/detaille-intervention/detaille-intervention.component';
 import { ListeInterventionComponent } from './pages/intervention/liste-intervention/liste-intervention.component';
+import { ListeLogicielComponent } from './pages/logiciel/liste-logiciel/liste-logiciel.component';
 import { DetailleMachineComponent } from './pages/Machine/detaille-machine/detaille-machine.component';
 import { ListeMachineComponent } from './pages/Machine/liste-machine/liste-machine.component';
 
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'machine-detaill',
     component: DetailleMachineComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'logiciel',
+    component: ListeLogicielComponent,
     canActivate: [AuthGuard],
   },
   {

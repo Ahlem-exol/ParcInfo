@@ -15,15 +15,6 @@ const Info_reseau = sequelize.define(
       comment: null,
       field: "idInfoR"
     },
-    IPadress: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "IPadress"
-    },
     nomMach: {
       type: DataTypes.STRING(255),
       allowNull: true,
@@ -100,51 +91,53 @@ const Info_reseau = sequelize.define(
       comment: null,
       field: "macAdd"
     },
-    nomAdpter: {
+    DNSDomain: {
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "nomAdpter"
+      field: "DNSDomain"
     },
-    Getway: {
+
+
+    VPNConfig: {
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "Getway"
-    },
-    DHCPServer: {
-      type: DataTypes.STRING(255),
+      field: "VPNConfig"
+    },  
+    idMach: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "DHCPServer"
-    },
-    Subnet: {
-      type: DataTypes.STRING(255),
+      field: "idMach",
+      references: {
+        key: "idMach",
+        model: "machine_model"
+      }
+    }, 
+     iduser: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "Subnet"
+      field: "iduser",
+      references: {
+        key: "id",
+        model: "machine_model"
+      }
     },
-    DNSserver: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "DNSserver"
-    },
+
 
   }, {
 

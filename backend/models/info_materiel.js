@@ -10,8 +10,8 @@ const Info_materiel = sequelize.define(
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
+      primaryKey: true,
+      autoIncrement: true,
       comment: null,
       field: "idInfoM"
     },
@@ -42,7 +42,63 @@ const Info_materiel = sequelize.define(
       comment: null,
       field: "CarteGraphique"
     },
-   
+    espaceStokage: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "espaceStokage"
+    },
+    
+    Appphoto: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "Appphoto"
+    },
+    Bluetouth: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "Bluetouth"
+    },
+
+    cartReseau: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "cartReseau"
+    },
+  
+    cartReseau2: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "cartReseau2"
+    },
+    cartReseau3: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "cartReseau3"
+    },
     idMach: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -56,17 +112,17 @@ const Info_materiel = sequelize.define(
         model: "machine_model"
       }
     }, 
-     idUser: {
+     iduser: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "idUser",
+      field: "iduser",
       references: {
         key: "id",
-        model: "user_model"
+        model: "machine_model"
       }
     },
    }, {

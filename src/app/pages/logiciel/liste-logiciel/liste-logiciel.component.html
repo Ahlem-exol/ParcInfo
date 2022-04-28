@@ -1,1 +1,161 @@
-<p>liste-logiciel works!</p>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h4 class="card-title"><b>Liste des Logiciels/licencs</b></h4>
+                                </div>
+                                <!-- la fonction rechernce -->
+                                <div class="col-lg-3"><input class="form-control" type="text" name="nomLog"
+                                        placeholder="search"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-success btn-rounded btn-icon"
+                                (click)="openMediumModal(mediumModalContent)">
+                                <i class="ti-plus"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="table table-striped table-bordere">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Icon</th>
+                                    <th>Nom logiciel</th>
+                                    <th>Type</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<ng-template #mediumModalContent let-modal class="modal fade" id="exampleModal-2" aria-labelledby="exampleModalLabel-2">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel-2"> <i class=" mdi mdi-plus-circle"></i> <span><b>Ajouter
+                        Logiciel
+                    </b></span></h4>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        <form #addLogiciel="ngForm" (ngSubmit)="addLogicile(addLogiciel)">
+            <div class="modal-body">
+
+                <div class="form-group row">
+                    <label class=" col-sm-3 col-sm-3 "><b>Icon Logiciel : </b> </label>
+                    <div class="col-sm-9">
+                        <input type="file" name="logo">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="  col-sm-3"><b>Nom de logiciel :</b></label>
+                    <div
+                        class="col-sm-9 col-lg-9
+                                                                                                                                                                                                                                                                                                                                   ">
+                        <input type="text" name="nomLog" class="form-control" placeholder="Windows " required ngModel>
+                    </div>
+
+                </div>
+
+                <div class="form-group row ">
+                    <label class=" col-sm-3 "><b>Type :</b></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="type" ngModel>
+                            <ng-container *ngFor="let type of typeLog">
+                                <option value={{type.title}}>
+                                    {{type.title}}
+                                </option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class=" col-sm-3"><b>Développé par :</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" name="Owner" class="form-control" ngModel placeholder="Développé par !!" />
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label class=" col-sm-3 "><b>Version de logiciel : </b> </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="versionLog" class="form-control" required ngModel
+                            placeholder=" 2008" />
+                    </div>
+                </div>
+
+
+                <div class="form-group row ">
+                    <label class=" col-sm-3 "><b>Licence :</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" name="Licence" class="form-control" ngModel
+                            placeholder="XXXX-XXXX-XXXX-XXXX" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-6">
+                        <label class=" col-sm-6 row "><b>Date D'activation : </b></label>
+                        <div class="col-sm-6">
+                            <input type="date" name="datedactivation" class="form-control" ngModel="yyyy-MM-dd" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class=" col-sm-6"><b>Date De Fin : </b></label>
+                        <div class="col-sm-6">
+                            <input type="date" name="datefin" class="form-control" ngModel="yyyy-MM-dd" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- <div class="form-group row " *ngIf="stat === 'En Stock' ">
+                    <label class=" col-sm-3"><b>Fournisseur : </b></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="idForniss" ngModel>
+                            <option *ngFor="let fournisseur of loadedFournisseur" [value]="fournisseur.idForniss">
+                                {{fournisseur.nomFourni}} </option>
+                        </select>
+                    </div>
+                </div> -->
+
+
+                <div class="form-group row ">
+                    <label class=" col-sm-3"><b>Observation</b>></label>
+                    <div class="col-sm-9">
+                        <textarea name="observation" class="form-control rounded-0"
+                            placeholder="Votre observation sur le materiele" required ngModel rows="3"></textarea>
+                    </div>
+                </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="modal.close()">Ajouter </button>
+        <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+    </div>
+    </form>
+    </div>
+    </ng-template>

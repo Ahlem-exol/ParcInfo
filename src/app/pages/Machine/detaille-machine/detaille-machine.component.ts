@@ -6,7 +6,9 @@ import { Subscription } from 'rxjs';
 import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Fournisseur } from 'src/app/models/fournisseur.model';
+import { Hard } from 'src/app/models/hard.model';
 import { Machine } from 'src/app/models/machine.model';
+import { Network } from 'src/app/models/network.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { FournisseurService } from 'src/app/services/fournisseur/fournisseur.service';
@@ -35,6 +37,12 @@ export class DetailleMachineComponent implements OnInit {
 
   sub4: Subscription;
   loadedFournisseur: Fournisseur[];
+
+  sub5: Subscription;
+  loadedhardData: Hard;
+
+  sub6: Subscription;
+  loadedNetworkData: Network;
 
   modal2: String = '';
   stat: String = '';
@@ -106,6 +114,26 @@ export class DetailleMachineComponent implements OnInit {
     { title: 'Windows Server 2012', icon: 'ni-tv-2 text-primary' },
     { title: 'Windows 11', icon: 'ni-tv-2 text-primary' },
   ];
+
+  DNSDomain: type[] = [
+    { title: 'Alrim.dz', icon: 'ni-tv-2 text-primary' },
+    { title: 'WorkGroup', icon: 'ni-tv-2 text-primary' },
+    { title: 'alrim.spa.local', icon: 'ni-tv-2 text-primary' },
+    { title: 'Other', icon: 'ni-tv-2 text-primary' },
+  ];
+
+  VPNConfig: type[] = [
+    { title: 'OUI', icon: 'ni-tv-2 text-primary' },
+    { title: 'NON', icon: 'ni-tv-2 text-primary' },
+  ];
+
+  ConfigOutlook: type[] = [
+    { title: 'OUI/PC', icon: 'ni-tv-2 text-primary' },
+    { title: 'OUI/Telephone', icon: 'ni-tv-2 text-primary' },
+    { title: 'OUI/PC et Telephone', icon: 'ni-tv-2 text-primary' },
+    { title: 'OUI/PC et laptop et Telephone', icon: 'ni-tv-2 text-primary' },
+    { title: 'NON', icon: 'ni-tv-2 text-primary' },
+  ];
   constructor(
     private modalService: NgbModal,
     private machineService: MachineService,
@@ -125,6 +153,20 @@ export class DetailleMachineComponent implements OnInit {
         this.loadedMachine = machinedata.machine;
         this.modal2 = machinedata.machine.categorieMach;
         console.log(this.loadedMachine);
+      });
+
+    this.sub5 = this.machineService
+      .GetHardData(idMach)
+      .subscribe((machinedata) => {
+        this.loadedhardData = machinedata.HardInfo;
+        console.log(this.loadedhardData);
+      });
+
+    this.sub6 = this.machineService
+      .GetNetworkData(idMach)
+      .subscribe((NetworkInfo) => {
+        this.loadedNetworkData = NetworkInfo.NetworkData;
+        console.log(this.loadedNetworkData);
       });
 
     this.sub2 = this.directionservice
@@ -207,10 +249,66 @@ export class DetailleMachineComponent implements OnInit {
     const RAM = form.value.RAM;
     const Processor = form.value.Processor;
     const CarteGraphique = form.value.CarteGraphique;
+    const Appphoto = form.value.Appphoto;
+    const espaceStokage = form.value.espaceStokage;
+    const Bluetouth = form.value.Bluetouth;
+    const cartReseau = form.value.cartReseau;
+    const cartReseau2 = form.value.cartReseau2;
+    const cartReseau3 = form.value.cartReseau3;
+
     const idMach = Number(
       JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')
     );
 
-    console.log('la machine a madifer leur inform tion estg', idMach);
+    this.machineService
+      .addHard(
+        RAM,
+        Processor,
+        CarteGraphique,
+        Appphoto,
+        espaceStokage,
+        Bluetouth,
+        cartReseau,
+        cartReseau2,
+        cartReseau3,
+        idMach
+      )
+      .subscribe((res) => {
+        this.notifyService.showSuccess('Add with success ', 'Add');
+        this.ngOnInit();
+      });
+  }
+
+  addNetwork(form: NgForm) {
+    const macAdd = form.value.macAdd;
+    const nomMach = form.value.nomMach;
+    const DNSDomain = form.value.DNSDomain;
+    const sessionReseau = form.value.sessionReseau;
+    const VPNConfig = form.value.VPNConfig;
+    const sessionLocal = form.value.sessionLocal;
+    const mdpsSessionLocal = form.value.mdpsSessionLocal;
+    const observation = form.value.observation;
+    const outlook = form.value.outlook;
+    const idMach = Number(
+      JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')
+    );
+
+    this.machineService
+      .addNetwork(
+        macAdd,
+        outlook,
+        nomMach,
+        DNSDomain,
+        sessionReseau,
+        VPNConfig,
+        sessionLocal,
+        mdpsSessionLocal,
+        observation,
+        idMach
+      )
+      .subscribe((res) => {
+        this.notifyService.showSuccess('Add with success ', 'Add');
+        this.ngOnInit();
+      });
   }
 }

@@ -3,6 +3,8 @@ const {
 } = require('sequelize');
 
 const sequelize = require('../utils/database');
+const Info_materiel = require('./info_materiel');
+const Info_reseau = require('./info_reseau');
 const Intervention = require('./intervention');
 
 const Machine = sequelize.define(
@@ -186,4 +188,13 @@ const Machine = sequelize.define(
 
 Machine.hasMany(Intervention);
 Intervention.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
+
+
+Machine.hasMany(Info_materiel);
+Info_materiel.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
+
+
+Machine.hasMany(Info_reseau);
+Info_reseau.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
+
 module.exports = Machine;
