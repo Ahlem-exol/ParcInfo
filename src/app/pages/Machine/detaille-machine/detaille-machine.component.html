@@ -638,7 +638,8 @@
                   <h4 class="card-title card-title-dash">Liste des SoftWares</h4>
                 </div>
                 <div class="col-lg-2 col-sm-2">
-                  <button type="button" class="btn btn-success btn-rounded btn-icon" (click)="openMediumModal(mediumModalContent6)">
+                <!-- get it from the intervention  -->
+                <button type="button" class="btn btn-success btn-rounded btn-icon" (click)="openMediumModal(mediumModalContent6)">
                     <i class="ti-plus"></i>
                   </button>
                 </div>
@@ -1054,90 +1055,20 @@
         </div>
         <form #network="ngForm" (ngSubmit)="addNetwork(network)">
           <div class="modal-body">
-            <div class="form-group row">
-              <label class="  col-sm-3"><b>Icon Logiciel:</b></label>
-              <div
-                class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ">
-                <input type="file" name="macAdd" class="form-control" ngModel>
-              </div>
+          
+            <div class="form-group row ">
+              <label class=" col-form-label">Software</label>
+              <ng-multiselect-dropdown [placeholder]="'Selectionez Le(les) Logiciel(s)'" [settings]="dropdownSettings"
+                [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)" (onDeSelect)="unSelect($event)" (onDeSelectAll)="unSelectAll($event)">
+              </ng-multiselect-dropdown>
             </div>
-            <div class="form-group row">
-    
-              <label class="  col-sm-3"><b>Nom Logiciel :</b></label>
-              <div class="col-sm-9 col-lg-9">
-              
-                <input type="text" name="nomMach" class="form-control" placeholder="Desk-PCXXX-XX" required ngModel>
-              </div>
-              </div>
               <div class="form-group row">
-                <label class="  col-sm-3"><b>Licence/Key :</b></label>
-                <div class="col-sm-9 col-lg-9">
-                  <select class="form-control" name="DNSDomain" ngModel>
-                    <ng-container *ngFor="let domain of DNSDomain">
-                      <option value={{domain.title}}>
-                        {{domain.title}}
-                      </option>
-                    </ng-container>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>Session Réseau:</b></label>
-                <div
-                  class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
-                  <input type="text" name="sessionReseau" class="form-control" placeholder="X.xxxxx" ngModel>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>Configuration Boit messagerie :</b></label>
-                <div class="col-sm-9 col-lg-9">
-                  <select class="form-control" name="outlook" ngModel>
-                    <ng-container *ngFor="let boit of ConfigOutlook">
-                      <option value={{boit.title}}>
-                        {{boit.title}}
-                      </option>
-                    </ng-container>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>VPN Config:</b></label>
-                <div
-                  class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
-                  <select class="form-control" name="VPNConfig" ngModel>
-                    <ng-container *ngFor="let vpn of VPNConfig">
-                      <option value={{vpn.title}}>
-                        {{vpn.title}}
-                      </option>
-                    </ng-container>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>Session Local :</b></label>
-                <div
-                  class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ">
-                  <input type="text" name="sessionLocal" class="form-control" placeholder="Administrateur" ngModel>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>Mot de passe Session Local :</b></label>
-                <div
-                  class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ">
-                  <input type="text" name="mdpsSessionLocal" class="form-control" placeholder="Intel(R) Wirless Bluetouth" ngModel>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="  col-sm-3"><b>Observation:</b></label>
+                <label class="  col-sm-3"><b>Date D'installation:</b></label>
                 <div
                   class="col-sm-9 col-lg-9
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ">
-                  <textarea name="observation" class="form-control" placeholder="Any observation" ngModel></textarea>
+                  <input type="date" name="" class="form-control" placeholder="dd/mm/yyyy" ngModel>
                 </div>
               </div>
               </div>

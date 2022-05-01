@@ -10,8 +10,10 @@
                                     <h4 class="card-title"><b>Liste des Logiciels/licencs</b></h4>
                                 </div>
                                 <!-- la fonction rechernce -->
-                                <div class="col-lg-3"><input class="form-control" type="text" name="nomLog"
-                                        placeholder="search"></div>
+                                <div class="col-lg-3">
+                                    <input class="form-control" type="text" name="nomLog" [(ngModel)]="nomLog" (ngModelChange)="Search()"
+                                        placeholder="Recherche">
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -29,13 +31,33 @@
                                     <th>Icon</th>
                                     <th>Nom logiciel</th>
                                     <th>Type</th>
-                                    <th>Etat</th>
-                                    <th>Action</th>
+                                    <th>owner</th>
+                                    <th>version </th>
+                                    <th>comptibilite</th>
+                                    <th>Licence</th>
+                                    <th>date fin d'activation </th>
+                                    <th>Fournisseur </th>
                                 </tr>
                             </thead>
-
+                            <tbody>
+                                <tr style="cursor: pointer;"
+                                    *ngFor="let logiciel of loadedLogiciels | orderBy: key: reverse |paginate : {itemsPerPage:5,currentPage:p};">
+                            
+                                    <td> <img class="img-sm rounded-10" src="assets/images/logiciel/{{logiciel.logo}}" alt=" profile"></td>
+                                    <td>{{logiciel.nomLog}}</td>
+                                    <td>{{logiciel.type}}</td>
+                                    <td>{{logiciel.owner}}</td>
+                                    <td>{{logiciel.versionLog}}</td>
+                                    <td>{{logiciel.comptabilite}}</td>
+                                    <td>{{logiciel.Licence}}</td>
+                                    <td>{{logiciel.datefin}}</td>
+                                    <td>{{logiciel.fournisseur.nomFourni}}</td>
+                                    
+                                    </tr>
+                                    </tbody>
                         </table>
-
+                
+                <pagination-controls class=" pagination justify-content-end " (pageChange)="p =$event"> </pagination-controls>
                     </div>
                 </div>
             </div>
@@ -64,7 +86,7 @@
                 <div class="form-group row">
                     <label class=" col-sm-3 col-sm-3 "><b>Icon Logiciel : </b> </label>
                     <div class="col-sm-9">
-                        <input type="file" name="logo">
+                        <input type="file" id="file" class="form-control" (change)="getFileDetails($event)" ngModel>
                     </div>
                 </div>
 
@@ -94,10 +116,17 @@
                 <div class="form-group row">
                     <label class=" col-sm-3"><b>Développé par :</b></label>
                     <div class="col-sm-9">
-                        <input type="text" name="Owner" class="form-control" ngModel placeholder="Développé par !!" />
+                        <input type="text" name="owner" class="form-control" ngModel placeholder="Développé par !!" />
                     </div>
                 </div>
 
+                <div class="form-group row ">
+                    <label class=" col-sm-3"><b>Presentation de logiciel: </b>></label>
+                    <div class="col-sm-9">
+                        <textarea name="observation" class="form-control rounded-0" placeholder="Votre observation sur le materiele"
+                            required ngModel rows="3"></textarea>
+                    </div>
+                </div>
                 <div class="form-group row ">
                     <label class=" col-sm-3 "><b>Version de logiciel : </b> </label>
                     <div class="col-sm-9">
@@ -105,7 +134,18 @@
                             placeholder=" 2008" />
                     </div>
                 </div>
-
+                <div class="form-group row ">
+                    <label class=" col-sm-3 "><b>OS Compatibilté :</b></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="comptabilite" ngModel>
+                            <ng-container *ngFor="let type of comptabiliteListe">
+                                <option value={{type.title}}>
+                                    {{type.title}}
+                                </option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group row ">
                     <label class=" col-sm-3 "><b>Licence :</b></label>
@@ -119,19 +159,24 @@
                     <div class="form-group col-sm-6">
                         <label class=" col-sm-6 row "><b>Date D'activation : </b></label>
                         <div class="col-sm-6">
-                            <input type="date" name="datedactivation" class="form-control" ngModel="yyyy-MM-dd" />
+                            <input type="date" name="datedactivation" class="form-control" placeholder="yyyy-MM-dd" />
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
                         <label class=" col-sm-6"><b>Date De Fin : </b></label>
                         <div class="col-sm-6">
-                            <input type="date" name="datefin" class="form-control" ngModel="yyyy-MM-dd" />
+                            <input type="date" name="datefin" class="form-control" placeholder="yyyy-MM-dd" />
                         </div>
                     </div>
 
                 </div>
-
-                <!-- <div class="form-group row " *ngIf="stat === 'En Stock' ">
+                <div class="form-group row ">
+                    <label class=" col-sm-3 "><b>Lien de télechargement/ sauvgarde :</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" name="lienTelechr" class="form-control" ngModel placeholder="https://www.xxxxxx.xxxx/" />
+                    </div>
+                </div>
+                <div class="form-group row ">
                     <label class=" col-sm-3"><b>Fournisseur : </b></label>
                     <div class="col-sm-9">
                         <select class="form-control" name="idForniss" ngModel>
@@ -139,16 +184,10 @@
                                 {{fournisseur.nomFourni}} </option>
                         </select>
                     </div>
-                </div> -->
-
-
-                <div class="form-group row ">
-                    <label class=" col-sm-3"><b>Observation</b>></label>
-                    <div class="col-sm-9">
-                        <textarea name="observation" class="form-control rounded-0"
-                            placeholder="Votre observation sur le materiele" required ngModel rows="3"></textarea>
-                    </div>
                 </div>
+
+
+            
 
 
     </div>

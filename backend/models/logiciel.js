@@ -23,12 +23,21 @@ const Logiciel = sequelize.define(
     },
     nomLog: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "nomLog"
+    },
+    owner: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "owner"
     },
     logo: {
       type: DataTypes.STRING(255),
@@ -42,7 +51,7 @@ const Logiciel = sequelize.define(
 
     versionLog: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
@@ -51,7 +60,7 @@ const Logiciel = sequelize.define(
     },
     Licence: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
@@ -60,7 +69,7 @@ const Logiciel = sequelize.define(
     },
     type: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
@@ -69,7 +78,7 @@ const Logiciel = sequelize.define(
     },
     comptabilite: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
@@ -80,7 +89,7 @@ const Logiciel = sequelize.define(
   
     observation: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
@@ -102,13 +111,25 @@ const Logiciel = sequelize.define(
     },
     lienTelechr: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "lienTelechr"
-    }
+    },   iduser: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "iduser",
+      references: {
+        key: "id",
+        model: "user_model"
+      }
+    },
   }, {
 
     freezeTableName: true,

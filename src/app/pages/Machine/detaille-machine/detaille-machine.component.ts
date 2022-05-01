@@ -7,11 +7,13 @@ import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Fournisseur } from 'src/app/models/fournisseur.model';
 import { Hard } from 'src/app/models/hard.model';
+import { Logiciel } from 'src/app/models/logiciel.model';
 import { Machine } from 'src/app/models/machine.model';
 import { Network } from 'src/app/models/network.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { FournisseurService } from 'src/app/services/fournisseur/fournisseur.service';
+import { LogicielService } from 'src/app/services/logiciel/logiciel.service';
 import { MachineService } from 'src/app/services/machine/machine.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
@@ -26,6 +28,10 @@ declare interface type {
   styleUrls: ['./detaille-machine.component.scss'],
 })
 export class DetailleMachineComponent implements OnInit {
+  dropdownList: any[];
+  selectedItems: any[];
+  dropdownSettings: any = {};
+  logiciels: any[];
   sub: Subscription;
   loadedMachine: Machine;
 
@@ -43,6 +49,9 @@ export class DetailleMachineComponent implements OnInit {
 
   sub6: Subscription;
   loadedNetworkData: Network;
+
+  sub7: Subscription;
+  loadedLogiciel: Logiciel[];
 
   modal2: String = '';
   stat: String = '';
@@ -142,7 +151,8 @@ export class DetailleMachineComponent implements OnInit {
     private router: Router,
     private directionservice: DirectionService,
     private notifyService: NotificationService,
-    private fournisseurService: FournisseurService
+    private fournisseurService: FournisseurService,
+    private logicielservice: LogicielService
   ) {}
 
   ngOnInit(): void {
@@ -186,6 +196,51 @@ export class DetailleMachineComponent implements OnInit {
       .subscribe((fournisseurdata) => {
         this.loadedFournisseur = fournisseurdata.fournisseurs;
       });
+
+    this.sub7 = this.logicielservice.getLogiciels().subscribe((logdata) => {
+      this.loadedLogiciel = logdata.logiciels;
+      this.dropdownList = this.loadedLogiciel;
+      this.selectedItems = [];
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'idLog',
+        textField: 'nomLog',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+      };
+    });
+  }
+
+  onItemSelect(item: any) {
+    this.logiciels = [];
+    this.logiciels = item;
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    this.logiciels = [];
+    this.logiciels = items;
+    console.log(items);
+  }
+  unSelect(item: any) {
+    this.logiciels.forEach((element, index) => {
+      if (this.logiciels[index].idLog == item.idLog) {
+        console.log(
+          'Item [' + index + ']: ',
+          this.logiciels[index].idLog,
+          ', unselcted Item :   ',
+          item.idLog,
+          'the equalite ',
+          this.logiciels[index].idLog == item.idLog
+        );
+        delete this.logiciels[index];
+      }
+    });
+  }
+  unSelectAll(items: any) {
+    this.logiciels = [];
+    console.log('inselcted item', items);
   }
 
   onForm2NameChange({ target }: { target: any }) {
