@@ -5,7 +5,7 @@ const Fournisseur = require('../models/fournisseur');
 const Direction = require('../models/direction');
 const Info_materiel = require('../models/info_materiel');
 const Info_reseau = require('../models/info_reseau');
-
+const Logparmach = require('../models/logparmach');
 exports.getAllMachine = (req, res, next) => {
 
   Machine.findAll({attributes:['idMach', 'categorieMach', 'typeMach','marqueMach', 'numSerie', 'numAlrim', 'etat', 'date_entre',
@@ -470,3 +470,35 @@ exports.getNetworkDetaille = (req, res, next) => {
     });
   })
  };
+
+ 
+/////////////add machine
+exports.addLogiciels= (req, res, next) => {
+  const idUser = req.userData.id;
+  logiciles = req.body.logiciles;
+
+  console.log(idUser, logiciles)
+    logiciles.forEach(element => {
+
+    const logparmach = new Logparmach({
+      dateInstallation:req.body.dateInstallation,
+      idMach:req.body.idMach,
+      iduser:idUser,
+      idLog:  element.idLog,
+    })
+    logparmach.save().then(resul => {
+      res.status(201).json({
+        message: ' Add Logiciel par machine  ! .',
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err,
+        message: 'Error !',
+      });
+    });
+  });
+   
+
+  
+};

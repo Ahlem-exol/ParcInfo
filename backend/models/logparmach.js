@@ -3,8 +3,7 @@ const {
   } = require('sequelize');
   
   const sequelize = require('../utils/database');
-  const Employee = require('./employee');
-  const Intervention = require('./intervention');
+
   const Logparmach = sequelize.define(
     'logparmach',
     {
@@ -52,6 +51,19 @@ const {
         comment: null,
         field: "dateInstallation"
       },
+      iduser: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        defaultValue: null,
+        primaryKey: false,
+        autoIncrement: false,
+        comment: null,
+        field: "idUser",
+        references: {
+          key: "id",
+          model: "user_model"
+        }
+      },
     }, {
   
       freezeTableName: true,
@@ -60,4 +72,4 @@ const {
     );
    
   
-    module.exports = Logparinter;
+module.exports = Logparmach;

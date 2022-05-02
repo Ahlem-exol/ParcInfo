@@ -12,7 +12,7 @@ const router = express.Router();
 //  add information of the hard parte 
  router.post('/addHard',checkAuth, MachineController.addHard);
  router.post('/addNetwork',checkAuth, MachineController.addNetwork);
- 
+ router.post('/addLogiciels',checkAuth, MachineController.addLogiciels);
 // // the dynamics route always in the end
 
  router.get('/:id',checkAuth,MachineController.getMachine);

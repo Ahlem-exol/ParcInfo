@@ -6,7 +6,7 @@ const sequelize = require('../utils/database');
 const Info_materiel = require('./info_materiel');
 const Info_reseau = require('./info_reseau');
 const Intervention = require('./intervention');
-
+const Logparmach = require('./logparmach');
 const Machine = sequelize.define(
   'machine',
   {
@@ -196,5 +196,9 @@ Info_materiel.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
 
 Machine.hasMany(Info_reseau);
 Info_reseau.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
+
+Machine.hasMany(Logparmach);
+Logparmach.belongsTo(Machine, { targetKey: 'idMach', foreignKey: 'idMach' });
+
 
 module.exports = Machine;

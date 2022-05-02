@@ -111,7 +111,7 @@ export class DetailleMachineComponent implements OnInit {
       icon: 'ni-tv-2 text-primary',
     },
   ];
-
+  lenth: number;
   // typeWindows
   typeWindows: type[] = [
     { title: 'Windows XP', icon: 'ni-tv-2 text-primary' },
@@ -198,17 +198,22 @@ export class DetailleMachineComponent implements OnInit {
       });
 
     this.sub7 = this.logicielservice.getLogiciels().subscribe((logdata) => {
+      //get the liste of logiciels
       this.loadedLogiciel = logdata.logiciels;
+      //on a affecte au droupwon liste
       this.dropdownList = this.loadedLogiciel;
+      // when we slecte an item we add it here
       this.selectedItems = [];
+
       this.dropdownSettings = {
         singleSelection: false,
         idField: 'idLog',
         textField: 'nomLog',
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
-        itemsShowLimit: 3,
+        itemsShowLimit: 6,
         allowSearchFilter: true,
+        noDataAvailablePlaceholderText: 'No data available',
       };
     });
   }
@@ -238,6 +243,7 @@ export class DetailleMachineComponent implements OnInit {
       }
     });
   }
+
   unSelectAll(items: any) {
     this.logiciels = [];
     console.log('inselcted item', items);
@@ -361,6 +367,28 @@ export class DetailleMachineComponent implements OnInit {
         observation,
         idMach
       )
+      .subscribe((res) => {
+        this.notifyService.showSuccess('Add with success ', 'Add');
+        this.ngOnInit();
+      });
+  }
+
+  addLogiciels(form: NgForm) {
+    //liste des logiciles selctionnées
+    console.log('from submite les logiciel est ', this.logiciels);
+    const dateInstallation = form.value.dateInstallation;
+    const idMach = Number(
+      JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')
+    );
+
+    if (this.logiciels.length == undefined) {
+      this.lenth = 0;
+    } else {
+      this.lenth = this.logiciels.length;
+    }
+
+    this.machineService
+      .addLogiciels(idMach, this.logiciels, this.lenth, dateInstallation)
       .subscribe((res) => {
         this.notifyService.showSuccess('Add with success ', 'Add');
         this.ngOnInit();

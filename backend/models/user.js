@@ -6,6 +6,8 @@ const {
 const Employee = require('./employee');
 const Info_materiel = require('./info_materiel');
 const Intervention = require('./intervention');
+const Logparmach = require('./logparmach');
+
 const Logiciel = require('./logiciel');
 const Machine = require('./machine');
 
@@ -74,6 +76,9 @@ Info_materiel.belongsTo(User, { targetKey: 'id', foreignKey: 'iduser' });
 
 User.hasMany(Logiciel);
 Logiciel.belongsTo(User, { targetKey: 'id', foreignKey: 'iduser' });
+
+User.hasMany(Logparmach);
+Logparmach.belongsTo(User, { targetKey: 'id', foreignKey: 'iduser' });
 
 
 

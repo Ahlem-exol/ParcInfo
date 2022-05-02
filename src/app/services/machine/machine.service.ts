@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Employee } from 'src/app/models/employee.model';
 import { Hard } from 'src/app/models/hard.model';
+import { Logiciel } from 'src/app/models/logiciel.model';
 import { Machine } from 'src/app/models/machine.model';
 import { Network } from 'src/app/models/network.model';
 const BACKEND_URL = 'http://localhost:3000/api/machine';
@@ -49,6 +50,13 @@ interface NetworkAdd {
   mdpsSessionLocal: string;
   observation: string;
   idMach: number;
+}
+
+interface LogicielsAdd {
+  idMach: number;
+  logiciles: Logiciel[];
+  lenth: number;
+  dateInstallation: Date;
 }
 
 @Injectable({
@@ -192,6 +200,23 @@ export class MachineService {
   GetNetworkData(id: number) {
     return this.http.get<{ message: string; NetworkData: Network }>(
       BACKEND_URL + '/GetNetworkDetaille/' + id
+    );
+  }
+  addLogiciels(
+    idMach: number,
+    logiciles: Logiciel[],
+    lenth: number,
+    dateInstallation: Date
+  ) {
+    const LogicielsAdd: LogicielsAdd = {
+      idMach: idMach,
+      logiciles: logiciles,
+      lenth: lenth,
+      dateInstallation: dateInstallation,
+    };
+    return this.http.post<{ message: string }>(
+      `${BACKEND_URL}/addLogiciels`,
+      LogicielsAdd
     );
   }
 }

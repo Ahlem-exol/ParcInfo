@@ -6,7 +6,7 @@ const sequelize = require('../utils/database');
 const Employee = require('./employee');
 const Logpardir = require('./logpardir');
 const Logparinter = require('./logparinter');
-
+const Logparmach = require('./logparmach');
 const Intervention = require('./intervention');
 
 const Logiciel = sequelize.define(
@@ -145,10 +145,13 @@ const Logiciel = sequelize.define(
   Logiciel.hasMany(Logparinter);
   Logparinter.belongsTo(Logiciel, { targetKey: 'idLog', foreignKey: 'idLog' });
 
+  Logiciel.hasMany(Logparmach);
+  Logparmach.belongsTo(Logiciel, { targetKey: 'idLog', foreignKey: 'idLog' });
+
 
   Logiciel.hasMany(Intervention);
   Intervention.belongsTo(Logiciel, { targetKey: 'idLog', foreignKey: 'idLog' });
 
-
+  
 
   module.exports = Logiciel;

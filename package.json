@@ -26,6 +26,7 @@
     "activedirectory": "^0.7.2",
     "angular-bootstrap-contextmenu": "^1.2.1",
     "angular-font-awesome": "^3.1.2",
+    "angular2-multiselect-dropdown": "^5.0.4",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
@@ -58,7 +59,7 @@
     "satelize": "^0.2.0",
     "sequelize": "^6.8.0",
     "systeminformation": "^4.34.23",
-    "tslib": "^2.3.0",
+    "tslib": "^2.4.0",
     "xlsx": "^0.18.4",
     "zone.js": "~0.11.4"
   },
