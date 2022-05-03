@@ -33,6 +33,12 @@ export class LogicielService {
     );
   }
 
+  getLogiciel(id: number) {
+    return this.http.get<{ message: string; logiciel: Logiciel }>(
+      BACKEND_URL + '/' + id
+    );
+  }
+
   //  LogPaDir
   getLogPaDir() {
     return this.http.get<{ message: string; logpardirs: LogParDir[] }>(

@@ -6,6 +6,7 @@ const Direction = require('../models/direction');
 const Info_materiel = require('../models/info_materiel');
 const Info_reseau = require('../models/info_reseau');
 const Logparmach = require('../models/logparmach');
+const Logiciel = require('../models/logiciel');
 exports.getAllMachine = (req, res, next) => {
 
   Machine.findAll({attributes:['idMach', 'categorieMach', 'typeMach','marqueMach', 'numSerie', 'numAlrim', 'etat', 'date_entre',
@@ -248,6 +249,7 @@ exports.getMachine = (req, res, next) => {
 
 /////////////////////// SUPRIMER ///////////////////////////////////
 exports.deleteMachine = (req, res, next) => {
+  
   const machineId = req.params.id;
   Machine.findOne(
     {
@@ -315,12 +317,9 @@ exports.addMachine = (req, res, next) => {
 /////////////add har information of the machine 
 exports.addHard = (req, res, next) => {
 
-  console.log("//////////////////////////add hard //////////////////////////////////////")
   const idUser = req.userData.id;
    console.log(req.body,idUser)
   const info_materiel = new Info_materiel({
-
-
     idMach:req.body.idMach,
     RAM:req.body.RAM,
     Processor:req.body.Processor,
@@ -361,8 +360,10 @@ exports.getHardDetaille = (req, res, next) => {
     ).then(HardData=>{
   
   if (!HardData) {
-   return res.status(401).json({
-     message: 'you should entre information of the hard !'
+   return res.status(200).json({
+     message: 'you should entre information of the hard !',
+
+    
    });
  }else{
  
@@ -381,15 +382,15 @@ exports.getHardDetaille = (req, res, next) => {
        cartReseau3: HardData.cartReseau3,
       
      }
-   });
- 
- }
-  }).catch(error=>{
+   }).catch(error=>{
     console.log(error);
     res.status(500).json({
       error:error,
       message :'An error occured while fetching the machines! Please try later or contact the administrator',
     });
+  })
+ 
+ }
   })
  };
 ///////////////////////
@@ -439,8 +440,9 @@ exports.getNetworkDetaille = (req, res, next) => {
     ).then(NetworkData=>{
   
   if (!NetworkData) {
-   return res.status(401).json({
-     message: 'you should entre information of the Network !'
+   return res.status(200).json({
+     message: 'you should entre information of the Network !',
+   
    });
  }else{
  
@@ -502,3 +504,54 @@ exports.addLogiciels= (req, res, next) => {
 
   
 };
+
+//get all the installed logociel onstlled in this machine 
+// i will  get the inforlation of the logiciel installed in machine avec un telll idMachine then i will take the information from the table of 
+//logciel for get the information of installefd logiciel
+// but ther is a  problem with the keys and licenceof the smae logiciel so ??
+// if i will  do the same logciel with multi licence or
+// i will do  licence table is better logiciel avec ensemeble des licence a installed kespersky licence 1 l'annes et date d'activation when 
+exports.getLogicielInstalled = (req, res, next) => {
+  const machineId = req.params.id;
+  console.log("we are in the machine controllor for get the data of the logiciels installed in this machine  with id "+machineId)
+  Logparmach.findAll(
+    {
+      where:{idMach:machineId},
+      attributes:['idLPM', 'idMach', 'idLog','dateInstallation'] ,
+        include:[
+        {model:Logiciel,attributes:['idLog', 'nomLog','logo']},
+       
+      ]
+    }
+
+    ).then(logdatas=>{
+  if (!logdatas) {
+   return res.status(200).json({
+     message: 'there is no logiciel installed in this machine !',
+
+   });
+ }else{
+  res.status(200).json({
+  logdatas  : logdatas.map(logdata=>{
+     return {
+      idLPM:logdata.idLPM,
+      idMach:logdata.idMach,
+      idLog:logdata.idLog,
+      dateInstallation:logdata.dateInstallation,
+      logiciel: { 
+        idLog: logdata.logiciel.idLog,
+         nomLog: logdata.logiciel.nomLog,
+         logo:logdata.logiciel.logo,
+      }
+       }
+     })
+    })
+ }
+  }).catch(error=>{
+    console.log(error);
+    res.status(500).json({
+      error:error,
+      message :'An error occured while fetching the data! Please try later or contact the administrator',
+    });
+  })
+ };

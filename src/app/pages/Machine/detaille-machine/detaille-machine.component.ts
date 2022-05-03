@@ -8,6 +8,7 @@ import { Employee } from 'src/app/models/employee.model';
 import { Fournisseur } from 'src/app/models/fournisseur.model';
 import { Hard } from 'src/app/models/hard.model';
 import { Logiciel } from 'src/app/models/logiciel.model';
+import { Logparmach } from 'src/app/models/logparmach.model';
 import { Machine } from 'src/app/models/machine.model';
 import { Network } from 'src/app/models/network.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
@@ -53,8 +54,12 @@ export class DetailleMachineComponent implements OnInit {
   sub7: Subscription;
   loadedLogiciel: Logiciel[];
 
+  sub8: Subscription;
+  loadedlogparMachine: Logparmach[];
+
   modal2: String = '';
   stat: String = '';
+  changeStat: boolean = false;
 
   etat: type[] = [
     { title: 'En Stock', icon: 'ni-tv-2 text-primary' },
@@ -161,8 +166,8 @@ export class DetailleMachineComponent implements OnInit {
       .getmachine(idMach)
       .subscribe((machinedata) => {
         this.loadedMachine = machinedata.machine;
+        this.stat = machinedata.machine.etat;
         this.modal2 = machinedata.machine.categorieMach;
-        console.log(this.loadedMachine);
       });
 
     this.sub5 = this.machineService
@@ -216,17 +221,25 @@ export class DetailleMachineComponent implements OnInit {
         noDataAvailablePlaceholderText: 'No data available',
       };
     });
+
+    this.sub8 = this.machineService
+      .getLogicielsData(idMach)
+      .subscribe((logicieldata) => {
+        this.loadedlogparMachine = logicieldata.logdatas;
+        console.log(
+          'we get information from the backend ',
+          this.loadedlogparMachine
+        );
+      });
   }
 
   onItemSelect(item: any) {
     this.logiciels = [];
     this.logiciels = item;
-    console.log(item);
   }
   onSelectAll(items: any) {
     this.logiciels = [];
     this.logiciels = items;
-    console.log(items);
   }
   unSelect(item: any) {
     this.logiciels.forEach((element, index) => {
@@ -246,42 +259,39 @@ export class DetailleMachineComponent implements OnInit {
 
   unSelectAll(items: any) {
     this.logiciels = [];
-    console.log('inselcted item', items);
   }
 
   onForm2NameChange({ target }: { target: any }) {
     this.modal2 = target.value;
-    console.log(target.value);
   }
 
   MachineUpdate(loadedMachine: any) {
     if (this.stat != '') {
       loadedMachine.etat = this.stat;
     }
-    console.log(loadedMachine);
 
-    // this.machineService.updateMachine(loadedMachine).subscribe((res) => {
-    //   this.notifyService.showSuccess('Update with success ', 'Update');
+    this.machineService.updateMachine(loadedMachine).subscribe((res) => {
+      this.notifyService.showSuccess('Update with success ', 'Update');
 
-    //   if (loadedMachine.etat == 'Affecte') {
-    //     console.log(
-    //       loadedMachine.employee.id,
-    //       loadedMachine.marqueMach,
-    //       loadedMachine.typeMach,
-    //       loadedMachine.numAlrim
-    //     );
-    //     this.router.navigate([
-    //       '/document',
-    //       {
-    //         Type: 'Decharge',
-    //         idEmp: loadedMachine.employee.id,
-    //         typeMach: loadedMachine.marqueMach,
-    //         marqueMach: loadedMachine.typeMach,
-    //         numAlrim: loadedMachine.numAlrim,
-    //       },
-    //     ]);
-    //   }
-    // });
+      if (loadedMachine.etat == 'Affecte' && this.changeStat == true) {
+        console.log(
+          loadedMachine.employee.id,
+          loadedMachine.marqueMach,
+          loadedMachine.typeMach,
+          loadedMachine.numAlrim
+        );
+        this.router.navigate([
+          '/document',
+          {
+            Type: 'Decharge',
+            idEmp: loadedMachine.employee.id,
+            typeMach: loadedMachine.marqueMach,
+            marqueMach: loadedMachine.typeMach,
+            numAlrim: loadedMachine.numAlrim,
+          },
+        ]);
+      }
+    });
   }
 
   deleteMachine(idMach: number) {
@@ -299,7 +309,7 @@ export class DetailleMachineComponent implements OnInit {
   openMediumModalStat(mediumModalContent: any, stat: string) {
     this.modalService.open(mediumModalContent);
     this.stat = stat;
-    console.log(stat);
+    this.changeStat = true;
   }
 
   detailleEmployee(idEmp: number) {
@@ -375,7 +385,6 @@ export class DetailleMachineComponent implements OnInit {
 
   addLogiciels(form: NgForm) {
     //liste des logiciles selctionnées
-    console.log('from submite les logiciel est ', this.logiciels);
     const dateInstallation = form.value.dateInstallation;
     const idMach = Number(
       JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')

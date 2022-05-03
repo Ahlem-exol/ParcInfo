@@ -45,6 +45,58 @@ exports.getAllLogiciel = (req,res, next) => {
     });
 };
 
+
+exports.getLogiciel = (req, res, next) => {
+  const logicielId = req.params.id;
+  
+  Logiciel.findOne(
+    {
+      where:{idLog:logicielId},
+      attributes: ['idLog', 'nomLog','logo', 'versionLog', 'Licence', 'type', 'comptabilite'
+      , 'observation', 'lienTelechr', `dateactivation`, `dateFin`, `iduser`, `owner`],
+  
+      include:[
+  
+          {model:Fournisseur,attributes:['idForniss', 'nomFourni', 'Adresse']}
+      ]}
+    ).then((logiciel) => {
+    
+      if (!logiciel) {
+        return res.status(401).json({
+          message: 'logiciel does not exist !'
+        });
+      }else{
+        res.status(200).json({
+          message: 'ok from controller  !',
+          logiciel: { 
+            idLog: logiciel.idLog,
+             nomLog: logiciel.nomLog,
+             logo:logiciel.logo,
+             owner:logiciel.owner,
+             versionLog: logiciel.versionLog,
+             Licence:logiciel.Licence,
+             type: logiciel.type,
+             datedactivation:logiciel.datedactivation,
+             datefin:logiciel.datefin,
+             comptabilite :logiciel.comptabilite,
+             observation:logiciel.observation,
+             lienTelechr:logiciel.lienTelechr,
+            ////////////////////
+            fournisseur:{
+                idForniss: logiciel.fournisseur.idForniss,
+                nomFourni: logiciel.fournisseur.nomFourni,
+                Adresse :logiciel.fournisseur.Adresse,
+            }
+
+        
+          }})
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+};
+
 exports.getAllLogicielParDirection = (req,res, next) => {
   Logpardir.findAll({attributes: ['idLpd','idDir','idLog'],
 

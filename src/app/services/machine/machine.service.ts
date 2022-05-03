@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Employee } from 'src/app/models/employee.model';
 import { Hard } from 'src/app/models/hard.model';
 import { Logiciel } from 'src/app/models/logiciel.model';
+import { Logparmach } from 'src/app/models/logparmach.model';
 import { Machine } from 'src/app/models/machine.model';
 import { Network } from 'src/app/models/network.model';
 const BACKEND_URL = 'http://localhost:3000/api/machine';
@@ -120,7 +121,7 @@ export class MachineService {
       idForniss: idForniss,
       idEmp: idEmp,
     };
-    console.log(machineAdd);
+
     return this.http.post<{ message: string }>(
       `${BACKEND_URL}/add`,
       machineAdd
@@ -145,15 +146,16 @@ export class MachineService {
       RAM: RAM,
       Processor: Processor,
       CarteGraphique: CarteGraphique,
-      espaceStokage: espaceStokage,
       Appphoto: Appphoto,
+      espaceStokage: espaceStokage,
+
       Bluetouth: Bluetouth,
       cartReseau: cartReseau,
       cartReseau2: cartReseau2,
       cartReseau3: cartReseau3,
       idMach: idMach,
     };
-    console.log(hardAdd);
+
     return this.http.post<{ message: string }>(
       `${BACKEND_URL}/addHard`,
       hardAdd
@@ -190,7 +192,7 @@ export class MachineService {
       observation: observation,
       idMach: idMach,
     };
-    console.log(NetworkAdd);
+
     return this.http.post<{ message: string }>(
       `${BACKEND_URL}/addNetwork`,
       NetworkAdd
@@ -219,7 +221,15 @@ export class MachineService {
       LogicielsAdd
     );
   }
+
+  getLogicielsData(id: number) {
+    return this.http.get<{ message: string; logdatas: Logparmach[] }>(
+      BACKEND_URL + '/GetLogicielsData/' + id
+    );
+  }
 }
+
+
 
 
  

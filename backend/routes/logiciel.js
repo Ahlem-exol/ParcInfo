@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get('/',checkAuth,LogicielController.getAllLogiciel);
 router.get('/LogPaDir',checkAuth,LogicielController.getAllLogicielParDirection);
-
+router.get('/:id',checkAuth,LogicielController.getLogiciel);
 router.post('/add',checkAuth, LogicielController.addLogiciel);
 module.exports = router;
