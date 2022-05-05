@@ -31,6 +31,8 @@ import { ListeLogicielComponent } from './pages/logiciel/liste-logiciel/liste-lo
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthInterceptor } from './pages/auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
+import { ListeProjectComponent } from './pages/project/liste-project/liste-project.component';
+import { DetailleProjectComponent } from './pages/project/detaille-project/detaille-project.component';
 // import {authInterceptoreProviders} from './_helpers/auth.interceptor';
 
 @NgModule({
@@ -50,7 +52,9 @@ import { ErrorInterceptor } from './error-interceptor';
     FournisseurComponent,
     OutputPdfComponent,
     HeaderPdfComponent,
-    LoginComponent
+    LoginComponent,
+    ListeProjectComponent,
+    DetailleProjectComponent
   ],
   imports: [
     BrowserModule,
