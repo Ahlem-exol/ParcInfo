@@ -50,6 +50,29 @@ exports.getAllEmployee = (req,res, next) => {
     });
 };
 
+
+exports.getEmployeeCount = (req,res, next) => {
+  console.log("employee count restle ")
+  Employee.findAll({
+    attributes: ['idEmp', [sequelize.fn('count', sequelize.col('idEmp')), 'count']],
+    group : ['Employee.idEmp'],
+    raw: true,
+    order: sequelize.literal('count DESC')
+  }) .then((employees) => {
+
+    res.status(200).json({
+      message: 'Employees !',
+      employees: employees.map(employee => {
+      console.log("employee count restle ")
+      }),
+    });
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+}
+
+
 // ////////////////////////////////////////////////////////////////////////////////////////////////
 exports.getEmployee = (req, res, next) => {
  const employeeId = req.params.id;

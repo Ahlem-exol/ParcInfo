@@ -12,6 +12,8 @@ router.post('/add', checkAuth,EmployeeController.addEmployee);
 router.get('/:id',checkAuth, EmployeeController.getEmployee);
 router.get('/inter/:id',checkAuth,EmployeeController.getAllInterventionEmployee);
 router.get('/mach/:id',checkAuth,EmployeeController.getAllMachineEmployee);
+router.get('/count',checkAuth,EmployeeController.getEmployeeCount);
+
 
 router.put('/update/:id',checkAuth,EmployeeController.updateEmployee);
 router.delete('/:id',checkAuth, EmployeeController.deleteEmployee);
