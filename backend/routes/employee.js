@@ -9,10 +9,11 @@ router.get('/',checkAuth,EmployeeController.getAllEmployee);
 
 router.post('/add', checkAuth,EmployeeController.addEmployee);
 // the dynamics route always in the end
+router.get('/count',checkAuth,EmployeeController.getEmployeeCount);
 router.get('/:id',checkAuth, EmployeeController.getEmployee);
 router.get('/inter/:id',checkAuth,EmployeeController.getAllInterventionEmployee);
 router.get('/mach/:id',checkAuth,EmployeeController.getAllMachineEmployee);
-router.get('/count',checkAuth,EmployeeController.getEmployeeCount);
+
 
 
 router.put('/update/:id',checkAuth,EmployeeController.updateEmployee);

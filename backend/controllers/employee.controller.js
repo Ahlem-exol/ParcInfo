@@ -3,6 +3,8 @@ const Direction = require('../models/direction');
 const Intervention = require('../models/intervention');
 const Machine = require('../models/machine');
 
+var sequelize = require('sequelize');
+
 ////////////////////////////////////
 exports.getAllEmployee = (req,res, next) => {
   Employee.findAll({
@@ -52,14 +54,17 @@ exports.getAllEmployee = (req,res, next) => {
 
 
 exports.getEmployeeCount = (req,res, next) => {
-  console.log("employee count restle ")
+  
   Employee.findAll({
-    attributes: ['idEmp', [sequelize.fn('count', sequelize.col('idEmp')), 'count']],
-    group : ['Employee.idEmp'],
+//     SELECT idDir, COUNT(idEmp) AS idEmp
+//     FROM employee
+//     GROUP BY idDir;
+// en va le traduire en sequelize
+    attributes: ['idDir', [sequelize.fn('COUNT', sequelize.col('idEmp')),'cnt']],
+    group : ['Employee.idDir'],
     raw: true,
-    order: sequelize.literal('count DESC')
   }) .then((employees) => {
-
+ console.log("this is the combination between the  start ",employees);
     res.status(200).json({
       message: 'Employees !',
       employees: employees.map(employee => {
