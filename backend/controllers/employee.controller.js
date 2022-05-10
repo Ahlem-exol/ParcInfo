@@ -54,21 +54,24 @@ exports.getAllEmployee = (req,res, next) => {
 
 
 exports.getEmployeeCount = (req,res, next) => {
-  
+
   Employee.findAll({
 //     SELECT idDir, COUNT(idEmp) AS idEmp
 //     FROM employee
 //     GROUP BY idDir;
 // en va le traduire en sequelize
-    attributes: ['idDir', [sequelize.fn('COUNT', sequelize.col('idEmp')),'cnt']],
+    attributes: ['idDir', [sequelize.fn('COUNT', sequelize.col('idEmp')),'nbrEmployee']],
     group : ['Employee.idDir'],
     raw: true,
-  }) .then((employees) => {
- console.log("this is the combination between the  start ",employees);
+  }) .then((charts) => {
+ console.log("this is the combination between the  start ",charts);
     res.status(200).json({
-      message: 'Employees !',
-      employees: employees.map(employee => {
-      console.log("employee count restle ")
+      message: 'charts !',
+      charts: charts.map(chart => {
+        return {
+       idDir: chart.idDir,
+       NombreEmp: chart.nbrEmployee,
+        }
       }),
     });
   })

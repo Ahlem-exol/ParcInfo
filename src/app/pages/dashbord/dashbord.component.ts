@@ -12,6 +12,7 @@ import { LogicielService } from 'src/app/services/logiciel/logiciel.service';
 // for the charts 
 import {Chart} from 'chart.js';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
+import { Charts } from 'src/app/models/charts.model';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -31,6 +32,7 @@ export class DashbordComponent implements OnInit, OnDestroy {
   loadedlogpardir: LogParDir[];
 
   sub5: Subscription;
+  loadedChart: Charts[];
 
   constructor(
     private modalService: NgbModal,
@@ -66,9 +68,10 @@ export class DashbordComponent implements OnInit, OnDestroy {
       this.loadedlogpardir = fourdata.logpardirs;
     });
 
-    this.sub5 = this.employeeService.getCountEmp().subscribe((Empdata) => {});
-
-    console.log('logicie par direction', this.loadedlogpardir);
+    this.sub5 = this.employeeService.getCountEmp().subscribe((Empdata) => {
+      this.loadedChart = Empdata.charts;
+      console.log('logicie par direction', this.loadedChart);
+    });
 
     const myChart = new Chart('myChart', {
       type: 'bar',

@@ -3,25 +3,25 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { Charts } from 'src/app/models/charts.model';
 import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Intervention } from 'src/app/models/intervention.model';
 import { Machine } from 'src/app/models/machine.model';
 
 interface EmployeeAdd {
-   nom: string,
-   prenom: string,
-   datenaissance:Date,
-   post: string,
-   numtel:string,
-   mailPers:string,
-   numpost:number,
-   matricule:number,
-   adresse:string,
-   idDir :number
-
+  nom: string;
+  prenom: string;
+  datenaissance: Date;
+  post: string;
+  numtel: string;
+  mailPers: string;
+  numpost: number;
+  matricule: number;
+  adresse: string;
+  idDir: number;
 }
-const BACKEND_URL ='http://localhost:3000/api/employee';
+const BACKEND_URL = 'http://localhost:3000/api/employee';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,9 @@ export class EmployeeService {
 
   // get liste of direction et nombre des employee dans cette drection
   getCountEmp() {
-    return this.http.get<{ message: String }>(BACKEND_URL + '/count');
+    return this.http.get<{ message: String; charts: Charts[] }>(
+      BACKEND_URL + '/count'
+    );
   }
 
   getEmployee(id: number) {
