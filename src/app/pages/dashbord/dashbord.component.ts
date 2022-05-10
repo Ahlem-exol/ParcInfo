@@ -51,9 +51,6 @@ export class DashbordComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub = this.directionService.getDirections().subscribe((dirdata) => {
-      this.loadedDirections = dirdata.directions;
-    });
     this.sub2 = this.FournisseurService.getFournisseur().subscribe(
       (fourdata) => {
         this.loadedFournisseur = fourdata.fournisseurs;
@@ -67,47 +64,64 @@ export class DashbordComponent implements OnInit, OnDestroy {
     this.sub4 = this.logicielService.getLogPaDir().subscribe((fourdata) => {
       this.loadedlogpardir = fourdata.logpardirs;
     });
+    this.sub5 = this.employeeService.getCountEmp().subscribe(() => {
+      this.sub = this.directionService.getDirections().subscribe((dirdata) => {
+        this.loadedDirections = dirdata.directions;
 
-    this.sub5 = this.employeeService.getCountEmp().subscribe((Empdata) => {
-      this.loadedChart = Empdata.charts;
-      console.log('logicie par direction', this.loadedChart);
-    });
+        let labelsD: string[] = [];
+        let dataD: number[] = [];
+        this.loadedDirections.forEach(function (item) {
+          // convert table iddirection to nom direction
+          labelsD.push(item.nom);
+          dataD.push(item.nbrEmp);
+        });
+        console.log(labelsD);
+        console.log(dataD);
+        const myChart = new Chart('myChart', {
+          type: 'bar',
+          data: {
+            //get frome table emlpoyee count nombre des employee per direction
+            // lable liste des direction
+            labels: labelsD,
+            datasets: [
+              {
+                label: '# of Employees',
+                // je doit mete mon data
+                data: dataD,
 
-    const myChart = new Chart('myChart', {
-      type: 'bar',
-      data: {
-        //get frome table emlpoyee count nombre des employee per direction
-        // lable liste des direction
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-          {
-            label: '# of Votes',
-            // je doit mete mon data
-            data: [12, 19, 3, 5, 2, 3],
-
-            backgroundColor: [
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
+                backgroundColor: [
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                ],
+                borderColor: [
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                  '#05c3fb',
+                ],
+                borderWidth: 1,
+              },
             ],
-            borderColor: [
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-              '#05c3fb',
-            ],
-            borderWidth: 1,
           },
-        ],
-      },
-      options: {
-        scales: {},
-      },
+          options: {
+            scales: {},
+          },
+        });
+      });
     });
   }
 }

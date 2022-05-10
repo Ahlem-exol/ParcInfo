@@ -2,9 +2,7 @@ const Employee = require('../models/employee');
 const Direction = require('../models/direction');
 const Intervention = require('../models/intervention');
 const Machine = require('../models/machine');
-
 var sequelize = require('sequelize');
-
 ////////////////////////////////////
 exports.getAllEmployee = (req,res, next) => {
   Employee.findAll({
@@ -51,8 +49,6 @@ exports.getAllEmployee = (req,res, next) => {
       console.log(err)
     });
 };
-
-
 exports.getEmployeeCount = (req,res, next) => {
 
   Employee.findAll({
@@ -63,20 +59,30 @@ exports.getEmployeeCount = (req,res, next) => {
     attributes: ['idDir', [sequelize.fn('COUNT', sequelize.col('idEmp')),'nbrEmployee']],
     group : ['Employee.idDir'],
     raw: true,
-  }) .then((charts) => {
+  }).then((charts) => {
  console.log("this is the combination between the  start ",charts);
-    res.status(200).json({
-      message: 'charts !',
-      charts: charts.map(chart => {
-        return {
-       idDir: chart.idDir,
-       NombreEmp: chart.nbrEmployee,
-        }
-      }),
+// i have charte contien le id et nombre des elmetns dans la structure 
+charts.forEach(element => {
+console.log("le id de  direction: ",element.idDir," le nombres des elemploye:  ",element.NombreEmp)
+  Direction.findOne({
+    where:{idDir : element.idDir},
+    attributes:['idDir', 'nomDir', 'numPost', 'nbrEmp','effectif','nbrMachine','nbrIntervention','UserPost','Emplacement']
+  }).then(direction=>{
+    direction.update({
+      nbrEmp: element.nbrEmployee,
+  }).then(result => {
+    res.status(201).json({
+      message: 'direction  update  !',
+      result: result,
     });
+   });
+  });
+
+
   })
   .catch((err) => {
     console.log(err)
+  });
   });
 }
 
@@ -199,7 +205,6 @@ exports.updateEmployee = (req, res, next) => {
           mailEmp:req.body.mailPers,
           numPost:req.body.numPost,
           adresse:req.body.adresse
-
       }) .then(result => {
         res.status(201).json({
           message: 'Employee update  !',
@@ -236,8 +241,6 @@ exports.deleteEmployee = (req, res, next) => {
 ////////////////////////////////////
 exports.getAllInterventionEmployee = (req,res, next) => {
   
-
-
 };
 
 
@@ -270,7 +273,6 @@ exports.getAllInterventionEmployee = (req, res, next) => {
          etat:intervention.etat,
          etatdereparation:intervention.etatdereparation,
          causeEchec:intervention.causeEchec,
- 
          employee:{
              id: intervention.employee.idEmp,
              nom: intervention.employee.nomEmp,
@@ -289,7 +291,7 @@ exports.getAllInterventionEmployee = (req, res, next) => {
     message:'An error occured while fetching the machines ! Please try later or contact he administartor',
   });
   });
-}
+};
 
 
 exports.getAllMachineEmployee = (req, res, next) => {
@@ -330,8 +332,6 @@ exports.getAllMachineEmployee = (req, res, next) => {
              prenom: machine.employee.prenomEmp,
              post: machine.employee.post,
          },
-
-     
         }
       }
     })
@@ -343,4 +343,4 @@ exports.getAllMachineEmployee = (req, res, next) => {
     message:'An error occured while fetching the machines ! Please try later or contact he administartor',
   });
   });
-}
+};
