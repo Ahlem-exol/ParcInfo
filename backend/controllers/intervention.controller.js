@@ -256,8 +256,7 @@ exports.addIntervention= (req, res, next) => {
   });
 
   intervention.save().then(resul => {
-   
-
+  
     listedeslogiciel.forEach(element => {
 
     const logparinter = new Logparinter({
