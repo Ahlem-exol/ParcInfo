@@ -60,10 +60,9 @@ exports.getEmployeeCount = (req,res, next) => {
     group : ['Employee.idDir'],
     raw: true,
   }).then((charts) => {
- console.log("this is the combination between the  start ",charts);
 // i have charte contien le id et nombre des elmetns dans la structure 
 charts.forEach(element => {
-console.log("le id de  direction: ",element.idDir," le nombres des elemploye:  ",element.NombreEmp)
+  
   Direction.findOne({
     where:{idDir : element.idDir},
     attributes:['idDir', 'nomDir', 'numPost', 'nbrEmp','effectif','nbrMachine','nbrIntervention','UserPost','Emplacement']

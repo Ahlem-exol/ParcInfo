@@ -7,6 +7,7 @@ const Info_materiel = require('../models/info_materiel');
 const Info_reseau = require('../models/info_reseau');
 const Logparmach = require('../models/logparmach');
 const Logiciel = require('../models/logiciel');
+var sequelize = require('sequelize');
 exports.getAllMachine = (req, res, next) => {
 
   Machine.findAll({attributes:['idMach', 'categorieMach', 'typeMach','marqueMach', 'numSerie', 'numAlrim', 'etat', 'date_entre',
@@ -555,3 +556,39 @@ exports.getLogicielInstalled = (req, res, next) => {
     });
   })
  };
+
+
+
+ exports.getMachineCount = (req,res, next) => {
+
+  console.log("###################################################################")
+  Machine.findAll({
+    attributes: ['idDir', [sequelize.fn('COUNT', sequelize.col('idMach')),'nbrMach']],
+    group : ['Machine.idDir'],
+    raw: true,
+  }).then((charts) => {
+ console.log("this is the combination between the  start ",charts);
+// i have charte contien le id et nombre des elmetns dans la structure 
+charts.forEach(element => {
+console.log("le id de  direction: ",element.idDir," le nombres des elemploye:  ",element.nbrMach)
+  Direction.findOne({
+    where:{idDir : element.idDir},
+    attributes:['idDir', 'nomDir', 'numPost', 'nbrEmp','effectif','nbrMachine','nbrIntervention','UserPost','Emplacement']
+  }).then(direction=>{
+    direction.update({
+      nbrMachine: element.nbrMach,
+  }).then(result => {
+    res.status(201).json({
+      message: 'direction  update  !',
+      result: result,
+    });
+   });
+  });
+
+
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+  });
+}

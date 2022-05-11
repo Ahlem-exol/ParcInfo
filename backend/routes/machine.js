@@ -13,6 +13,7 @@ const router = express.Router();
  router.post('/addLogiciels',checkAuth, MachineController.addLogiciels);
 // // the dynamics route always in the end
 
+router.get('/count',checkAuth,MachineController.getMachineCount);
  router.get('/:id',checkAuth,MachineController.getMachine);
  router.get('/GetHardDetaille/:id',checkAuth,MachineController.getHardDetaille);
  router.get('/GetNetworkDetaille/:id',checkAuth,MachineController.getNetworkDetaille);

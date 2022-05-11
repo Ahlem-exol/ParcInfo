@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Charts } from 'src/app/models/charts.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Hard } from 'src/app/models/hard.model';
 import { Logiciel } from 'src/app/models/logiciel.model';
@@ -73,6 +74,13 @@ export class MachineService {
   getmachine(id: number) {
     return this.http.get<{ message: string; machine: Machine }>(
       BACKEND_URL + '/' + id
+    );
+  }
+
+  // get liste of direction et nombre des employee dans cette drection
+  getCountMach() {
+    return this.http.get<{ message: String; charts: Charts[] }>(
+      BACKEND_URL + '/count'
     );
   }
 
