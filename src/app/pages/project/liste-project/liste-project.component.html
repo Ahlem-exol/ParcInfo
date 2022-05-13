@@ -85,76 +85,75 @@
                     <div class="form-group row">
                         <label for="exampleInputUsername1" class="col-sm-3 col-form-label"><b>Type de demande:</b></label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="matricule" placeholder="matricule" ngModel>
-                        </div>
+                            <select class="form-control" name="categorieMach" (change)="onForm2NameChange($event)" ngModel>
+                                <ng-container *ngFor="let demande of TypesDemande">
+                                    <option value={{demande.title}}>
+                                        {{demande.title}}
+                                    </option>
+                                </ng-container>
+                            </select>
+                            </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleInputEmail1" class="col-sm-3 col-form-label"><b>Object demandé:</b></label>
+                        <label for="exampleInputEmail1" class="col-sm-3 col-form-label"><b>Descreption :</b></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="nom" placeholder="nom" ngModel>
-                        </div>
-                    </div>
+                            <textarea class="form-control" name="nom" placeholder="Explenation for the achat de ce produit !!!" ngModel></textarea>
+                            </div>
+                            </div>
+                            <!-- les objet   -->
+                            <div class="form-group row" *ngIf="modal2 ==='Achat Matériel' ">
+                                <label class=" col-sm-3"><b>Ajouter Materiel:</b> </label>
+                                <p>Ici je doit faire une formalaire d'ajouter une materile la meme de machine; avec un booton </p>
+                            </div>
+                            
+                            
+                            
+                            <!-- les objet a demande  -->
+                            <div class="form-group row" *ngIf="modal2 ==='Achat Logiciel' ">
+                                <label class=" col-sm-3"><b>Ajouter une logiciel :</b> </label>
+                                <p>pour logiciel on doit ajouter une logiciel c'est formulaire</p>
+                            
+                            </div>
+                            <!-- les objet a demande  -->
+                            <div class="form-group row" *ngIf="modal2 ==='Achat Licence' ">
+                                <label class=" col-sm-3"><b>Achat Licence:</b> </label>
+                                <p> licence pour logiciel or materiel (sphos , )</p>
+                            
+                            </div>
+<!-- les objet a demande  -->
+<div class="form-group row" *ngIf="modal2 ==='Achat Abonnement' ">
+    <label class=" col-sm-3"><b>Ajouter une Abonnement :</b> </label>
+    <p>pour abbonnmanet internet je doit redejer l'abbonmant</p>
+
+</div>
+<!-- Achat Service -->
+
+<div class="form-group row" *ngIf="modal2 ==='Achat Service' ">
+    <label class=" col-sm-3"><b>Ajouter une Service :</b> </label>
+    <p>pour selectionne le type de service, descreption de service avec une possiblite de slection le materiel ou le
+        logiciel</p>
+
+</div>
+
+<!-- Achat Service -->
+
+<div class="form-group row" *ngIf="modal2 ==='Demande Fourniteur' ">
+    <label class=" col-sm-3"><b>Demande Fourniteur :</b> </label>
+    <p>Demande interne, je doit fair une possibilite de faire une ajouter des elemnt demande et leur quentitie</p>
+
+</div>
+
                     <div class="form-group row">
-                        <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Prenom</label>
-                        <div class="col-sm-9"> <input type="text" class="form-control" name="prenom"
-                                placeholder="prenom" ngModel></div>
+                        <label for="exampleInputPassword1" class="col-sm-3 col-form-label"><b>Devis (optional ): </b></label>
+                        <div class="col-sm-9"> <input type="file" class="form-control" ngModel></div>
 
                     </div>
                     <div class="form-group row">
                         <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Date de
-                            naissance</label>
+                            Demande</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" name="datenaissance" placeholder="date" ngModel>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Direction </label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="idDir" ngModel>
-                                <option *ngFor="let direction of loadedDirections" [value]="direction.id">
-                                    {{direction.nom}} </option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Fonction</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="post" placeholder="poste de travaille"
-                                ngModel>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Numero de
-                            Telephone</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="numtel" placeholder="Numero de telephone"
-                                ngModel>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Email
-                            Personnele</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="mailPers" placeholder="email personnele"
-                                ngModel>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Numero de Post</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" name="numpost" placeholder="numero de poste"
-                                ngModel>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleInputConfirmPassword1" class="col-sm-3 col-form-label">Adresse</label>
-                        <div class="col-sm-9">
-                            <textarea rows="3" class="form-control" name="adresse" placeholder="adresse"
-                                ngModel></textarea>
-                        </div>
-
-
                     </div>
                 </div>
 

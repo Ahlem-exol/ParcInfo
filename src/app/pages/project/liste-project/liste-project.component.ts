@@ -23,16 +23,29 @@ declare interface type {
   styleUrls: ['./liste-project.component.scss'],
 })
 export class ListeProjectComponent implements OnInit {
+  modal2: string = '';
   sub: Subscription;
   AddEmployee: Employee;
   loadedEmployees: Employee[];
   idDirection: number;
   loadedDirection: Direction;
-  etat: type[] = [
+  TypesDemande: type[] = [
     { title: 'Achat Matériel', icon: 'ni-tv-2 text-primary' }, // serveur, camera ..., ici  je soit mettre l'ajouter materiels
-    { title: 'Affecte', icon: 'ni-tv-2 text-primary' },
-    { title: 'En Reparation', icon: 'ni-tv-2 text-primary' },
-    { title: 'En reforme', icon: 'ni-tv-2 text-primary' },
+    {
+      title: 'Achat Logiciel',
+      icon: 'ni-tv-2 text-primary',
+    }, // internet, licence Kespersky.., ajouter licence de quele logiciel
+
+    {
+      title: 'Achat Licence',
+      icon: 'ni-tv-2 text-primary',
+    },
+    {
+      title: 'Achat Abonnement',
+      icon: 'ni-tv-2 text-primary',
+    },
+    { title: 'Achat Service', icon: 'ni-tv-2 text-primary' }, //configuration , instakllation  (materiel, logiciel)
+    { title: 'Demande Fourniteur', icon: 'ni-tv-2 text-primary' }, //intene , saisi
   ];
   data: EmpExcel[];
   sub2: Subscription;
@@ -56,83 +69,12 @@ export class ListeProjectComponent implements OnInit {
     });
   }
 
-  // for the importtation de ficher excel je doit cree un model qui contien les meme donnes de ficher excel
-  onFileChange(evt: any) {
-    const selectedFile = evt.target.files[0];
-    const fileReader = new FileReader();
-    fileReader.readAsBinaryString(selectedFile);
-    fileReader.onload = (evt) => {
-      console.log(evt);
-      let binaryData = evt.target?.result;
-      const wb = XLSX.read(binaryData, { type: 'binary' });
-
-      wb.SheetNames.forEach((sheet) => {
-        this.data = XLSX.utils.sheet_to_json(wb.Sheets[sheet]);
-      });
-
-      this.data.forEach((elm) => {
-        //convert string date to type DATE
-        let newDate = new Date(elm.DNAISSANCE);
-        //find id direction by her name
-        console.log(elm.DIRECTION);
-        this.sub = this.directionservice
-          .getDirection(elm.DIRECTION)
-          .subscribe((dirdata) => {
-            this.loadedDirection = dirdata.direction;
-            this.idDirection = this.loadedDirection.id;
-            this.employeeService
-              .addEmployee(
-                elm.NOM,
-                elm.PRENOM,
-                elm.FONCTION,
-                newDate,
-                '',
-                '',
-                elm.MAT,
-                0,
-                elm.ADRESSECOMP,
-                this.idDirection
-              )
-              .subscribe((res) => {
-                this.ngOnInit();
-              });
-          });
-        console.log('le id of direction est ' + this.idDirection);
-      });
-    };
+  onForm2NameChange({ target }: { target: any }) {
+    this.modal2 = target.value;
+    console.log(target.value);
   }
-
   /////////////////////:::add user
-  onSubmit(form: NgForm) {
-    const nom = form.value.nom;
-    const prenom = form.value.prenom;
-    const poste = form.value.post;
-    const datenaissance = form.value.datenaissance;
-    const idDiraction = form.value.idDir;
-    const numtel = form.value.numtel;
-    const mailPers = form.value.mailPers;
-    const matricule = form.value.matricule;
-    const numpost = form.value.numpost;
-    const adresse = form.value.adresse;
-    const idDir = Number(idDiraction);
-
-    this.employeeService
-      .addEmployee(
-        nom,
-        prenom,
-        poste,
-        datenaissance,
-        numtel,
-        mailPers,
-        matricule,
-        numpost,
-        adresse,
-        idDir
-      )
-      .subscribe((res) => {
-        this.ngOnInit();
-      });
-  }
+  onSubmit(form: NgForm) {}
 
   ngOnDestroy(): void {
     this.sub.unsubscribe;
