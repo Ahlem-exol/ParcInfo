@@ -13,6 +13,10 @@ import readXlsxFile from 'read-excel-file';
 import { EmpExcel } from 'src/app/models/EmpExcel.model';
 import { data } from 'src/assets/vendors/colcade/colcade';
 import { EMLINK } from 'constants';
+declare interface type {
+  title: string;
+  icon: string;
+}
 @Component({
   selector: 'app-liste-project',
   templateUrl: './liste-project.component.html',
@@ -24,7 +28,12 @@ export class ListeProjectComponent implements OnInit {
   loadedEmployees: Employee[];
   idDirection: number;
   loadedDirection: Direction;
-
+  etat: type[] = [
+    { title: 'Achat Matériel', icon: 'ni-tv-2 text-primary' }, // serveur, camera ..., ici  je soit mettre l'ajouter materiels
+    { title: 'Affecte', icon: 'ni-tv-2 text-primary' },
+    { title: 'En Reparation', icon: 'ni-tv-2 text-primary' },
+    { title: 'En reforme', icon: 'ni-tv-2 text-primary' },
+  ];
   data: EmpExcel[];
   sub2: Subscription;
   loadedDirections: Direction[];
