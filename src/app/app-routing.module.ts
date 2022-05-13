@@ -12,6 +12,7 @@ import { ListeInterventionComponent } from './pages/intervention/liste-intervent
 import { ListeLogicielComponent } from './pages/logiciel/liste-logiciel/liste-logiciel.component';
 import { DetailleMachineComponent } from './pages/Machine/detaille-machine/detaille-machine.component';
 import { ListeMachineComponent } from './pages/Machine/liste-machine/liste-machine.component';
+import { ListeProjectComponent } from './pages/project/liste-project/liste-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -50,6 +51,13 @@ const routes: Routes = [
   {
     path: 'intervension-detaill',
     component: DetailleInterventionComponent,
+    canActivate: [AuthGuard],
+  },
+
+  // Project
+  {
+    path: 'Project',
+    component: ListeProjectComponent,
     canActivate: [AuthGuard],
   },
   { path: 'document', component: OutputPdfComponent, canActivate: [AuthGuard] },
