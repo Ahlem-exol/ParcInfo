@@ -23,6 +23,7 @@ declare interface type {
   styleUrls: ['./liste-project.component.scss'],
 })
 export class ListeProjectComponent implements OnInit {
+  modal1: string = '';
   modal2: string = '';
   sub: Subscription;
   AddEmployee: Employee;
@@ -67,6 +68,11 @@ export class ListeProjectComponent implements OnInit {
       console.log(dirdata.directions);
       this.loadedDirections = dirdata.directions;
     });
+  }
+
+  onChangeDemande({ target }: { target: any }) {
+    this.modal1 = target.value;
+    console.log(target.value);
   }
 
   onForm2NameChange({ target }: { target: any }) {
