@@ -49,7 +49,8 @@ export class ListeProjectComponent implements OnInit {
   data: EmpExcel[];
   sub2: Subscription;
   loadedDirections: Direction[];
-  produit: Produit[];
+  produits: Produit[] = [];
+  produit: Produit;
   constructor(
     private modalService: NgbModal,
     private employeeService: EmployeeService,
@@ -78,10 +79,16 @@ export class ListeProjectComponent implements OnInit {
   addProduit(form: NgForm) {
     const Quantite = form.value.Quantite;
     const Designation = form.value.Designation;
+    const id = 1;
+    this.produit = {
+      id: id,
+      Quantite: Quantite,
+      Designation: Designation,
+    };
 
-    const produit = { Quantite, Designation };
-    this.produit;
+    this.produits.push(this.produit);
   }
+
   /////////////////////:::add user
   onSubmit(form: NgForm) {}
 

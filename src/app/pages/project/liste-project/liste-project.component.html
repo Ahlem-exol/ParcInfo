@@ -101,16 +101,19 @@
         <!--##########################################"" Achat Materiel]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]   -->
         <div class="row">
             <label class="col-sm-12">
-                <b>Liste de Produits:</b>
+                <b>Add de Produits:</b>
             </label>
             <br><br><br>
             <form #ProduitForm="ngForm" (ngSubmit)="addProduit(ProduitForm)">
                 <div class="row">
-                    <div class="form-group  col-sm-2">
+                    <div class="form-group col-sm-2">
+                        <input type="number" name="id" class="form-control" placeholder="N°" required ngModel>
+                    </div>
+                    <div class="form-group col-sm-2">
                         <input type="number" name="Quantite" class="form-control" placeholder="Qnt" required ngModel>
                     </div>
         
-                        <div class="form-group col-sm-8">
+                        <div class="form-group col-sm-6">
                             <textarea name="Designation" class="form-control " placeholder="Designation" required ngModel></textarea>
                         </div>
 
@@ -120,8 +123,30 @@
                 </div>
         
             </form>
-            </div>
-
+            </div><br>
+            <div>
+                <p> ______________________________________________________________________________</p>
+                <b> Liste de produits </b>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th (click)="sort('id')">N° <i class="fa fa-sort"></i></th>
+                            <th (click)="sort('id')">Quantite <i class="fa fa-sort"></i></th>
+                            <th (click)="sort('id')"> Designation &nbsp; <i class="fa fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="cursor: pointer;" *ngFor="let produit of produits">
+                            <td>{{produit.id}}</td>
+                            <td>{{produit.Quantite}}</td>
+                            <td>{{produit.Designation}}</td>
+                            <td> <button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Detaille</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+<br><br>
 
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-sm-3 col-form-label"><b>Devis (optional ): </b></label>

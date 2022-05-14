@@ -179,7 +179,7 @@ export class OutputPdfComponent implements OnInit {
 
         {
           margin: [10, 40, 10, 10], // [left, top, right, bottom]
-          text: '   Accusé de réception.',
+          text: ' Accusé de réception.',
           fontSize: 13,
           bold: true,
           alignment: 'right',
