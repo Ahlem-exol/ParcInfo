@@ -7,12 +7,10 @@ import { Direction } from 'src/app/models/direction.model';
 import { Employee } from 'src/app/models/employee.model';
 import { DirectionService } from 'src/app/services/direction/direction.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
-import * as XLSX from 'xlsx';
 
-import readXlsxFile from 'read-excel-file';
 import { EmpExcel } from 'src/app/models/EmpExcel.model';
-import { data } from 'src/assets/vendors/colcade/colcade';
-import { EMLINK } from 'constants';
+import { Produit } from 'src/app/models/produit.model';
+
 declare interface type {
   title: string;
   icon: string;
@@ -51,6 +49,7 @@ export class ListeProjectComponent implements OnInit {
   data: EmpExcel[];
   sub2: Subscription;
   loadedDirections: Direction[];
+  produit: Produit[];
   constructor(
     private modalService: NgbModal,
     private employeeService: EmployeeService,
@@ -75,9 +74,13 @@ export class ListeProjectComponent implements OnInit {
     console.log(target.value);
   }
 
-  onForm2NameChange({ target }: { target: any }) {
-    this.modal2 = target.value;
-    console.log(target.value);
+  //////// Add Produit
+  addProduit(form: NgForm) {
+    const Quantite = form.value.Quantite;
+    const Designation = form.value.Designation;
+
+    const produit = { Quantite, Designation };
+    this.produit;
   }
   /////////////////////:::add user
   onSubmit(form: NgForm) {}

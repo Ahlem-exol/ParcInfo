@@ -83,7 +83,7 @@
                     <div class="form-group row">
                         <label for="exampleInputUsername1" class="col-sm-3 col-form-label"><b>Type de demande:</b></label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="categorieMach" (change)="onChangeDemande($event)" ngModel>
+                            <select class="form-control" name="categorieMach" ngModel>
                                 <ng-container *ngFor="let demande of TypesDemande">
                                     <option value={{demande.title}}>
                                         {{demande.title}}
@@ -99,76 +99,29 @@
                             </div>
                             </div>
         <!--##########################################"" Achat Materiel]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]   -->
-        <div class="row" *ngIf="modal1 ==='Achat Matériel' ">
+        <div class="row">
             <label class="col-sm-12">
-                <b>Liste de Materiel:</b>
+                <b>Liste de Produits:</b>
             </label>
-        
-            <form>
-        
-                <div class="form-group row">
-                    <label class="  col-sm-3"><b>La Quantite :</b></label>
-                    <div
-                        class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                 ">
-                        <input type="number" name="marqueMach" class="form-control" placeholder="Entre la marque de la machine"
-                            required ngModel>
+            <br><br><br>
+            <form #ProduitForm="ngForm" (ngSubmit)="addProduit(ProduitForm)">
+                <div class="row">
+                    <div class="form-group  col-sm-2">
+                        <input type="number" name="Quantite" class="form-control" placeholder="Qnt" required ngModel>
                     </div>
         
-                </div>
-        
-                <div class="form-group row">
-                    <label class="  col-sm-3"><b>La Designation :</b></label>
-                    <div
-                        class="col-sm-9 col-lg-9
-                                                                                                                                                                                                                                                                                                                                                 ">
-                        <input type="number" name="marqueMach" class="form-control" placeholder="Entre la marque de la machine"
-                            required ngModel>
-                    </div>
-        
+                        <div class="form-group col-sm-8">
+                            <textarea name="Designation" class="form-control " placeholder="Designation" required ngModel></textarea>
+                        </div>
+
+                        <div class="form-group col-sm-2">
+                            <button type="submit" class="btn btn-success btn-rounded btn-icon"><i class="ti-plus"></i></button>
+                        </div>
                 </div>
         
             </form>
-        </div>
-                            
-                            
-                
-        
+            </div>
 
-                            <!-- les objet a demande  -->
-                            <div class="form-group row" *ngIf="modal1 ==='Achat Logiciel' ">
-                                <label class=" col-sm-3"><b>Ajouter une logiciel :</b> </label>
-                                <p>pour logiciel on doit ajouter une logiciel c'est formulaire</p>
-                            
-                            </div>
-                            <!-- les objet a demande  -->
-                            <div class="form-group row" *ngIf="modal1 ==='Achat Licence' ">
-                                <label class=" col-sm-3"><b>Achat Licence:</b> </label>
-                                <p> licence pour logiciel or materiel (sphos , )</p>
-                            
-                            </div>
-<!-- les objet a demande  -->
-<div class="form-group row" *ngIf="modal1 ==='Achat Abonnement' ">
-    <label class=" col-sm-3"><b>Ajouter une Abonnement :</b> </label>
-    <p>pour abbonnmanet internet je doit redejer l'abbonmant</p>
-
-</div>
-<!-- Achat Service -->
-
-<div class="form-group row" *ngIf="modal1 ==='Achat Service' ">
-    <label class=" col-sm-3"><b>Ajouter une Service :</b> </label>
-    <p>pour selectionne le type de service, descreption de service avec une possiblite de slection le materiel ou le
-        logiciel</p>
-
-</div>
-
-<!-- Achat Service -->
-
-<div class="form-group row" *ngIf="modal1 ==='Demande Fourniteur' ">
-    <label class=" col-sm-3"><b>Demande Fourniteur :</b> </label>
-    <p>Demande interne, je doit fair une possibilite de faire une ajouter des elemnt demande et leur quentitie</p>
-
-</div>
 
                     <div class="form-group row">
                         <label for="exampleInputPassword1" class="col-sm-3 col-form-label"><b>Devis (optional ): </b></label>
