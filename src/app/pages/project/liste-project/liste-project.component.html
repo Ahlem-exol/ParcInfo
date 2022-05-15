@@ -1,69 +1,135 @@
 <div class="content-wrapper">
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
+        <div class="col-lg-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-
-
                     <div class="row">
                         <div class="col-lg-11">
-                            <h4 class="card-title">Gestion de Projets </h4>
+                            <h4 class="card-title">Demandes D'achat </h4>
                             <div class="row">
-
+                    
                                 <div class="col-lg-3">
-                                    <input class="form-control" type="text" name="nom" [(ngModel)]="nom"
-                                        (ngModelChange)="Search()" placeholder="Recherche">
+                                    <input class="form-control" type="text" name="nom" [(ngModel)]="nom" (ngModelChange)="Search()" placeholder="Recherche">
                                 </div>
-
+                    
                                 <div class="col-lg-8"> </div>
                                 <div class="col-lg-1">
                                     <button type="button" class="btn btn-success btn-rounded btn-icon"
                                         (click)="openMediumModal(mediumModalContent)">
                                         <i class="ti-plus"></i>
                                     </button>
-
+                    
                                 </div>
                             </div>
-
+        
                         </div>
-
+                        
                         <div class="table table-responsive table-striped table-bordere">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th (click)="sort('id')">Direction <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Matricule <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')"> Nom&nbsp; <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Prenom&nbsp; <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Post&nbsp; <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">N° <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">Designation <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">Quantite&nbsp; <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">Date de demande&nbsp; <i class="fa fa-sort"></i></th>
                                         <th>Action&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="cursor: pointer;" *ngFor="let employee of loadedEmployees  
-                      | orderBy: key: reverse |paginate : {itemsPerPage:5,currentPage:p};
-                      " (click)="detaille(employee.id)">
-                                        <td>{{employee.direction.nom}}</td>
-                                        <td>{{employee.matricule}}</td>
-                                        <td>{{employee.nom}}</td>
-                                        <td>{{employee.prenom}}</td>
-                                        <td>{{employee.post}}</td>
-                                        <td> <button type="button"
-                                                class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Detaille</button>
+                                    <tr style="cursor: pointer;">
+                                        <td>01</td>
+                                        <td>Unité HP Pro I7 , Ram 16 </td>
+                                        <td>10</td>
+                                        <td>12/04/2011</td>
+                                        <td><button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Impression</button>
+                                            <button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Apprové</button>
                                         </td>
                                     </tr>
-                                </tbody>
-                            </table>
-
-                            <pagination-controls class=" pagination justify-content-end " (pageChange)="p =$event">
-                            </pagination-controls>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    </tbody>
+                                    </table>
+                                    
+                                    <pagination-controls class=" pagination justify-content-end " (pageChange)="p =$event">
+                                    </pagination-controls>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="col-5 grid-margin stretch-card">
+                                        <div class="card card-rounded">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <h4 class="card-title card-title-dash">Contart</h4>
+                                                            <div class="add-items d-flex mb-0">
+                                                                <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
+                                                                <button
+                                                                    class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i
+                                                                        class="mdi mdi-plus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list-wrapper">
+                                                            <ul class="todo-list todo-list-rounded">
+                                                                <li class="d-block">
+                                                                    <div class="form-check w-100">
+                                                                        <label class="form-check-label">
+                                                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the
+                                                                            printing <i class="input-helper rounded"></i>
+                                                                        </label>
+                                                                        <div class="d-flex mt-2">
+                                                                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                                                                            <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
+                                                                            <i class="mdi mdi-flag ms-2 flag-color"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="d-block">
+                                                                    <div class="form-check w-100">
+                                                                        <label class="form-check-label">
+                                                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the
+                                                                            printing <i class="input-helper rounded"></i>
+                                                                        </label>
+                                                                        <div class="d-flex mt-2">
+                                                                            <div class="ps-4 text-small me-3">23 June 2020</div>
+                                                                            <div class="badge badge-opacity-success me-3">Done</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="form-check w-100">
+                                                                        <label class="form-check-label">
+                                                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the
+                                                                            printing <i class="input-helper rounded"></i>
+                                                                        </label>
+                                                                        <div class="d-flex mt-2">
+                                                                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                                                                            <div class="badge badge-opacity-success me-3">Done</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="border-bottom-0">
+                                                                    <div class="form-check w-100">
+                                                                        <label class="form-check-label">
+                                                                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the
+                                                                            printing <i class="input-helper rounded"></i>
+                                                                        </label>
+                                                                        <div class="d-flex mt-2">
+                                                                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                                                                            <div class="badge badge-opacity-danger me-3">Expired</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
     </div>
 
 
@@ -164,7 +230,6 @@
 
                 <button type="submit" class="btn btn-success" (click)="modal.close()">Submit</button>
                 <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
-
             </form>
         </div>
     </ng-template>
