@@ -1,25 +1,18 @@
 <div class="content-wrapper">
     <div class="row">
+<!-- Les des projets -->
         <div class="col-lg-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-11">
-                            <h4 class="card-title">Demandes D'achat </h4>
+                            <h4 class="card-title">Liste des contrats</h4>
                             <div class="row">
                     
                                 <div class="col-lg-3">
                                     <input class="form-control" type="text" name="nom" [(ngModel)]="nom" (ngModelChange)="Search()" placeholder="Recherche">
                                 </div>
                     
-                                <div class="col-lg-8"> </div>
-                                <div class="col-lg-1">
-                                    <button type="button" class="btn btn-success btn-rounded btn-icon"
-                                        (click)="openMediumModal(mediumModalContent)">
-                                        <i class="ti-plus"></i>
-                                    </button>
-                    
-                                </div>
                             </div>
         
                         </div>
@@ -28,11 +21,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th (click)="sort('id')">N° <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Designation <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Quantite&nbsp; <i class="fa fa-sort"></i></th>
-                                        <th (click)="sort('id')">Date de demande&nbsp; <i class="fa fa-sort"></i></th>
-                                        <th>Action&nbsp;</th>
+                                        <th (click)="sort('id')">N°<i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">Type <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">bla <i class="fa fa-sort"></i></th>
+                                        <th (click)="sort('id')">Date de debut <i class="fa fa-sort"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,9 +33,6 @@
                                         <td>Unité HP Pro I7 , Ram 16 </td>
                                         <td>10</td>
                                         <td>12/04/2011</td>
-                                        <td><button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Impression</button>
-                                            <button type="button" class="btn btn-outline-primary btn-rounded  btn-sm btn-fw">Apprové</button>
-                                        </td>
                                     </tr>
                                     </tbody>
                                     </table>
@@ -53,9 +42,10 @@
                                     </div>
                                     </div>
                                     </div>
-                                    </div>
-                                    </div>
-                                    
+            </div>
+            </div>
+
+                            <!--  Les demande d'achat-->
                                     <div class="col-5 grid-margin stretch-card">
                                         <div class="card card-rounded">
                                             <div class="card-body">
@@ -66,8 +56,8 @@
                                                             <div class="add-items d-flex mb-0">
                                                                 <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
                                                                 <button
-                                                                    class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i
-                                                                        class="mdi mdi-plus"></i></button>
+                                                                    class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"  (click)="openMediumModal(mediumModalContent)"><i
+                                                                        class="mdi mdi-plus" ></i></button>
                                                             </div>
                                                         </div>
                                                         <div class="list-wrapper">
