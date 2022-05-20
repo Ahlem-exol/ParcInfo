@@ -351,7 +351,6 @@ exports.addHard = (req, res, next) => {
 ///////////////////
 exports.getHardDetaille = (req, res, next) => {
   const machineId = req.params.id;
-  
   Info_materiel.findOne(
     {
       where:{idMach:machineId},
