@@ -1,3 +1,4 @@
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -30,9 +31,11 @@ exports.createUser = (req, res, next) => {
 };
 
 exports.userLogin = (req, res, next) => {
+  console.log("in the set",req.body)
   let fetchedUser;
   User.findOne({ where: {mail: req.body.mail} })
     .then(user => {
+      console.log("in the set")
       if (!user) {
         return res.status(401).json({
           message: 'User does not exist !'
@@ -42,7 +45,9 @@ exports.userLogin = (req, res, next) => {
       fetchedUser = user;
       return bcrypt.compare(req.body.password, user.password);
     })
+
     .then(result => {
+      console.log("in the set",result)
       if (!result) {
         return res.status(401).json({
           message: "Incorrect Password !"
@@ -50,6 +55,7 @@ exports.userLogin = (req, res, next) => {
       }
       User.findByPk(fetchedUser.id)
         .then(fetchedUser => {
+          console.log("in the set",fetchedUser)
           const token = jwt.sign(
             {mail: fetchedUser.mail, id: fetchedUser.id, name: fetchedUser.name},
             process.env.JWT_KEY,

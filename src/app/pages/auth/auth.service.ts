@@ -63,6 +63,7 @@ export class AuthService {
   }
 
   login(mail: string, password: string) {
+    console.log('in the set');
     const authData: AuthData = {
       mail: mail,
       password: password,
